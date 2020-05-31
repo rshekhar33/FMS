@@ -6,8 +6,8 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.url.app.dto.FacultySkillsetMng;
-import com.url.app.dto.User;
+import com.url.app.dto.entity.FacultySkillsetMng;
+import com.url.app.dto.entity.User;
 import com.url.app.interf.restcontroller.FacultySkillsetRestController;
 import com.url.app.interf.service.AppFacultySkillsetService;
 

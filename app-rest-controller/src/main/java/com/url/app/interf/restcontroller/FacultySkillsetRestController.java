@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.url.app.dto.FacultySkillsetMng;
-import com.url.app.dto.User;
+import com.url.app.dto.entity.FacultySkillsetMng;
+import com.url.app.dto.entity.User;
 import com.url.app.utility.AppUrlView;
 
 /**

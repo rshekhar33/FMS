@@ -1,21 +1,17 @@
-package com.url.app.dto;
+package com.url.app.dto.entity;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.HashSet;
 import java.util.Objects;
-import java.util.Set;
 
 import javax.persistence.AssociationOverride;
 import javax.persistence.AssociationOverrides;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
 import javax.persistence.JoinColumn;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -25,25 +21,24 @@ import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.url.app.utility.AppSQL;
 
 /**
- * The persistent class for the faculty_skillset database table.
+ * The persistent class for the role_privilege_relation database table.
  */
 @Entity
-@Table(name = "faculty_skillset")
+@Table(name = "role_privilege_relation")
 @EntityListeners(AuditingEntityListener.class)
-@AssociationOverrides({ @AssociationOverride(name = "id.module", joinColumns = @JoinColumn(name = "module_id")),
-		@AssociationOverride(name = "id.user", joinColumns = @JoinColumn(name = "user_id")) })
+@AssociationOverrides({ @AssociationOverride(name = "id.privilege", joinColumns = @JoinColumn(name = "privilege_id")),
+		@AssociationOverride(name = "id.role", joinColumns = @JoinColumn(name = "role_id")) })
 @JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
-@NamedQuery(name = "FacultySkillset.findAll", query = AppSQL.QRY_FIND_ALL_FACULTY_SKILLSET)
-public class FacultySkillset implements Serializable {
+@NamedQuery(name = "RolePrivilegeRelation.findAll", query = AppSQL.QRY_FIND_ALL_ROLE_PRIVILEGE_RELATION)
+public class RolePrivilegeRelation implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@EmbeddedId
-	private FacultySkillsetPK id = new FacultySkillsetPK();
+	private RolePrivilegeRelationPK id = new RolePrivilegeRelationPK();
 
 	@Column(name = "created_by", updatable = false, nullable = false)
 	private Integer createdBy;
@@ -64,39 +59,34 @@ public class FacultySkillset implements Serializable {
 	@LastModifiedDate
 	private Date modifiedDate;
 
-	//bi-directional many-to-one association to Course
-	@OneToMany(mappedBy = "facultySkillset", cascade = CascadeType.ALL, orphanRemoval = true)
-	@JsonBackReference(value = "facultySkillset_course")
-	private Set<Course> courses = new HashSet<>(0);
-
-	public FacultySkillset() {
+	public RolePrivilegeRelation() {
 		super();
 	}
 
-	public FacultySkillsetPK getId() {
+	public RolePrivilegeRelationPK getId() {
 		return this.id;
 	}
 
-	public void setId(FacultySkillsetPK id) {
+	public void setId(RolePrivilegeRelationPK id) {
 		this.id = id;
 	}
 
 	@Transient
-	public Module getModule() {
-		return getId().getModule();
+	public Privilege getPrivilege() {
+		return getId().getPrivilege();
 	}
 
-	public void setModule(Module module) {
-		getId().setModule(module);
+	public void setPrivilege(Privilege privilege) {
+		getId().setPrivilege(privilege);
 	}
 
 	@Transient
-	public User getUser() {
-		return getId().getUser();
+	public Role getRole() {
+		return getId().getRole();
 	}
 
-	public void setUser(User user) {
-		getId().setUser(user);
+	public void setRole(Role role) {
+		getId().setRole(role);
 	}
 
 	public Integer getCreatedBy() {
@@ -139,24 +129,6 @@ public class FacultySkillset implements Serializable {
 		this.modifiedDate = modifiedDate;
 	}
 
-	public Set<Course> getCourses() {
-		return this.courses;
-	}
-
-	public void setCourses(Set<Course> courses) {
-		this.courses = courses;
-	}
-
-	public boolean addCourse(Course course) {
-		course.setFacultySkillset(this);
-
-		return getCourses().add(course);
-	}
-
-	public boolean removeCourse(Course course) {
-		return getCourses().remove(course);
-	}
-
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);
@@ -170,10 +142,10 @@ public class FacultySkillset implements Serializable {
 		if (obj == null) {
 			return false;
 		}
-		if (!(obj instanceof FacultySkillset)) {
+		if (!(obj instanceof RolePrivilegeRelation)) {
 			return false;
 		}
-		FacultySkillset other = (FacultySkillset) obj;
+		RolePrivilegeRelation other = (RolePrivilegeRelation) obj;
 
 		return Objects.equals(id, other.id);
 	}

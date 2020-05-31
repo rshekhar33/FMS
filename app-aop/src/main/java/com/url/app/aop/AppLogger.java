@@ -12,7 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StopWatch;
 
-import com.url.app.dto.User;
+import com.url.app.dto.entity.User;
 import com.url.app.interf.service.AppUserService;
 import com.url.app.utility.AppLogMessage;
 

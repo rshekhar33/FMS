@@ -12,7 +12,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.url.app.config.AppDBValidationMessage;
 import com.url.app.config.AppMessage;
-import com.url.app.dto.Module;
+import com.url.app.dto.entity.Module;
+import com.url.app.dto.validation.AppModuleValidationService;
 import com.url.app.interf.dao.ModuleRepository;
 import com.url.app.interf.service.AppModuleService;
 import com.url.app.interf.service.AppUserService;
@@ -20,7 +21,6 @@ import com.url.app.utility.AppCommon;
 import com.url.app.utility.AppConstant;
 import com.url.app.utility.AppLogMessage;
 import com.url.app.utility.AppResponseKey;
-import com.url.app.validation.AppModuleValidationService;
 
 /**
  * Service implementation of application for Module.

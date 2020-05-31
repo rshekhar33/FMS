@@ -1,21 +1,23 @@
-package com.url.app.dto;
+package com.url.app.dto.entity;
 
 import java.io.Serializable;
 import java.util.Date;
 import java.util.Objects;
 
-import javax.persistence.AssociationOverride;
-import javax.persistence.AssociationOverrides;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
-import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.persistence.Transient;
 
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
@@ -25,20 +27,23 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.url.app.utility.AppSQL;
 
 /**
- * The persistent class for the user_role_relation database table.
+ * The persistent class for the feedback_answer database table.
  */
 @Entity
-@Table(name = "user_role_relation")
+@Table(name = "feedback_answer")
 @EntityListeners(AuditingEntityListener.class)
-@AssociationOverrides({ @AssociationOverride(name = "id.role", joinColumns = @JoinColumn(name = "role_id")),
-		@AssociationOverride(name = "id.user", joinColumns = @JoinColumn(name = "user_id")) })
 @JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
-@NamedQuery(name = "UserRoleRelation.findAll", query = AppSQL.QRY_FIND_ALL_USER_ROLE_RELATION)
-public class UserRoleRelation implements Serializable {
+@NamedQuery(name = "FeedbackAnswer.findAll", query = AppSQL.QRY_FIND_ALL_FEEDBACK_ANSWER)
+public class FeedbackAnswer implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	@EmbeddedId
-	private UserRoleRelationPK id = new UserRoleRelationPK();
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "feedback_answer_id", unique = true, nullable = false)
+	private Integer feedbackAnswerId;
+
+	@Column(nullable = false, length = 500)
+	private String answer;
 
 	@Column(name = "created_by", updatable = false, nullable = false)
 	private Integer createdBy;
@@ -59,34 +64,29 @@ public class UserRoleRelation implements Serializable {
 	@LastModifiedDate
 	private Date modifiedDate;
 
-	public UserRoleRelation() {
+	//bi-directional many-to-one association to FeedbackQuestion
+	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@JoinColumn(name = "feedback_question_id", nullable = false)
+	private FeedbackQuestion feedbackQuestion;
+
+	public FeedbackAnswer() {
 		super();
 	}
 
-	public UserRoleRelationPK getId() {
-		return this.id;
+	public Integer getFeedbackAnswerId() {
+		return this.feedbackAnswerId;
 	}
 
-	public void setId(UserRoleRelationPK id) {
-		this.id = id;
+	public void setFeedbackAnswerId(Integer feedbackAnswerId) {
+		this.feedbackAnswerId = feedbackAnswerId;
 	}
 
-	@Transient
-	public Role getRole() {
-		return getId().getRole();
+	public String getAnswer() {
+		return this.answer;
 	}
 
-	public void setRole(Role role) {
-		getId().setRole(role);
-	}
-
-	@Transient
-	public User getUser() {
-		return getId().getUser();
-	}
-
-	public void setUser(User user) {
-		getId().setUser(user);
+	public void setAnswer(String answer) {
+		this.answer = answer;
 	}
 
 	public Integer getCreatedBy() {
@@ -129,9 +129,17 @@ public class UserRoleRelation implements Serializable {
 		this.modifiedDate = modifiedDate;
 	}
 
+	public FeedbackQuestion getFeedbackQuestion() {
+		return this.feedbackQuestion;
+	}
+
+	public void setFeedbackQuestion(FeedbackQuestion feedbackQuestion) {
+		this.feedbackQuestion = feedbackQuestion;
+	}
+
 	@Override
 	public int hashCode() {
-		return Objects.hash(id);
+		return Objects.hash(feedbackAnswerId);
 	}
 
 	@Override
@@ -142,11 +150,11 @@ public class UserRoleRelation implements Serializable {
 		if (obj == null) {
 			return false;
 		}
-		if (!(obj instanceof UserRoleRelation)) {
+		if (!(obj instanceof FeedbackAnswer)) {
 			return false;
 		}
-		UserRoleRelation other = (UserRoleRelation) obj;
+		FeedbackAnswer other = (FeedbackAnswer) obj;
 
-		return Objects.equals(id, other.id);
+		return Objects.equals(this.getFeedbackAnswerId(), other.getFeedbackAnswerId());
 	}
 }

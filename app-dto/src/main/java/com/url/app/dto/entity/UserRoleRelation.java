@@ -1,4 +1,4 @@
-package com.url.app.dto;
+package com.url.app.dto.entity;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -25,20 +25,20 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.url.app.utility.AppSQL;
 
 /**
- * The persistent class for the role_privilege_relation database table.
+ * The persistent class for the user_role_relation database table.
  */
 @Entity
-@Table(name = "role_privilege_relation")
+@Table(name = "user_role_relation")
 @EntityListeners(AuditingEntityListener.class)
-@AssociationOverrides({ @AssociationOverride(name = "id.privilege", joinColumns = @JoinColumn(name = "privilege_id")),
-		@AssociationOverride(name = "id.role", joinColumns = @JoinColumn(name = "role_id")) })
+@AssociationOverrides({ @AssociationOverride(name = "id.role", joinColumns = @JoinColumn(name = "role_id")),
+		@AssociationOverride(name = "id.user", joinColumns = @JoinColumn(name = "user_id")) })
 @JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
-@NamedQuery(name = "RolePrivilegeRelation.findAll", query = AppSQL.QRY_FIND_ALL_ROLE_PRIVILEGE_RELATION)
-public class RolePrivilegeRelation implements Serializable {
+@NamedQuery(name = "UserRoleRelation.findAll", query = AppSQL.QRY_FIND_ALL_USER_ROLE_RELATION)
+public class UserRoleRelation implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@EmbeddedId
-	private RolePrivilegeRelationPK id = new RolePrivilegeRelationPK();
+	private UserRoleRelationPK id = new UserRoleRelationPK();
 
 	@Column(name = "created_by", updatable = false, nullable = false)
 	private Integer createdBy;
@@ -59,25 +59,16 @@ public class RolePrivilegeRelation implements Serializable {
 	@LastModifiedDate
 	private Date modifiedDate;
 
-	public RolePrivilegeRelation() {
+	public UserRoleRelation() {
 		super();
 	}
 
-	public RolePrivilegeRelationPK getId() {
+	public UserRoleRelationPK getId() {
 		return this.id;
 	}
 
-	public void setId(RolePrivilegeRelationPK id) {
+	public void setId(UserRoleRelationPK id) {
 		this.id = id;
-	}
-
-	@Transient
-	public Privilege getPrivilege() {
-		return getId().getPrivilege();
-	}
-
-	public void setPrivilege(Privilege privilege) {
-		getId().setPrivilege(privilege);
 	}
 
 	@Transient
@@ -87,6 +78,15 @@ public class RolePrivilegeRelation implements Serializable {
 
 	public void setRole(Role role) {
 		getId().setRole(role);
+	}
+
+	@Transient
+	public User getUser() {
+		return getId().getUser();
+	}
+
+	public void setUser(User user) {
+		getId().setUser(user);
 	}
 
 	public Integer getCreatedBy() {
@@ -142,10 +142,10 @@ public class RolePrivilegeRelation implements Serializable {
 		if (obj == null) {
 			return false;
 		}
-		if (!(obj instanceof RolePrivilegeRelation)) {
+		if (!(obj instanceof UserRoleRelation)) {
 			return false;
 		}
-		RolePrivilegeRelation other = (RolePrivilegeRelation) obj;
+		UserRoleRelation other = (UserRoleRelation) obj;
 
 		return Objects.equals(id, other.id);
 	}

@@ -1,4 +1,4 @@
-package com.url.app.dto;
+package com.url.app.dto.entity;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -6,21 +6,20 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
+import javax.persistence.AssociationOverride;
+import javax.persistence.AssociationOverrides;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
@@ -31,20 +30,20 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.url.app.utility.AppSQL;
 
 /**
- * The persistent class for the feedback_question database table.
+ * The persistent class for the faculty_skillset database table.
  */
 @Entity
-@Table(name = "feedback_question")
+@Table(name = "faculty_skillset")
 @EntityListeners(AuditingEntityListener.class)
+@AssociationOverrides({ @AssociationOverride(name = "id.module", joinColumns = @JoinColumn(name = "module_id")),
+		@AssociationOverride(name = "id.user", joinColumns = @JoinColumn(name = "user_id")) })
 @JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
-@NamedQuery(name = "FeedbackQuestion.findAll", query = AppSQL.QRY_FIND_ALL_FEEDBACK_QUESTION)
-public class FeedbackQuestion implements Serializable {
+@NamedQuery(name = "FacultySkillset.findAll", query = AppSQL.QRY_FIND_ALL_FACULTY_SKILLSET)
+public class FacultySkillset implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "feedback_question_id", unique = true, nullable = false)
-	private Integer feedbackQuestionId;
+	@EmbeddedId
+	private FacultySkillsetPK id = new FacultySkillsetPK();
 
 	@Column(name = "created_by", updatable = false, nullable = false)
 	private Integer createdBy;
@@ -65,29 +64,39 @@ public class FeedbackQuestion implements Serializable {
 	@LastModifiedDate
 	private Date modifiedDate;
 
-	@Column(nullable = false, length = 500)
-	private String question;
-
-	//bi-directional many-to-one association to FeedbackAnswer
-	@OneToMany(mappedBy = "feedbackQuestion", cascade = CascadeType.ALL, orphanRemoval = true)
-	@JsonBackReference(value = "feedbackQuestion_feedbackAnswer")
-	private Set<FeedbackAnswer> feedbackAnswers = new HashSet<>(0);
-
 	//bi-directional many-to-one association to Course
-	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	@JoinColumn(name = "course_id", nullable = false)
-	private Course course;
+	@OneToMany(mappedBy = "facultySkillset", cascade = CascadeType.ALL, orphanRemoval = true)
+	@JsonBackReference(value = "facultySkillset_course")
+	private Set<Course> courses = new HashSet<>(0);
 
-	public FeedbackQuestion() {
+	public FacultySkillset() {
 		super();
 	}
 
-	public Integer getFeedbackQuestionId() {
-		return this.feedbackQuestionId;
+	public FacultySkillsetPK getId() {
+		return this.id;
 	}
 
-	public void setFeedbackQuestionId(Integer feedbackQuestionId) {
-		this.feedbackQuestionId = feedbackQuestionId;
+	public void setId(FacultySkillsetPK id) {
+		this.id = id;
+	}
+
+	@Transient
+	public Module getModule() {
+		return getId().getModule();
+	}
+
+	public void setModule(Module module) {
+		getId().setModule(module);
+	}
+
+	@Transient
+	public User getUser() {
+		return getId().getUser();
+	}
+
+	public void setUser(User user) {
+		getId().setUser(user);
 	}
 
 	public Integer getCreatedBy() {
@@ -130,43 +139,27 @@ public class FeedbackQuestion implements Serializable {
 		this.modifiedDate = modifiedDate;
 	}
 
-	public String getQuestion() {
-		return this.question;
+	public Set<Course> getCourses() {
+		return this.courses;
 	}
 
-	public void setQuestion(String question) {
-		this.question = question;
+	public void setCourses(Set<Course> courses) {
+		this.courses = courses;
 	}
 
-	public Set<FeedbackAnswer> getFeedbackAnswers() {
-		return this.feedbackAnswers;
+	public boolean addCourse(Course course) {
+		course.setFacultySkillset(this);
+
+		return getCourses().add(course);
 	}
 
-	public void setFeedbackAnswers(Set<FeedbackAnswer> feedbackAnswers) {
-		this.feedbackAnswers = feedbackAnswers;
-	}
-
-	public boolean addFeedbackAnswer(FeedbackAnswer feedbackAnswer) {
-		feedbackAnswer.setFeedbackQuestion(this);
-
-		return getFeedbackAnswers().add(feedbackAnswer);
-	}
-
-	public boolean removeFeedbackAnswer(FeedbackAnswer feedbackAnswer) {
-		return getFeedbackAnswers().remove(feedbackAnswer);
-	}
-
-	public Course getCourse() {
-		return this.course;
-	}
-
-	public void setCourse(Course course) {
-		this.course = course;
+	public boolean removeCourse(Course course) {
+		return getCourses().remove(course);
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(feedbackQuestionId);
+		return Objects.hash(id);
 	}
 
 	@Override
@@ -177,11 +170,11 @@ public class FeedbackQuestion implements Serializable {
 		if (obj == null) {
 			return false;
 		}
-		if (!(obj instanceof FeedbackQuestion)) {
+		if (!(obj instanceof FacultySkillset)) {
 			return false;
 		}
-		FeedbackQuestion other = (FeedbackQuestion) obj;
+		FacultySkillset other = (FacultySkillset) obj;
 
-		return Objects.equals(this.getFeedbackQuestionId(), other.getFeedbackQuestionId());
+		return Objects.equals(id, other.id);
 	}
 }

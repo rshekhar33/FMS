@@ -15,10 +15,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.url.app.config.AppMessage;
-import com.url.app.dto.FacultySkillset;
-import com.url.app.dto.FacultySkillsetMng;
-import com.url.app.dto.Module;
-import com.url.app.dto.User;
+import com.url.app.dto.entity.FacultySkillset;
+import com.url.app.dto.entity.FacultySkillsetMng;
+import com.url.app.dto.entity.Module;
+import com.url.app.dto.entity.User;
 import com.url.app.interf.dao.AppDao;
 import com.url.app.interf.dao.ModuleRepository;
 import com.url.app.interf.dao.UserRepository;

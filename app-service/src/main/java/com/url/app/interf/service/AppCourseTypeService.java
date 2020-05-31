@@ -3,7 +3,7 @@ package com.url.app.interf.service;
 import java.util.List;
 import java.util.Map;
 
-import com.url.app.dto.CourseType;
+import com.url.app.dto.entity.CourseType;
 
 /**
  * Service Layer of application for Course Type.

@@ -3,7 +3,7 @@ package com.url.app.interf.service;
 import java.util.List;
 import java.util.Map;
 
-import com.url.app.dto.Role;
+import com.url.app.dto.entity.Role;
 
 /**
  * Service Layer of application for Role.

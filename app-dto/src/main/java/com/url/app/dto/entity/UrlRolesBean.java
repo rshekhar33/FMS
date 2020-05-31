@@ -1,4 +1,4 @@
-package com.url.app.dto;
+package com.url.app.dto.entity;
 
 /**
  * @author Shekhar Shinde

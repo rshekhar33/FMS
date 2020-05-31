@@ -6,7 +6,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.url.app.dto.Module;
+import com.url.app.dto.entity.Module;
 import com.url.app.interf.restcontroller.ModuleRestController;
 import com.url.app.interf.service.AppModuleService;
 

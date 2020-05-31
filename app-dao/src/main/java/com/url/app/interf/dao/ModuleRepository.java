@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.url.app.dto.Module;
+import com.url.app.dto.entity.Module;
 
 @Repository(value = "moduleRepository")
 public interface ModuleRepository extends JpaRepository<Module, Integer> {

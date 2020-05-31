@@ -1,11 +1,11 @@
-package com.url.app.validation;
+package com.url.app.dto.validation;
 
 import javax.validation.Valid;
 
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 
-import com.url.app.dto.User;
+import com.url.app.dto.entity.User;
 
 @Service
 @Validated

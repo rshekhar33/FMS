@@ -14,8 +14,8 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 
-import com.url.app.dto.Action;
-import com.url.app.dto.UrlRolesBean;
+import com.url.app.dto.entity.Action;
+import com.url.app.dto.entity.UrlRolesBean;
 import com.url.app.utility.AppLogMessage;
 
 /**

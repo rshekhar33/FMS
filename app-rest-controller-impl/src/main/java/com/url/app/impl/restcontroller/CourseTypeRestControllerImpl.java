@@ -6,7 +6,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.url.app.dto.CourseType;
+import com.url.app.dto.entity.CourseType;
 import com.url.app.interf.restcontroller.CourseTypeRestController;
 import com.url.app.interf.service.AppCourseTypeService;
 

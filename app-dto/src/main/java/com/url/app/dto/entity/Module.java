@@ -1,4 +1,4 @@
-package com.url.app.dto;
+package com.url.app.dto.entity;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -32,30 +32,30 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.url.app.dto.validation.BasicActivateGroup;
+import com.url.app.dto.validation.BasicCreateGroup;
+import com.url.app.dto.validation.BasicUpdateGroup;
 import com.url.app.utility.AppBasicValidationKey;
 import com.url.app.utility.AppConstant;
 import com.url.app.utility.AppSQL;
-import com.url.app.validation.BasicActivateGroup;
-import com.url.app.validation.BasicCreateGroup;
-import com.url.app.validation.BasicUpdateGroup;
 
 /**
- * The persistent class for the role database table.
+ * The persistent class for the module database table.
  */
 @Entity
-@Table(name = "role")
+@Table(name = "module")
 @EntityListeners(AuditingEntityListener.class)
 @JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
-@NamedQuery(name = "Role.findAll", query = AppSQL.QRY_FIND_ALL_ROLE)
-public class Role implements Serializable {
+@NamedQuery(name = "Module.findAll", query = AppSQL.QRY_FIND_ALL_MODULE)
+public class Module implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "role_id", unique = true, nullable = false)
+	@Column(name = "module_id", unique = true, nullable = false)
 	@NotNull(groups = BasicActivateGroup.class, message = AppBasicValidationKey.UPDATE_FAILED_ERROR)
 	@Positive(groups = BasicActivateGroup.class, message = AppBasicValidationKey.UPDATE_FAILED_ERROR)
-	private Integer roleId;
+	private Integer moduleId;
 
 	@Column(name = "created_by", updatable = false, nullable = false)
 	private Integer createdBy;
@@ -79,33 +79,28 @@ public class Role implements Serializable {
 	@LastModifiedDate
 	private Date modifiedDate;
 
-	@Column(name = "role_name", unique = true, nullable = false, length = 50)
+	@Column(name = "module_name", unique = true, nullable = false, length = 100)
 	@NotBlank(groups = { BasicCreateGroup.class, BasicUpdateGroup.class }, message = AppBasicValidationKey.MANDATORY_FIELD_ERROR)
 	@Pattern(groups = { BasicCreateGroup.class,
-			BasicUpdateGroup.class }, regexp = AppConstant.REGEX_RESTRICTED_CHAR_3, message = AppBasicValidationKey.ROLE_ROLENAME_RESTRICTEDCHAR3_ERROR)
-	@Size(groups = { BasicCreateGroup.class, BasicUpdateGroup.class }, max = 50, message = AppBasicValidationKey.LENGTH_ERROR)
-	private String roleName;
+			BasicUpdateGroup.class }, regexp = AppConstant.REGEX_RESTRICTED_CHAR_3, message = AppBasicValidationKey.MODULE_MODULENAME_RESTRICTEDCHAR3_ERROR)
+	@Size(groups = { BasicCreateGroup.class, BasicUpdateGroup.class }, max = 100, message = AppBasicValidationKey.LENGTH_ERROR)
+	private String moduleName;
 
-	//bi-directional many-to-one association to RolePrivilegeRelation
-	@OneToMany(mappedBy = "id.role", cascade = CascadeType.ALL, orphanRemoval = true)
-	@JsonBackReference(value = "role_rolePrivilegeRelation")
-	private Set<RolePrivilegeRelation> rolePrivilegeRelations = new HashSet<>(0);
+	//bi-directional many-to-one association to FacultySkillset
+	@OneToMany(mappedBy = "id.module", cascade = CascadeType.ALL, orphanRemoval = true)
+	@JsonBackReference(value = "module_facultySkillset")
+	private Set<FacultySkillset> facultySkillsets = new HashSet<>(0);
 
-	//bi-directional many-to-one association to UserRoleRelation
-	@OneToMany(mappedBy = "id.role", cascade = CascadeType.ALL, orphanRemoval = true)
-	@JsonBackReference(value = "role_userRoleRelation")
-	private Set<UserRoleRelation> userRoleRelations = new HashSet<>(0);
-
-	public Role() {
+	public Module() {
 		super();
 	}
 
-	public Integer getRoleId() {
-		return this.roleId;
+	public Integer getModuleId() {
+		return this.moduleId;
 	}
 
-	public void setRoleId(Integer roleId) {
-		this.roleId = roleId;
+	public void setModuleId(Integer moduleId) {
+		this.moduleId = moduleId;
 	}
 
 	public Integer getCreatedBy() {
@@ -148,53 +143,35 @@ public class Role implements Serializable {
 		this.modifiedDate = modifiedDate;
 	}
 
-	public String getRoleName() {
-		return this.roleName;
+	public String getModuleName() {
+		return this.moduleName;
 	}
 
-	public void setRoleName(String roleName) {
-		this.roleName = roleName;
+	public void setModuleName(String moduleName) {
+		this.moduleName = moduleName;
 	}
 
-	public Set<RolePrivilegeRelation> getRolePrivilegeRelations() {
-		return this.rolePrivilegeRelations;
+	public Set<FacultySkillset> getFacultySkillsets() {
+		return this.facultySkillsets;
 	}
 
-	public void setRolePrivilegeRelations(Set<RolePrivilegeRelation> rolePrivilegeRelations) {
-		this.rolePrivilegeRelations = rolePrivilegeRelations;
+	public void setFacultySkillsets(Set<FacultySkillset> facultySkillsets) {
+		this.facultySkillsets = facultySkillsets;
 	}
 
-	public boolean addRolePrivilegeRelation(RolePrivilegeRelation rolePrivilegeRelation) {
-		rolePrivilegeRelation.setRole(this);
+	public boolean addFacultySkillset(FacultySkillset facultySkillset) {
+		facultySkillset.setModule(this);
 
-		return getRolePrivilegeRelations().add(rolePrivilegeRelation);
+		return getFacultySkillsets().add(facultySkillset);
 	}
 
-	public boolean removeRolePrivilegeRelation(RolePrivilegeRelation rolePrivilegeRelation) {
-		return getRolePrivilegeRelations().remove(rolePrivilegeRelation);
-	}
-
-	public Set<UserRoleRelation> getUserRoleRelations() {
-		return this.userRoleRelations;
-	}
-
-	public void setUserRoleRelations(Set<UserRoleRelation> userRoleRelations) {
-		this.userRoleRelations = userRoleRelations;
-	}
-
-	public boolean addUserRoleRelation(UserRoleRelation userRoleRelation) {
-		userRoleRelation.setRole(this);
-
-		return getUserRoleRelations().add(userRoleRelation);
-	}
-
-	public boolean removeUserRoleRelation(UserRoleRelation userRoleRelation) {
-		return getUserRoleRelations().remove(userRoleRelation);
+	public boolean removeFacultySkillset(FacultySkillset facultySkillset) {
+		return getFacultySkillsets().remove(facultySkillset);
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(roleId);
+		return Objects.hash(moduleId);
 	}
 
 	@Override
@@ -205,11 +182,11 @@ public class Role implements Serializable {
 		if (obj == null) {
 			return false;
 		}
-		if (!(obj instanceof Role)) {
+		if (!(obj instanceof Module)) {
 			return false;
 		}
-		Role other = (Role) obj;
+		Module other = (Module) obj;
 
-		return Objects.equals(this.getRoleId(), other.getRoleId());
+		return Objects.equals(this.getModuleId(), other.getModuleId());
 	}
 }

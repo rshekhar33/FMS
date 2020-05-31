@@ -11,7 +11,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.url.app.config.AppMessage;
-import com.url.app.dto.CourseType;
+import com.url.app.dto.entity.CourseType;
+import com.url.app.dto.validation.AppCourseTypeValidationService;
 import com.url.app.interf.dao.AppDao;
 import com.url.app.interf.dao.CourseTypeRepository;
 import com.url.app.interf.service.AppCourseTypeService;
@@ -20,7 +21,6 @@ import com.url.app.utility.AppCommon;
 import com.url.app.utility.AppConstant;
 import com.url.app.utility.AppLogMessage;
 import com.url.app.utility.AppResponseKey;
-import com.url.app.validation.AppCourseTypeValidationService;
 
 /**
  * Service implementation of application for Course Type.

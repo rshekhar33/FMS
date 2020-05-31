@@ -1,4 +1,4 @@
-package com.url.app.dto;
+package com.url.app.dto.entity;
 
 import java.util.ArrayList;
 import java.util.Collection;

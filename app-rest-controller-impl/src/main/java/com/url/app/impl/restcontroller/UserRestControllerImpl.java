@@ -6,8 +6,8 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.url.app.dto.User;
-import com.url.app.dto.UserMng;
+import com.url.app.dto.entity.User;
+import com.url.app.dto.entity.UserMng;
 import com.url.app.interf.restcontroller.UserRestController;
 import com.url.app.interf.service.AppUserService;
 

@@ -3,7 +3,7 @@ package com.url.app.interf.service;
 import java.util.List;
 import java.util.Map;
 
-import com.url.app.dto.Module;
+import com.url.app.dto.entity.Module;
 
 /**
  * Service Layer of application for Module.

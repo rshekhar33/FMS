@@ -1,8 +1,10 @@
-package com.url.app.dto;
+package com.url.app.dto.entity;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -15,6 +17,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -23,27 +26,25 @@ import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.url.app.utility.AppSQL;
 
 /**
- * The persistent class for the feedback_answer database table.
+ * The persistent class for the feedback_question database table.
  */
 @Entity
-@Table(name = "feedback_answer")
+@Table(name = "feedback_question")
 @EntityListeners(AuditingEntityListener.class)
 @JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
-@NamedQuery(name = "FeedbackAnswer.findAll", query = AppSQL.QRY_FIND_ALL_FEEDBACK_ANSWER)
-public class FeedbackAnswer implements Serializable {
+@NamedQuery(name = "FeedbackQuestion.findAll", query = AppSQL.QRY_FIND_ALL_FEEDBACK_QUESTION)
+public class FeedbackQuestion implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "feedback_answer_id", unique = true, nullable = false)
-	private Integer feedbackAnswerId;
-
-	@Column(nullable = false, length = 500)
-	private String answer;
+	@Column(name = "feedback_question_id", unique = true, nullable = false)
+	private Integer feedbackQuestionId;
 
 	@Column(name = "created_by", updatable = false, nullable = false)
 	private Integer createdBy;
@@ -64,29 +65,29 @@ public class FeedbackAnswer implements Serializable {
 	@LastModifiedDate
 	private Date modifiedDate;
 
-	//bi-directional many-to-one association to FeedbackQuestion
-	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	@JoinColumn(name = "feedback_question_id", nullable = false)
-	private FeedbackQuestion feedbackQuestion;
+	@Column(nullable = false, length = 500)
+	private String question;
 
-	public FeedbackAnswer() {
+	//bi-directional many-to-one association to FeedbackAnswer
+	@OneToMany(mappedBy = "feedbackQuestion", cascade = CascadeType.ALL, orphanRemoval = true)
+	@JsonBackReference(value = "feedbackQuestion_feedbackAnswer")
+	private Set<FeedbackAnswer> feedbackAnswers = new HashSet<>(0);
+
+	//bi-directional many-to-one association to Course
+	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@JoinColumn(name = "course_id", nullable = false)
+	private Course course;
+
+	public FeedbackQuestion() {
 		super();
 	}
 
-	public Integer getFeedbackAnswerId() {
-		return this.feedbackAnswerId;
+	public Integer getFeedbackQuestionId() {
+		return this.feedbackQuestionId;
 	}
 
-	public void setFeedbackAnswerId(Integer feedbackAnswerId) {
-		this.feedbackAnswerId = feedbackAnswerId;
-	}
-
-	public String getAnswer() {
-		return this.answer;
-	}
-
-	public void setAnswer(String answer) {
-		this.answer = answer;
+	public void setFeedbackQuestionId(Integer feedbackQuestionId) {
+		this.feedbackQuestionId = feedbackQuestionId;
 	}
 
 	public Integer getCreatedBy() {
@@ -129,17 +130,43 @@ public class FeedbackAnswer implements Serializable {
 		this.modifiedDate = modifiedDate;
 	}
 
-	public FeedbackQuestion getFeedbackQuestion() {
-		return this.feedbackQuestion;
+	public String getQuestion() {
+		return this.question;
 	}
 
-	public void setFeedbackQuestion(FeedbackQuestion feedbackQuestion) {
-		this.feedbackQuestion = feedbackQuestion;
+	public void setQuestion(String question) {
+		this.question = question;
+	}
+
+	public Set<FeedbackAnswer> getFeedbackAnswers() {
+		return this.feedbackAnswers;
+	}
+
+	public void setFeedbackAnswers(Set<FeedbackAnswer> feedbackAnswers) {
+		this.feedbackAnswers = feedbackAnswers;
+	}
+
+	public boolean addFeedbackAnswer(FeedbackAnswer feedbackAnswer) {
+		feedbackAnswer.setFeedbackQuestion(this);
+
+		return getFeedbackAnswers().add(feedbackAnswer);
+	}
+
+	public boolean removeFeedbackAnswer(FeedbackAnswer feedbackAnswer) {
+		return getFeedbackAnswers().remove(feedbackAnswer);
+	}
+
+	public Course getCourse() {
+		return this.course;
+	}
+
+	public void setCourse(Course course) {
+		this.course = course;
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(feedbackAnswerId);
+		return Objects.hash(feedbackQuestionId);
 	}
 
 	@Override
@@ -150,11 +177,11 @@ public class FeedbackAnswer implements Serializable {
 		if (obj == null) {
 			return false;
 		}
-		if (!(obj instanceof FeedbackAnswer)) {
+		if (!(obj instanceof FeedbackQuestion)) {
 			return false;
 		}
-		FeedbackAnswer other = (FeedbackAnswer) obj;
+		FeedbackQuestion other = (FeedbackQuestion) obj;
 
-		return Objects.equals(this.getFeedbackAnswerId(), other.getFeedbackAnswerId());
+		return Objects.equals(this.getFeedbackQuestionId(), other.getFeedbackQuestionId());
 	}
 }

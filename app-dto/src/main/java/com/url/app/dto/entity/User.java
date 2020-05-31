@@ -1,4 +1,4 @@
-package com.url.app.dto;
+package com.url.app.dto.entity;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -36,12 +36,12 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.url.app.dto.validation.BasicActivateGroup;
+import com.url.app.dto.validation.BasicCreateGroup;
+import com.url.app.dto.validation.BasicUpdateGroup;
 import com.url.app.utility.AppBasicValidationKey;
 import com.url.app.utility.AppConstant;
 import com.url.app.utility.AppSQL;
-import com.url.app.validation.BasicActivateGroup;
-import com.url.app.validation.BasicCreateGroup;
-import com.url.app.validation.BasicUpdateGroup;
 
 /**
  * The persistent class for the user database table.

@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.url.app.dto.CourseType;
+import com.url.app.dto.entity.CourseType;
 import com.url.app.utility.AppUrlView;
 
 @RequestMapping(value = AppUrlView.PATH_ROOT_COURSE_TYPE)

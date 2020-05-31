@@ -1,4 +1,4 @@
-package com.url.app.validation;
+package com.url.app.dto.validation;
 
 import javax.validation.GroupSequence;
 import javax.validation.groups.Default;

@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.url.app.dto.User;
-import com.url.app.dto.UserMng;
+import com.url.app.dto.entity.User;
+import com.url.app.dto.entity.UserMng;
 import com.url.app.utility.AppUrlView;
 
 /**

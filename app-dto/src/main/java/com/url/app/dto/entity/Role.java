@@ -1,4 +1,4 @@
-package com.url.app.dto;
+package com.url.app.dto.entity;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -32,30 +32,30 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.url.app.dto.validation.BasicActivateGroup;
+import com.url.app.dto.validation.BasicCreateGroup;
+import com.url.app.dto.validation.BasicUpdateGroup;
 import com.url.app.utility.AppBasicValidationKey;
 import com.url.app.utility.AppConstant;
 import com.url.app.utility.AppSQL;
-import com.url.app.validation.BasicActivateGroup;
-import com.url.app.validation.BasicCreateGroup;
-import com.url.app.validation.BasicUpdateGroup;
 
 /**
- * The persistent class for the module database table.
+ * The persistent class for the role database table.
  */
 @Entity
-@Table(name = "module")
+@Table(name = "role")
 @EntityListeners(AuditingEntityListener.class)
 @JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
-@NamedQuery(name = "Module.findAll", query = AppSQL.QRY_FIND_ALL_MODULE)
-public class Module implements Serializable {
+@NamedQuery(name = "Role.findAll", query = AppSQL.QRY_FIND_ALL_ROLE)
+public class Role implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "module_id", unique = true, nullable = false)
+	@Column(name = "role_id", unique = true, nullable = false)
 	@NotNull(groups = BasicActivateGroup.class, message = AppBasicValidationKey.UPDATE_FAILED_ERROR)
 	@Positive(groups = BasicActivateGroup.class, message = AppBasicValidationKey.UPDATE_FAILED_ERROR)
-	private Integer moduleId;
+	private Integer roleId;
 
 	@Column(name = "created_by", updatable = false, nullable = false)
 	private Integer createdBy;
@@ -79,28 +79,33 @@ public class Module implements Serializable {
 	@LastModifiedDate
 	private Date modifiedDate;
 
-	@Column(name = "module_name", unique = true, nullable = false, length = 100)
+	@Column(name = "role_name", unique = true, nullable = false, length = 50)
 	@NotBlank(groups = { BasicCreateGroup.class, BasicUpdateGroup.class }, message = AppBasicValidationKey.MANDATORY_FIELD_ERROR)
 	@Pattern(groups = { BasicCreateGroup.class,
-			BasicUpdateGroup.class }, regexp = AppConstant.REGEX_RESTRICTED_CHAR_3, message = AppBasicValidationKey.MODULE_MODULENAME_RESTRICTEDCHAR3_ERROR)
-	@Size(groups = { BasicCreateGroup.class, BasicUpdateGroup.class }, max = 100, message = AppBasicValidationKey.LENGTH_ERROR)
-	private String moduleName;
+			BasicUpdateGroup.class }, regexp = AppConstant.REGEX_RESTRICTED_CHAR_3, message = AppBasicValidationKey.ROLE_ROLENAME_RESTRICTEDCHAR3_ERROR)
+	@Size(groups = { BasicCreateGroup.class, BasicUpdateGroup.class }, max = 50, message = AppBasicValidationKey.LENGTH_ERROR)
+	private String roleName;
 
-	//bi-directional many-to-one association to FacultySkillset
-	@OneToMany(mappedBy = "id.module", cascade = CascadeType.ALL, orphanRemoval = true)
-	@JsonBackReference(value = "module_facultySkillset")
-	private Set<FacultySkillset> facultySkillsets = new HashSet<>(0);
+	//bi-directional many-to-one association to RolePrivilegeRelation
+	@OneToMany(mappedBy = "id.role", cascade = CascadeType.ALL, orphanRemoval = true)
+	@JsonBackReference(value = "role_rolePrivilegeRelation")
+	private Set<RolePrivilegeRelation> rolePrivilegeRelations = new HashSet<>(0);
 
-	public Module() {
+	//bi-directional many-to-one association to UserRoleRelation
+	@OneToMany(mappedBy = "id.role", cascade = CascadeType.ALL, orphanRemoval = true)
+	@JsonBackReference(value = "role_userRoleRelation")
+	private Set<UserRoleRelation> userRoleRelations = new HashSet<>(0);
+
+	public Role() {
 		super();
 	}
 
-	public Integer getModuleId() {
-		return this.moduleId;
+	public Integer getRoleId() {
+		return this.roleId;
 	}
 
-	public void setModuleId(Integer moduleId) {
-		this.moduleId = moduleId;
+	public void setRoleId(Integer roleId) {
+		this.roleId = roleId;
 	}
 
 	public Integer getCreatedBy() {
@@ -143,35 +148,53 @@ public class Module implements Serializable {
 		this.modifiedDate = modifiedDate;
 	}
 
-	public String getModuleName() {
-		return this.moduleName;
+	public String getRoleName() {
+		return this.roleName;
 	}
 
-	public void setModuleName(String moduleName) {
-		this.moduleName = moduleName;
+	public void setRoleName(String roleName) {
+		this.roleName = roleName;
 	}
 
-	public Set<FacultySkillset> getFacultySkillsets() {
-		return this.facultySkillsets;
+	public Set<RolePrivilegeRelation> getRolePrivilegeRelations() {
+		return this.rolePrivilegeRelations;
 	}
 
-	public void setFacultySkillsets(Set<FacultySkillset> facultySkillsets) {
-		this.facultySkillsets = facultySkillsets;
+	public void setRolePrivilegeRelations(Set<RolePrivilegeRelation> rolePrivilegeRelations) {
+		this.rolePrivilegeRelations = rolePrivilegeRelations;
 	}
 
-	public boolean addFacultySkillset(FacultySkillset facultySkillset) {
-		facultySkillset.setModule(this);
+	public boolean addRolePrivilegeRelation(RolePrivilegeRelation rolePrivilegeRelation) {
+		rolePrivilegeRelation.setRole(this);
 
-		return getFacultySkillsets().add(facultySkillset);
+		return getRolePrivilegeRelations().add(rolePrivilegeRelation);
 	}
 
-	public boolean removeFacultySkillset(FacultySkillset facultySkillset) {
-		return getFacultySkillsets().remove(facultySkillset);
+	public boolean removeRolePrivilegeRelation(RolePrivilegeRelation rolePrivilegeRelation) {
+		return getRolePrivilegeRelations().remove(rolePrivilegeRelation);
+	}
+
+	public Set<UserRoleRelation> getUserRoleRelations() {
+		return this.userRoleRelations;
+	}
+
+	public void setUserRoleRelations(Set<UserRoleRelation> userRoleRelations) {
+		this.userRoleRelations = userRoleRelations;
+	}
+
+	public boolean addUserRoleRelation(UserRoleRelation userRoleRelation) {
+		userRoleRelation.setRole(this);
+
+		return getUserRoleRelations().add(userRoleRelation);
+	}
+
+	public boolean removeUserRoleRelation(UserRoleRelation userRoleRelation) {
+		return getUserRoleRelations().remove(userRoleRelation);
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(moduleId);
+		return Objects.hash(roleId);
 	}
 
 	@Override
@@ -182,11 +205,11 @@ public class Module implements Serializable {
 		if (obj == null) {
 			return false;
 		}
-		if (!(obj instanceof Module)) {
+		if (!(obj instanceof Role)) {
 			return false;
 		}
-		Module other = (Module) obj;
+		Role other = (Role) obj;
 
-		return Objects.equals(this.getModuleId(), other.getModuleId());
+		return Objects.equals(this.getRoleId(), other.getRoleId());
 	}
 }

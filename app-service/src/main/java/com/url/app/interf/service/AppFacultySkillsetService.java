@@ -3,8 +3,8 @@ package com.url.app.interf.service;
 import java.util.List;
 import java.util.Map;
 
-import com.url.app.dto.FacultySkillsetMng;
-import com.url.app.dto.User;
+import com.url.app.dto.entity.FacultySkillsetMng;
+import com.url.app.dto.entity.User;
 
 /**
  * Service Layer of application for FacultySkillset.

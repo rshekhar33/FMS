@@ -16,9 +16,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 
-import com.url.app.dto.User;
+import com.url.app.dto.entity.User;
+import com.url.app.dto.validation.ValidationActivateSequence;
 import com.url.app.utility.AppConstant;
-import com.url.app.validation.ValidationActivateSequence;
 
 @SpringBootTest
 public class ApplicationWebApplicationTests {
