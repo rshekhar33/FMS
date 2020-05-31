@@ -19,5 +19,5 @@ spring:
         format_sql: true
     show-sql: false
   main:
-    allow-bean-definition-overriding: true  profiles:    active:    - default
-#    - package
+    allow-bean-definition-overriding: true  profiles:    active:#    - default
+    - package
