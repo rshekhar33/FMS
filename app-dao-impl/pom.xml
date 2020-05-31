@@ -31,11 +31,6 @@
 			<version>${project.version}</version>
 		</dependency>
 
-		<!-- Hibernate -->
-		<dependency>
-			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate-core</artifactId>
-		</dependency>
 		<!-- MySQL -->
 		<dependency>
 			<groupId>mysql</groupId>

@@ -22,12 +22,9 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<java.version>1.8</java.version>
-		<hibernate.core.version>5.4.16.Final</hibernate.core.version>
-		<hibernate.validator.version>6.1.5.Final</hibernate.validator.version>
 		<commons.fileupload.version>1.4</commons.fileupload.version>
 		<javax.servlet.jsp.version>2.3.3</javax.servlet.jsp.version>
 		<jasypt.version>3.0.2</jasypt.version>
-		<javax.mail.version>1.6.2</javax.mail.version>
 	</properties>
 
 	<dependencies>
