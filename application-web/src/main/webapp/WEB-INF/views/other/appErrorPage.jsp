@@ -10,16 +10,16 @@
 	<meta http-equiv="x-ua-compatible" content="ie=edge">
 	<title>${appTitle}</title>
 	<!-- Font Awesome Icons -->
-	<link rel="stylesheet" href="${contextPath}resources/font-awesome/css/all.min.css">
+	<link rel="stylesheet" href="${contextPath}static/resources/font-awesome/css/all.min.css">
 	<!-- IonIcons -->
-	<link rel="stylesheet" href="${contextPath}resources/ionicons/css/ionicons.min.css">
+	<link rel="stylesheet" href="${contextPath}static/resources/ionicons/css/ionicons.min.css">
 	<!-- overlayScrollbars -->
-	<link rel="stylesheet" href="${contextPath}resources/overlayScrollbars/css/OverlayScrollbars.min.css">
+	<link rel="stylesheet" href="${contextPath}static/resources/overlayScrollbars/css/OverlayScrollbars.min.css">
 	<!-- Theme style -->
-	<link rel="stylesheet" href="${contextPath}css/adminlte.min.css">
+	<link rel="stylesheet" href="${contextPath}static/css/adminlte.min.css">
 	<!-- Google Font: Source Sans Pro -->
-	<link rel="stylesheet" href="${contextPath}resources/google-fonts/google-fonts.css">
-	<link rel="shortcut icon" href="${contextPath}images/favicon.ico" />
+	<link rel="stylesheet" href="${contextPath}static/resources/google-fonts/google-fonts.css">
+	<link rel="shortcut icon" href="${contextPath}static/images/favicon.ico" />
 </head>
 <body class="hold-transition sidebar-mini text-sm layout-fixed layout-navbar-fixed layout-footer-fixed">
 	<div class="wrapper">
@@ -83,13 +83,13 @@
 	<!-- REQUIRED SCRIPTS -->
 
 	<!-- jQuery -->
-	<script src="${contextPath}resources/jquery/jquery.min.js"></script>
+	<script src="${contextPath}static/resources/jquery/jquery.min.js"></script>
 	<!-- Bootstrap -->
-	<script src="${contextPath}resources/bootstrap/js/bootstrap.bundle.min.js"></script>
+	<script src="${contextPath}static/resources/bootstrap/js/bootstrap.bundle.min.js"></script>
 	<!-- overlayScrollbars -->
-	<script src="${contextPath}resources/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
+	<script src="${contextPath}static/resources/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
 	<!-- AdminLTE -->
-	<script src="${contextPath}js/adminlte.js"></script>
-	<script src="${contextPath}js/demo.js"></script>
+	<script src="${contextPath}static/js/adminlte.min.js"></script>
+	<script src="${contextPath}static/js/demo.js"></script>
 </body>
 </html>

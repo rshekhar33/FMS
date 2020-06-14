@@ -1,4 +1,4 @@
-package com.url.app.securityservice;
+package com.url.app.security.service;
 
 import java.util.Collection;
 import java.util.List;
@@ -17,6 +17,7 @@ import org.springframework.security.web.servletapi.SecurityContextHolderAwareReq
 import org.springframework.stereotype.Component;
 
 import com.url.app.interf.service.AppService;
+import com.url.app.security.config.AppAuthorization;
 import com.url.app.utility.AppLogMessage;
 
 /**
@@ -48,7 +49,7 @@ public class DbFilterInvocationSecurityMetadataSource implements FilterInvocatio
 			url = request.getRequestURI().substring(request.getContextPath().length() + 1);
 		}
 
-		final List<String> roles = appAuthorization.getRolesHavingAccessToAction(url);
+		final String[] roles = appAuthorization.getArrayOfRolesHavingAccessToAction(url);
 		logger.debug(AppLogMessage.REQUEST_URL_AND_ROLES_MSG, url, roles);
 
 		Collection<ConfigAttribute> attributes = null;
@@ -59,7 +60,7 @@ public class DbFilterInvocationSecurityMetadataSource implements FilterInvocatio
 				attributes = CONFIG_ATTRIBUTES_DENIED;
 			}
 		} else {
-			attributes = SecurityConfig.createList(roles.stream().toArray(String[]::new));
+			attributes = SecurityConfig.createList(roles);
 		}
 
 		return attributes;

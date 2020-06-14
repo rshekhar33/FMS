@@ -28,6 +28,7 @@ public class AppLogMessage {
 	public static final String NO_HANDLER_FOUND_EXCEPTION_MSG = "Global NoHandlerFoundException at Location : {} with Exception : {}";
 	public static final String METHOD_NOT_SUPPORTED_EXCEPTION_MSG = "Global HttpRequestMethodNotSupportedException at Location : {} with Exception : {}";
 	public static final String GLOBAL_EXCEPTION_MSG = "Global Exception at Location : ";
+	public static final String GLOBAL_ERROR_MSG = "Global Error Data : {}";
 
 	public static final String MODULE_ID_MSG = "moduleId = {}";
 	public static final String ROLE_ID_MSG = "roleId = {}";

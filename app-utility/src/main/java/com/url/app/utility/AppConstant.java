@@ -61,5 +61,6 @@ public class AppConstant {
 	public static final String USER_DEFAULT_PASSWORD = "fms";
 
 	/* Spring Security ignore patterns */
-	public static final String[] SPRING_SECURITY_IGNORE_PATTERNS = new String[] { "/images/**", "/js/**", "/css/**", "/fonts/**", "/resources/**" };
+	public static final String STATIC_PATH_PATTERN = "/static/**";
+	public static final String STATIC_RESOURCE_LOCATION = "classpath:/static/";
 }

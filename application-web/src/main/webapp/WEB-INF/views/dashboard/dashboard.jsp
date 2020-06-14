@@ -10,16 +10,16 @@
 	<meta http-equiv="x-ua-compatible" content="ie=edge">
 	<title>${appTitle} | Dashboard</title>
 	<!-- Font Awesome Icons -->
-	<link rel="stylesheet" href="${contextPath}resources/font-awesome/css/all.min.css">
+	<link rel="stylesheet" href="${contextPath}static/resources/font-awesome/css/all.min.css">
 	<!-- IonIcons -->
-	<link rel="stylesheet" href="${contextPath}resources/ionicons/css/ionicons.min.css">
+	<link rel="stylesheet" href="${contextPath}static/resources/ionicons/css/ionicons.min.css">
 	<!-- overlayScrollbars -->
-	<link rel="stylesheet" href="${contextPath}resources/overlayScrollbars/css/OverlayScrollbars.min.css">
+	<link rel="stylesheet" href="${contextPath}static/resources/overlayScrollbars/css/OverlayScrollbars.min.css">
 	<!-- Theme style -->
-	<link rel="stylesheet" href="${contextPath}css/adminlte.min.css">
+	<link rel="stylesheet" href="${contextPath}static/css/adminlte.min.css">
 	<!-- Google Font: Source Sans Pro -->
-	<link rel="stylesheet" href="${contextPath}resources/google-fonts/google-fonts.css">
-	<link rel="shortcut icon" href="${contextPath}images/favicon.ico" />
+	<link rel="stylesheet" href="${contextPath}static/resources/google-fonts/google-fonts.css">
+	<link rel="shortcut icon" href="${contextPath}static/images/favicon.ico" />
 </head>
 <!--
 BODY TAG OPTIONS:
@@ -121,7 +121,7 @@ to get the desired effect
 										<tbody>
 											<tr>
 												<td>
-													<img src="${contextPath}images/default-150x150.png" alt="Product 1" class="img-circle img-size-32 mr-2">
+													<img src="${contextPath}static/images/default-150x150.png" alt="Product 1" class="img-circle img-size-32 mr-2">
 													Some Product
 												</td>
 												<td>$13 USD</td>
@@ -137,7 +137,7 @@ to get the desired effect
 											</tr>
 											<tr>
 												<td>
-													<img src="${contextPath}images/default-150x150.png" alt="Product 1" class="img-circle img-size-32 mr-2">
+													<img src="${contextPath}static/images/default-150x150.png" alt="Product 1" class="img-circle img-size-32 mr-2">
 													Another Product
 												</td>
 												<td>$29 USD</td>
@@ -153,7 +153,7 @@ to get the desired effect
 											</tr>
 											<tr>
 												<td>
-													<img src="${contextPath}images/default-150x150.png" alt="Product 1" class="img-circle img-size-32 mr-2">
+													<img src="${contextPath}static/images/default-150x150.png" alt="Product 1" class="img-circle img-size-32 mr-2">
 													Amazing Product
 												</td>
 												<td>$1,230 USD</td>
@@ -169,7 +169,7 @@ to get the desired effect
 											</tr>
 											<tr>
 												<td>
-													<img src="${contextPath}images/default-150x150.png" alt="Product 1" class="img-circle img-size-32 mr-2">
+													<img src="${contextPath}static/images/default-150x150.png" alt="Product 1" class="img-circle img-size-32 mr-2">
 													Perfect Item <span class="badge bg-danger">NEW</span>
 												</td>
 												<td>$199 USD</td>
@@ -296,17 +296,17 @@ to get the desired effect
 	<!-- REQUIRED SCRIPTS -->
 
 	<!-- jQuery -->
-	<script src="${contextPath}resources/jquery/jquery.min.js"></script>
+	<script src="${contextPath}static/resources/jquery/jquery.min.js"></script>
 	<!-- Bootstrap -->
-	<script src="${contextPath}resources/bootstrap/js/bootstrap.bundle.min.js"></script>
+	<script src="${contextPath}static/resources/bootstrap/js/bootstrap.bundle.min.js"></script>
 	<!-- overlayScrollbars -->
-	<script src="${contextPath}resources/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
+	<script src="${contextPath}static/resources/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
 	<!-- AdminLTE -->
-	<script src="${contextPath}js/adminlte.min.js"></script>
+	<script src="${contextPath}static/js/adminlte.min.js"></script>
 
 	<!-- OPTIONAL SCRIPTS -->
-	<script src="${contextPath}resources/chart.js/Chart.min.js"></script>
-	<script src="${contextPath}js/demo.js"></script>
-	<script src="${contextPath}js/pages/dashboard/dashboard3.js"></script>
+	<script src="${contextPath}static/resources/chart.js/Chart.min.js"></script>
+	<script src="${contextPath}static/js/demo.js"></script>
+	<script src="${contextPath}static/js/pages/dashboard/dashboard3.js"></script>
 </body>
 </html>

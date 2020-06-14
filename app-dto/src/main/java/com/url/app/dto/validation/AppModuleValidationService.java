@@ -16,12 +16,12 @@ public class AppModuleValidationService {
 		// Spring bean validation while creating new module
 	}
 
-	@Validated(value = { ValidationUpdateSequence.class })
+	@Validated(value = ValidationUpdateSequence.class)
 	public void validateForUpdate(@Valid Module module) {
 		// Spring bean validation while updating module
 	}
 
-	@Validated(value = { ValidationActivateSequence.class })
+	@Validated(value = ValidationActivateSequence.class)
 	public void validateForActivate(@Valid Module module) {
 		// Spring bean validation while activating/deactivating module
 	}

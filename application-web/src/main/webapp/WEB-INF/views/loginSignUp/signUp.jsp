@@ -10,9 +10,9 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<title>${appTitle} | Sign Up</title>
 	<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-	<link rel="stylesheet" href="${contextPath}css/normalize.css">
-	<link rel="stylesheet" href="${contextPath}css/style.css">
-	<link rel="shortcut icon" href="${contextPath}images/favicon.ico" />
+	<link rel="stylesheet" href="${contextPath}static/css/normalize.css">
+	<link rel="stylesheet" href="${contextPath}static/css/style.css">
+	<link rel="shortcut icon" href="${contextPath}static/images/favicon.ico" />
 	<style type="text/css">
 	.logmod__wrapper {
 		margin: 30px auto;
@@ -105,11 +105,11 @@
 		</div>
 	</div>
 
-	<script src="${contextPath}resources/jquery/jquery.min.js"></script>
+	<script src="${contextPath}static/resources/jquery/jquery.min.js"></script>
 	<script>
 		var contextPath = "${contextPath}";
 	</script>
-	<script src="${contextPath}js/common.js"></script>
-	<script src="${contextPath}js/pages/loginSignUp/signUp.js"></script>
+	<script src="${contextPath}static/js/common.js"></script>
+	<script src="${contextPath}static/js/pages/loginSignUp/signUp.js"></script>
 </body>
 </html>

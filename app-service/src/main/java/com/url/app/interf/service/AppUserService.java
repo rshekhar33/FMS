@@ -3,9 +3,9 @@ package com.url.app.interf.service;
 import java.util.List;
 import java.util.Map;
 
-import com.url.app.dto.entity.LoggedUser;
 import com.url.app.dto.entity.User;
 import com.url.app.dto.entity.UserMng;
+import com.url.app.pojo.LoggedUser;
 
 /**
  * Service Layer of application for User.

@@ -10,22 +10,22 @@
 	<meta http-equiv="x-ua-compatible" content="ie=edge">
 	<title>${appTitle} | All Roles</title>
 	<!-- Font Awesome Icons -->
-	<link rel="stylesheet" href="${contextPath}resources/font-awesome/css/all.min.css">
+	<link rel="stylesheet" href="${contextPath}static/resources/font-awesome/css/all.min.css">
 	<!-- IonIcons -->
-	<link rel="stylesheet" href="${contextPath}resources/ionicons/css/ionicons.min.css">
+	<link rel="stylesheet" href="${contextPath}static/resources/ionicons/css/ionicons.min.css">
 	<!-- overlayScrollbars -->
-	<link rel="stylesheet" href="${contextPath}resources/overlayScrollbars/css/OverlayScrollbars.min.css">
+	<link rel="stylesheet" href="${contextPath}static/resources/overlayScrollbars/css/OverlayScrollbars.min.css">
 	<!-- DataTables -->
-	<link rel="stylesheet" href="${contextPath}resources/datatables-bs4/css/dataTables.bootstrap4.min.css">
-	<link rel="stylesheet" href="${contextPath}resources/datatables-responsive/css/responsive.bootstrap4.min.css">
+	<link rel="stylesheet" href="${contextPath}static/resources/datatables-bs4/css/dataTables.bootstrap4.min.css">
+	<link rel="stylesheet" href="${contextPath}static/resources/datatables-responsive/css/responsive.bootstrap4.min.css">
 	<!-- Semantic Checkbox -->
-	<link rel="stylesheet" href="${contextPath}resources/semantic-ui/css/checkbox.min.css">
+	<link rel="stylesheet" href="${contextPath}static/resources/semantic-ui/css/checkbox.min.css">
 	<!-- Theme style -->
-	<link rel="stylesheet" href="${contextPath}css/adminlte.min.css">
+	<link rel="stylesheet" href="${contextPath}static/css/adminlte.min.css">
 	<!-- Google Font: Source Sans Pro -->
-	<link rel="stylesheet" href="${contextPath}resources/google-fonts/google-fonts.css">
-	<link rel="stylesheet" href="${contextPath}css/override.css">
-	<link rel="shortcut icon" href="${contextPath}images/favicon.ico" />
+	<link rel="stylesheet" href="${contextPath}static/resources/google-fonts/google-fonts.css">
+	<link rel="stylesheet" href="${contextPath}static/css/override.css">
+	<link rel="shortcut icon" href="${contextPath}static/images/favicon.ico" />
 </head>
 <body class="hold-transition sidebar-mini text-sm layout-fixed layout-navbar-fixed layout-footer-fixed">
 	<div class="wrapper">
@@ -101,32 +101,32 @@
 	<!-- REQUIRED SCRIPTS -->
 
 	<!-- jQuery -->
-	<script src="${contextPath}resources/jquery/jquery.min.js"></script>
+	<script src="${contextPath}static/resources/jquery/jquery.min.js"></script>
 	<!-- Bootstrap -->
-	<script src="${contextPath}resources/bootstrap/js/bootstrap.bundle.min.js"></script>
+	<script src="${contextPath}static/resources/bootstrap/js/bootstrap.bundle.min.js"></script>
 	<!-- Bootbox -->
-	<script src="${contextPath}resources/bootbox/bootbox.min.js"></script>
+	<script src="${contextPath}static/resources/bootbox/bootbox.min.js"></script>
 	<!-- overlayScrollbars -->
-	<script src="${contextPath}resources/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
+	<script src="${contextPath}static/resources/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
 	<!-- DataTables -->
-	<script src="${contextPath}resources/datatables/jquery.dataTables.min.js"></script>
-	<script src="${contextPath}resources/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
-	<script src="${contextPath}resources/datatables-responsive/js/dataTables.responsive.min.js"></script>
-	<script src="${contextPath}resources/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+	<script src="${contextPath}static/resources/datatables/jquery.dataTables.min.js"></script>
+	<script src="${contextPath}static/resources/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+	<script src="${contextPath}static/resources/datatables-responsive/js/dataTables.responsive.min.js"></script>
+	<script src="${contextPath}static/resources/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
 	<!-- Semantic Checkbox -->
-	<script src="${contextPath}resources/semantic-ui/js/checkbox.min.js"></script>
+	<script src="${contextPath}static/resources/semantic-ui/js/checkbox.min.js"></script>
 	<!-- AdminLTE -->
-	<script src="${contextPath}js/adminlte.min.js"></script>
+	<script src="${contextPath}static/js/adminlte.min.js"></script>
 
 	<!-- OPTIONAL SCRIPTS -->
-	<script src="${contextPath}js/demo.js"></script>
+	<script src="${contextPath}static/js/demo.js"></script>
 	<!-- page script -->
 	<script>
 		var contextPath = "${contextPath}";
 		var activationIsAllowed = ${appAuthorization.isAccessAllowed('role/activation')};
 		var updateIsAllowed = ${appAuthorization.isAccessAllowed('role/update')};
 	</script>
-	<script src="${contextPath}js/common.js"></script>
-	<script src="${contextPath}js/pages/role/list.js"></script>
+	<script src="${contextPath}static/js/common.js"></script>
+	<script src="${contextPath}static/js/pages/role/list.js"></script>
 </body>
 </html>

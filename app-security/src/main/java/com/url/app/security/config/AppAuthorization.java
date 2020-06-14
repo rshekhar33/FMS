@@ -1,4 +1,4 @@
-package com.url.app.securityservice;
+package com.url.app.security.config;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -16,6 +16,7 @@ import org.springframework.stereotype.Component;
 
 import com.url.app.dto.entity.Action;
 import com.url.app.dto.entity.UrlRolesBean;
+import com.url.app.pojo.RolesCollection;
 import com.url.app.utility.AppLogMessage;
 
 /**
@@ -27,15 +28,15 @@ import com.url.app.utility.AppLogMessage;
 public class AppAuthorization {
 	private static final Logger logger = LoggerFactory.getLogger(AppAuthorization.class);
 
-	private Map<String, List<String>> actionRoles = new ConcurrentHashMap<>();
+	private Map<String, RolesCollection> actionRoles = new ConcurrentHashMap<>();
 	private List<String> applicationAuthSkipUrls = new ArrayList<>();
 	private List<String> applicationUrls = new ArrayList<>();
 
-	public Map<String, List<String>> getActionRoles() {
+	public Map<String, RolesCollection> getActionRoles() {
 		return actionRoles;
 	}
 
-	public void setActionRoles(Map<String, List<String>> actionRoles) {
+	public void setActionRoles(Map<String, RolesCollection> actionRoles) {
 		this.actionRoles = actionRoles;
 	}
 
@@ -61,8 +62,20 @@ public class AppAuthorization {
 	 * @param action the url action whose roles are to be fetched.
 	 * @return list of all roles which has access to the provided action.
 	 */
-	public List<String> getRolesHavingAccessToAction(final String action) {
-		return actionRoles.get(action);
+	public List<String> getListOfRolesHavingAccessToAction(final String action) {
+		final RolesCollection rolesCollection = actionRoles.get(action);
+		return rolesCollection != null ? rolesCollection.getRoleList() : null;
+	}
+
+	/**
+	 * Returns all the roles which has access to the action.
+	 * 
+	 * @param action the url action whose roles are to be fetched.
+	 * @return array of all roles which has access to the provided action.
+	 */
+	public String[] getArrayOfRolesHavingAccessToAction(final String action) {
+		final RolesCollection rolesCollection = actionRoles.get(action);
+		return rolesCollection != null ? rolesCollection.getRoleArr() : null;
 	}
 
 	/**
@@ -72,7 +85,7 @@ public class AppAuthorization {
 	 * @return true if user is authorized to access else returns false.
 	 */
 	public boolean isAccessAllowed(final String action) {
-		final List<String> roles = getRolesHavingAccessToAction(action);
+		final List<String> roles = getListOfRolesHavingAccessToAction(action);
 
 		final Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		final Collection<? extends GrantedAuthority> userRoles = auth.getAuthorities();
@@ -109,12 +122,10 @@ public class AppAuthorization {
 
 		for (final UrlRolesBean urlRolesBean : actionRoleList) {
 			final String dbUrl = urlRolesBean.getUrl();
-			final List<String> roles = actionRoles.getOrDefault(dbUrl, new ArrayList<>());
-			if (roles.isEmpty()) {
-				actionRoles.put(dbUrl, roles);
-			}
-			roles.add(String.valueOf(urlRolesBean.getRoleId()));
+			actionRoles.computeIfAbsent(dbUrl, k -> new RolesCollection()).add(String.valueOf(urlRolesBean.getRoleId()));
 		}
+
+		actionRoles.forEach((k, v) -> v.setRoleArr(v.getRoleList().stream().toArray(String[]::new)));
 
 		logger.debug(AppLogMessage.SKIPPED_ACTIONS_MSG, applicationAuthSkipUrls);
 		logger.debug(AppLogMessage.APPLICATION_ACTIONS_MSG, applicationUrls);

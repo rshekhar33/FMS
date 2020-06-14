@@ -1,4 +1,4 @@
-package com.url.app.securityservice;
+package com.url.app.security.service;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -9,9 +9,9 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import com.url.app.config.AppMessage;
-import com.url.app.dto.entity.LoggedUser;
 import com.url.app.dto.entity.User;
 import com.url.app.interf.service.AppUserService;
+import com.url.app.pojo.LoggedUser;
 import com.url.app.utility.AppLogMessage;
 
 /**

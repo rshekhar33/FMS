@@ -8,12 +8,12 @@
 	<meta http-equiv="x-ua-compatible" content="ie=edge">
 	<title>${appTitle} | Access Denied page</title>
 	<!-- Font Awesome Icons -->
-	<link rel="stylesheet" href="${contextPath}resources/font-awesome/css/all.min.css">
+	<link rel="stylesheet" href="${contextPath}static/resources/font-awesome/css/all.min.css">
 	<!-- Theme style -->
-	<link rel="stylesheet" href="${contextPath}css/adminlte.min.css">
+	<link rel="stylesheet" href="${contextPath}static/css/adminlte.min.css">
 	<!-- Google Font: Source Sans Pro -->
-	<link rel="stylesheet" href="${contextPath}resources/google-fonts/google-fonts.css">
-	<link rel="shortcut icon" href="${contextPath}images/favicon.ico" />
+	<link rel="stylesheet" href="${contextPath}static/resources/google-fonts/google-fonts.css">
+	<link rel="shortcut icon" href="${contextPath}static/images/favicon.ico" />
 </head>
 <body class="hold-transition sidebar-mini text-sm layout-fixed layout-navbar-fixed layout-footer-fixed">
 	<div class="wrapper">
@@ -26,7 +26,7 @@
 		<aside class="main-sidebar sidebar-dark-primary elevation-4">
 			<!-- Brand Logo -->
 			<a href="${contextPath}" class="brand-link">
-				<img src="${contextPath}images/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+				<img src="${contextPath}static/images/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
 				<span class="brand-text font-weight-light">AdminLTE 3</span>
 			</a>
 		</aside>
@@ -88,12 +88,12 @@
 	<!-- REQUIRED SCRIPTS -->
 
 	<!-- jQuery -->
-	<script src="${contextPath}resources/jquery/jquery.min.js"></script>
+	<script src="${contextPath}static/resources/jquery/jquery.min.js"></script>
 	<!-- Bootstrap -->
-	<script src="${contextPath}resources/bootstrap/js/bootstrap.bundle.min.js"></script>
+	<script src="${contextPath}static/resources/bootstrap/js/bootstrap.bundle.min.js"></script>
 	<!-- AdminLTE -->
-	<script src="${contextPath}js/adminlte.js"></script>
-	<script src="${contextPath}js/demo.js"></script>
+	<script src="${contextPath}static/js/adminlte.min.js"></script>
+	<script src="${contextPath}static/js/demo.js"></script>
 	<script>
 		var contextPath = "${contextPath}";
 		setTimeout(function() {

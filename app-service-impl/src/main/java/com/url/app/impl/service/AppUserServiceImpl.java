@@ -17,7 +17,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.url.app.config.AppDBValidationMessage;
 import com.url.app.config.AppMessage;
-import com.url.app.dto.entity.LoggedUser;
 import com.url.app.dto.entity.Role;
 import com.url.app.dto.entity.User;
 import com.url.app.dto.entity.UserMng;
@@ -26,6 +25,7 @@ import com.url.app.dto.validation.AppUserValidationService;
 import com.url.app.interf.dao.AppDao;
 import com.url.app.interf.dao.UserRepository;
 import com.url.app.interf.service.AppUserService;
+import com.url.app.pojo.LoggedUser;
 import com.url.app.utility.AppCommon;
 import com.url.app.utility.AppConstant;
 import com.url.app.utility.AppLogMessage;

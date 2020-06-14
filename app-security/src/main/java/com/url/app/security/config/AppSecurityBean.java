@@ -1,4 +1,4 @@
-package com.url.app.securityservice;
+package com.url.app.security.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -9,6 +9,9 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.session.HttpSessionEventPublisher;
 
+import com.url.app.security.handler.LoginFailureHandler;
+import com.url.app.security.handler.LoginSuccessHandler;
+import com.url.app.security.service.AppUserDetailsService;
 import com.url.app.utility.AppUrlView;
 
 /**

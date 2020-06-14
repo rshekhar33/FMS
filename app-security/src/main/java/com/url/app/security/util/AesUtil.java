@@ -1,4 +1,4 @@
-package com.url.app.securityservice;
+package com.url.app.security.util;
 
 import java.io.UnsupportedEncodingException;
 import java.nio.charset.StandardCharsets;

@@ -1,4 +1,4 @@
-package com.url.app.dto.entity;
+package com.url.app.pojo;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -9,6 +9,8 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import com.url.app.dto.entity.User;
+import com.url.app.dto.entity.UserRoleRelation;
 import com.url.app.utility.AppConstant;
 
 /**

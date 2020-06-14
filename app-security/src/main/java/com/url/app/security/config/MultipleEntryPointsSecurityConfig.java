@@ -1,4 +1,4 @@
-package com.url.app.securityservice;
+package com.url.app.security.config;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,6 +17,11 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.session.SessionRegistry;
 import org.springframework.security.web.access.intercept.FilterSecurityInterceptor;
 
+import com.url.app.security.handler.LoginFailureHandler;
+import com.url.app.security.handler.LoginSuccessHandler;
+import com.url.app.security.service.AppUserDetailsService;
+import com.url.app.security.service.CustomAuthenticationProvider;
+import com.url.app.security.service.DbFilterInvocationSecurityMetadataSource;
 import com.url.app.utility.AppConstant;
 import com.url.app.utility.AppUrlView;
 
@@ -90,7 +95,7 @@ public class MultipleEntryPointsSecurityConfig {
 
 		@Override
 		public void configure(WebSecurity web) throws Exception {
-			web.ignoring().antMatchers(AppConstant.SPRING_SECURITY_IGNORE_PATTERNS);
+			web.ignoring().antMatchers(AppConstant.STATIC_PATH_PATTERN);
 		}
 
 		public FilterSecurityInterceptor filterSecurityInterceptor() {

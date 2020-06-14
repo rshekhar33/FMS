@@ -15,6 +15,7 @@ public class AppResponseKey {
 	public static final String EXCEPTION_HEADER = "exceptionHeader";
 	public static final String EXCEPTION_DESC = "exceptionDesc";
 	public static final String EXCEPTION_STACK = "exceptionStack";
+	public static final String APP_EXCEPTION_INFO = "appExceptionInfo";
 
 	public static final String STATUS = "status";
 	public static final String MSG = "msg";

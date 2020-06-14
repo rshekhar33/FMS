@@ -10,10 +10,10 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 	<meta http-equiv="x-ua-compatible" content="ie=edge">
 	<title>${appTitle} | Login</title>
-	<link rel="stylesheet" href="${contextPath}css/normalize.css">
-	<link rel="stylesheet" href="${contextPath}css/style.css">
-	<link rel="stylesheet" href="${contextPath}css/override.css">
-	<link rel="shortcut icon" href="${contextPath}images/favicon.ico" />
+	<link rel="stylesheet" href="${contextPath}static/css/normalize.css">
+	<link rel="stylesheet" href="${contextPath}static/css/style.css">
+	<link rel="stylesheet" href="${contextPath}static/css/override.css">
+	<link rel="shortcut icon" href="${contextPath}static/images/favicon.ico" />
 </head>
 <body>
 	<div class="logmod">
@@ -69,15 +69,15 @@
 		</div>
 	</div>
 
-	<script src="${contextPath}resources/jquery/jquery.min.js"></script>
-	<script src="${contextPath}js/enc/aes.js"></script>
-	<script src="${contextPath}js/enc/pbkdf2.js"></script>
-	<script src="${contextPath}js/enc/AesUtil.js"></script>
-	<script src="${contextPath}js/enc/encryption.js"></script>
+	<script src="${contextPath}static/resources/jquery/jquery.min.js"></script>
+	<script src="${contextPath}static/js/enc/aes.js"></script>
+	<script src="${contextPath}static/js/enc/pbkdf2.js"></script>
+	<script src="${contextPath}static/js/enc/AesUtil.js"></script>
+	<script src="${contextPath}static/js/enc/encryption.js"></script>
 	<script>
 		var contextPath = "${contextPath}";
 	</script>
-	<script src="${contextPath}js/common.js"></script>
-	<script src="${contextPath}js/pages/loginSignUp/login.js"></script>
+	<script src="${contextPath}static/js/common.js"></script>
+	<script src="${contextPath}static/js/pages/loginSignUp/login.js"></script>
 </body>
 </html>

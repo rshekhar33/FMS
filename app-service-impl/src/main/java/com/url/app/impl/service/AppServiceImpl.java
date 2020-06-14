@@ -6,7 +6,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.url.app.interf.dao.AppDao;
 import com.url.app.interf.service.AppService;
-import com.url.app.securityservice.AppAuthorization;
+import com.url.app.security.config.AppAuthorization;
 
 @Service(value = "appServiceImpl")
 public class AppServiceImpl implements AppService {

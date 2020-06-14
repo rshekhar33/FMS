@@ -1,4 +1,4 @@
-package com.url.app.securityservice;
+package com.url.app.security.util;
 
 import com.url.app.utility.AppCommon;
 
