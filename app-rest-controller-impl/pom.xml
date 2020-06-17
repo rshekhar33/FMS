@@ -5,8 +5,8 @@
 
 	<artifactId>app-rest-controller-impl</artifactId>
 
-	<name>app-rest-controller-impl</name>
-	<description>REST Controller Implementation</description>
+	<name>REST Controller Implementation</name>
+	<description>Application REST Contoller Implementation</description>
 
 	<parent>
 		<groupId>com.url.app</groupId>

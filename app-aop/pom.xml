@@ -5,8 +5,8 @@
 
 	<artifactId>app-aop</artifactId>
 
-	<name>app-aop</name>
-	<description>AOP</description>
+	<name>AOP</name>
+	<description>Application Aspect-oriented programming</description>
 
 	<parent>
 		<groupId>com.url.app</groupId>

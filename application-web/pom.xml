@@ -6,8 +6,8 @@
 	<artifactId>application-web</artifactId>
 	<packaging>war</packaging>
 
-	<name>application-web</name>
-	<description>Application and Web</description>
+	<name>Application Web</name>
+	<description>Application and Web Components</description>
 
 	<parent>
 		<groupId>com.url.app</groupId>

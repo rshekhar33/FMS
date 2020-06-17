@@ -5,8 +5,8 @@
 
 	<artifactId>app-controller-impl</artifactId>
 
-	<name>app-controller-impl</name>
-	<description>Contoller Implementation</description>
+	<name>Controller Implementation</name>
+	<description>Application Contoller Implementation</description>
 
 	<parent>
 		<groupId>com.url.app</groupId>

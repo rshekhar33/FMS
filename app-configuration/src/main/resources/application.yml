@@ -1,11 +1,11 @@
 jasypt:  encryptor:    bean: stringEncryptor
 logging:
-  config: classpath:env-config/default/log4j2.xmlserver:  error:    path: error  port: 443  ssl:    key-store: classpath:keystore/keystore.p12    key-store-password: keystore    key-store-type: PKCS12    key-alias: tomcat    key-password: keystore
+  config: classpath:env-config/default/log4j2.xmlserver:  error:    path: error  port: 443  ssl:    key-store: classpath:keystore/keystore.p12    key-store-password: ENC(sFaLoX8Kasehiaw+kWEv46Z2CE2MVBER)    key-store-type: PKCS12    key-alias: tomcat    key-password: ENC(C3xpBAsbDcw8Nnd5GhQjA1QG8RRFzdRc)
 spring:
   datasource:    driver-class-name: com.mysql.cj.jdbc.Driver
-    password: ENC(ftEDigclRA+AvqPdTumuXw==)
+    password: ENC(bqqYrJp9eaNYxSMtDZKn9Q==)
     url: jdbc:mysql://localhost:3306/fmsdb?useSSL=false
-    username: ENC(ftEDigclRA+AvqPdTumuXw==)
+    username: ENC(YI3qbP4x2B+bUjZMMi5ihg==)
   jackson:
     default-property-inclusion: non-null
     serialization:

@@ -5,8 +5,8 @@
 
 	<artifactId>app-dto</artifactId>
 
-	<name>app-dto</name>
-	<description>DTO</description>
+	<name>DTO</name>
+	<description>Application Data transfer object and Bean Validation</description>
 
 	<parent>
 		<groupId>com.url.app</groupId>

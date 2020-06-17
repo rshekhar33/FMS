@@ -5,8 +5,8 @@
 
 	<artifactId>app-configuration</artifactId>
 
-	<name>app-configuration</name>
-	<description>Configuration</description>
+	<name>Configuration</name>
+	<description>Application Configuration</description>
 
 	<parent>
 		<groupId>com.url.app</groupId>

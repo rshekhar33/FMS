@@ -5,8 +5,8 @@
 
 	<artifactId>app-service-impl</artifactId>
 
-	<name>app-service-impl</name>
-	<description>Service Implementation</description>
+	<name>Service Implementation</name>
+	<description>Application Service/Business Layer Implementation</description>
 
 	<parent>
 		<groupId>com.url.app</groupId>

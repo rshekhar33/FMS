@@ -5,8 +5,8 @@
 
 	<artifactId>app-dao</artifactId>
 
-	<name>app-dao</name>
-	<description>DAO</description>
+	<name>DAO</name>
+	<description>Application Data access object</description>
 
 	<parent>
 		<groupId>com.url.app</groupId>

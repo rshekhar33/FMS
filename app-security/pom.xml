@@ -5,8 +5,8 @@
 
 	<artifactId>app-security</artifactId>
 
-	<name>app-security</name>
-	<description>Security</description>
+	<name>Security</name>
+	<description>Application Security</description>
 
 	<parent>
 		<groupId>com.url.app</groupId>

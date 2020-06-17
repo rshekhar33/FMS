@@ -5,8 +5,8 @@
 
 	<artifactId>app-controller</artifactId>
 
-	<name>app-controller</name>
-	<description>Controller</description>
+	<name>Controller</name>
+	<description>Application Controller</description>
 
 	<parent>
 		<groupId>com.url.app</groupId>

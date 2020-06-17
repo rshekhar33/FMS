@@ -5,8 +5,8 @@
 
 	<artifactId>app-dao-impl</artifactId>
 
-	<name>app-dao-impl</name>
-	<description>DAO Implementation</description>
+	<name>DAO Implementation</name>
+	<description>Application Data access object Implementation</description>
 
 	<parent>
 		<groupId>com.url.app</groupId>

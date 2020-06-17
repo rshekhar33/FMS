@@ -43,7 +43,7 @@ public class AppSQL {
 			+ "order by a.actionPath asc";
 
 	public static final String QRY_SELECT_ACTIONS = "from Action a "
-			+ "order by a.isSkip, a.actionPath asc";
+			+ "order by a.isSkip asc, a.actionPath asc";
 
 	public static final String QRY_SELECT_USER_ROLES_BY_USERNAME = "from User u "
 			+ "join fetch u.userRoleRelations urr "

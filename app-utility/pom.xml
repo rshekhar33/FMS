@@ -5,8 +5,8 @@
 
 	<artifactId>app-utility</artifactId>
 
-	<name>app-utility</name>
-	<description>Utility</description>
+	<name>Utility</name>
+	<description>Application Utility</description>
 
 	<parent>
 		<groupId>com.url.app</groupId>
