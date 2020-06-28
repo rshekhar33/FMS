@@ -36,7 +36,7 @@ public interface AppModuleService {
 	 * @param module all the parameters of add/update screen.
 	 * @return status as success if data is valid or else all the validation messages with status as failure in JSON.
 	 */
-	Map<String, String> validateSaveModule(Module module);
+	Map<String, Object> validateSaveModule(Module module);
 
 	/**
 	 * Validates module activation data.

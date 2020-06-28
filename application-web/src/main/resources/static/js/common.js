@@ -23,12 +23,10 @@ function showErrorMsg(selector, errorMsg) {
 function showErrors(errorObj) {
 	var isValid = true;
 	for ( var key in errorObj) {
-		if (errorObj.hasOwnProperty(key) && key != "status") {
-			var errorMsg = errorObj[key];
-			if (!isEmpty(errorMsg)) {
-				isValid = false;
-				showErrorMsg("#" + key, errorMsg);
-			}
+		var errorMsg = errorObj[key];
+		if (!isEmpty(errorMsg)) {
+			isValid = false;
+			showErrorMsg("#" + key, errorMsg);
 		}
 	}
 
@@ -60,8 +58,8 @@ function errorFun2(jqXHR) {
 		location.reload();
 	} else {
 		var errorObj = jqXHR.responseJSON;
-		if (errorObj.status == "fail") {
-			showErrors(errorObj);
+		if (errorObj.status == "fail" && !isEmpty(errorObj.invalidData)) {
+			showErrors(errorObj.invalidData);
 		}
 		showLoaderRight(false);
 	}

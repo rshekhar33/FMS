@@ -2,7 +2,6 @@ package com.url.app.impl.service;
 
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,6 +16,7 @@ import com.url.app.interf.dao.AppDao;
 import com.url.app.interf.dao.CourseTypeRepository;
 import com.url.app.interf.service.AppCourseTypeService;
 import com.url.app.interf.service.AppUserService;
+import com.url.app.pojo.AppConcurrentHashMap;
 import com.url.app.utility.AppCommon;
 import com.url.app.utility.AppConstant;
 import com.url.app.utility.AppLogMessage;
@@ -56,13 +56,7 @@ public class AppCourseTypeServiceImpl implements AppCourseTypeService {
 	@Override
 	@Transactional(readOnly = true)
 	public CourseType fetchDataCourseType(final CourseType formCourseType) {
-		CourseType courseType = null;
-
-		if (AppCommon.isPositiveInteger(formCourseType.getCourseTypeId())) {
-			courseType = courseTypeRepository.getOne(formCourseType.getCourseTypeId());
-		}
-
-		return courseType;
+		return AppCommon.isPositiveInteger(formCourseType.getCourseTypeId()) ? courseTypeRepository.getOne(formCourseType.getCourseTypeId()) : null;
 	}
 
 	@Override
@@ -99,14 +93,10 @@ public class AppCourseTypeServiceImpl implements AppCourseTypeService {
 
 		if (AppCommon.isPositiveInteger(courseTypeId)) {
 			status = AppConstant.SUCCESS;
-			if (AppCommon.isPositiveInteger(formCourseType.getCourseTypeId())) {
-				msg = appMessage.coursetypeUpdateSuccess;
-			} else {
-				msg = appMessage.coursetypeAddSuccess;
-			}
+			msg = AppCommon.isPositiveInteger(formCourseType.getCourseTypeId()) ? appMessage.coursetypeUpdateSuccess : appMessage.coursetypeAddSuccess;
 		}
 
-		final Map<String, String> json = new ConcurrentHashMap<>();
+		final Map<String, String> json = new AppConcurrentHashMap<>();
 		json.put(AppResponseKey.STATUS, status);
 		json.put(AppResponseKey.MSG, msg);
 
@@ -136,7 +126,7 @@ public class AppCourseTypeServiceImpl implements AppCourseTypeService {
 			}
 		}
 
-		final Map<String, String> json = new ConcurrentHashMap<>();
+		final Map<String, String> json = new AppConcurrentHashMap<>();
 		json.put(AppResponseKey.STATUS, status);
 		json.put(AppResponseKey.MSG, msg);
 

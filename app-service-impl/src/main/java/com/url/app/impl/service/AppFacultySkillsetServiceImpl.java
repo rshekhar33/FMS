@@ -5,7 +5,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.concurrent.ConcurrentHashMap;
 import java.util.stream.Collectors;
 
 import org.slf4j.Logger;
@@ -24,6 +23,7 @@ import com.url.app.interf.dao.ModuleRepository;
 import com.url.app.interf.dao.UserRepository;
 import com.url.app.interf.service.AppFacultySkillsetService;
 import com.url.app.interf.service.AppUserService;
+import com.url.app.pojo.AppConcurrentHashMap;
 import com.url.app.utility.AppCommon;
 import com.url.app.utility.AppConstant;
 import com.url.app.utility.AppLogMessage;
@@ -63,7 +63,7 @@ public class AppFacultySkillsetServiceImpl implements AppFacultySkillsetService 
 	@Override
 	@Transactional(readOnly = true)
 	public Map<String, Object> fetchDataFacultySkillset(final User formUser) {
-		final Map<String, Object> json = new ConcurrentHashMap<>();
+		final Map<String, Object> json = new AppConcurrentHashMap<>();
 
 		if (AppCommon.isPositiveInteger(formUser.getUserId())) {
 			final User user = appDao.fetchUserWithModules(formUser.getUserId());
@@ -81,7 +81,7 @@ public class AppFacultySkillsetServiceImpl implements AppFacultySkillsetService 
 
 	@Override
 	@Transactional
-	public Map<String, String> validateSaveFacultySkillset(final Map<String, String> allRequestParams) {
+	public Map<String, Object> validateSaveFacultySkillset(final Map<String, String> allRequestParams) {
 		logger.debug(AppLogMessage.ALL_REQUEST_PARAMS_MSG, allRequestParams);
 		final String hidUserIdStr = allRequestParams.getOrDefault("hidUserId", "0");
 		final String modulesStr = allRequestParams.get("modulesStr");
@@ -90,12 +90,15 @@ public class AppFacultySkillsetServiceImpl implements AppFacultySkillsetService 
 
 		String status = AppConstant.BLANK_STRING;
 		String msg = AppConstant.BLANK_STRING;
-		String modulesError = AppConstant.BLANK_STRING;
+
+		final Map<String, String> invalidData = new AppConcurrentHashMap<>();
+		String modulesError = null;
 
 		if (AppCommon.isEmpty(modulesStr)) {
 			status = AppConstant.FAIL;
 			modulesError = appMessage.mandatoryFieldError;
 		}
+		invalidData.put(AppResponseKey.MODULES_ERROR, modulesError);
 
 		if (AppCommon.isEmpty(status)) {
 			final Integer loggedInUserId = appUserService.getPrincipalUserUserId();
@@ -136,10 +139,10 @@ public class AppFacultySkillsetServiceImpl implements AppFacultySkillsetService 
 			}
 		}
 
-		final Map<String, String> json = new ConcurrentHashMap<>();
+		final Map<String, Object> json = new AppConcurrentHashMap<>();
 		json.put(AppResponseKey.STATUS, status);
 		json.put(AppResponseKey.MSG, msg);
-		json.put(AppResponseKey.MODULES_ERROR, modulesError);
+		json.put(AppResponseKey.INVALID_DATA, invalidData.isEmpty() ? null : invalidData);
 
 		return json;
 	}
@@ -149,7 +152,7 @@ public class AppFacultySkillsetServiceImpl implements AppFacultySkillsetService 
 	public Map<String, Object> validateUpdateActivation(final Map<String, String> allRequestParams) {
 		String status = AppConstant.BLANK_STRING;
 
-		final Map<String, Object> json = new ConcurrentHashMap<>();
+		final Map<String, Object> json = new AppConcurrentHashMap<>();
 		json.put(AppResponseKey.STATUS, status);
 
 		return json;

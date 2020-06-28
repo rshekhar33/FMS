@@ -25,7 +25,7 @@ public interface AppRoleService {
 	 * 
 	 * @return roles details in json format.
 	 */
-	List<Role> fetchDetailsActiveRoles();
+	List<Role> fetchActiveDetailsRoles();
 
 	/**
 	 * Fetch role data on add role screen.
@@ -43,7 +43,7 @@ public interface AppRoleService {
 	 * @param role all the parameters of add/update screen.
 	 * @return status as success if data is valid or else all the validation messages with status as failure in JSON.
 	 */
-	Map<String, String> validateSaveRole(Role role);
+	Map<String, Object> validateSaveRole(Role role);
 
 	/**
 	 * Validates role activation data.

@@ -32,7 +32,7 @@ public class ModuleRestControllerImpl implements ModuleRestController {
 	}
 
 	@Override
-	public Map<String, String> validateSave(final Module module) {
+	public Map<String, Object> validateSave(final Module module) {
 		return appModuleService.validateSaveModule(module);
 	}
 

@@ -1,7 +1,6 @@
 package com.url.app.impl.globalrestcontroller;
 
 import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.ConstraintViolationException;
@@ -20,9 +19,10 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import com.url.app.config.AppMessage;
 import com.url.app.interf.globalrestcontroller.GlobalExceptionRestController;
+import com.url.app.pojo.AppConcurrentHashMap;
+import com.url.app.pojo.AppExceptionInfo;
 import com.url.app.utility.AppConstant;
 import com.url.app.utility.AppLogMessage;
-import com.url.app.utility.AppResponseKey;
 
 /**
  * Global Error Handler for API's.
@@ -38,40 +38,49 @@ public class GlobalExceptionRestControllerImpl implements GlobalExceptionRestCon
 	private AppMessage appMessage;
 
 	@Override
-	public Map<String, String> handleMethodArgumentNotValidException(final MethodArgumentNotValidException e) {
-		final Map<String, String> json = new ConcurrentHashMap<>();
-		json.put(AppResponseKey.STATUS, AppConstant.FAIL);
+	public AppExceptionInfo handleMethodArgumentNotValidException(final MethodArgumentNotValidException e) {
+		final Map<String, String> invalidData = new AppConcurrentHashMap<>();
 		e.getBindingResult().getAllErrors().forEach(error -> {
 			final String fieldName = ((FieldError) error).getField();
 			final String errorMessage = error.getDefaultMessage();
-			json.put(fieldName, errorMessage);
+			invalidData.put(fieldName, errorMessage);
 		});
+		final AppExceptionInfo appExceptionInfo = new AppExceptionInfo();
+		appExceptionInfo.setStatus(AppConstant.FAIL);
+		appExceptionInfo.setStatusCode(HttpStatus.INTERNAL_SERVER_ERROR.value());
+		appExceptionInfo.setInvalidData(invalidData);
 
-		return json;
+		return appExceptionInfo;
 	}
 
 	@Override
-	public Map<String, String> handleConstraintViolationException(final ConstraintViolationException e) {
-		final Map<String, String> json = new ConcurrentHashMap<>();
-		json.put(AppResponseKey.STATUS, AppConstant.FAIL);
+	public AppExceptionInfo handleConstraintViolationException(final ConstraintViolationException e) {
+		final Map<String, String> invalidData = new AppConcurrentHashMap<>();
 		e.getConstraintViolations().forEach(error -> {
 			final String fieldName = ((PathImpl) error.getPropertyPath()).getLeafNode().getName();
 			final String errorMessage = error.getMessage();
-			json.put(fieldName, errorMessage);
+			invalidData.put(fieldName, errorMessage);
 		});
+		final AppExceptionInfo appExceptionInfo = new AppExceptionInfo();
+		appExceptionInfo.setStatus(AppConstant.FAIL);
+		appExceptionInfo.setStatusCode(HttpStatus.INTERNAL_SERVER_ERROR.value());
+		appExceptionInfo.setInvalidData(invalidData);
 
-		return json;
+		return appExceptionInfo;
 	}
 
 	@Override
-	public Map<String, Object> handleAllException(final HttpServletRequest request, final Exception e) {
-		logger.error(AppLogMessage.GLOBAL_EXCEPTION_MSG + request.getRequestURL(), e);
+	public AppExceptionInfo handleAllException(final HttpServletRequest request, final Exception e) {
+		final String globalExceptionMsg = AppLogMessage.GLOBAL_EXCEPTION_MSG + request.getRequestURL();
+		logger.error(globalExceptionMsg, e);
 
-		final Map<String, Object> json = new ConcurrentHashMap<>();
-		json.put(AppResponseKey.STATUS, HttpStatus.INTERNAL_SERVER_ERROR.value());
-		json.put(AppResponseKey.EXCEPTION_HEADER, appMessage.exceptionHeader2);
-		json.put(AppResponseKey.EXCEPTION_DESC, appMessage.exceptionDesc3);
+		final AppExceptionInfo appExceptionInfo = new AppExceptionInfo();
+		appExceptionInfo.setStatus(AppConstant.FAIL);
+		appExceptionInfo.setStatusCode(HttpStatus.INTERNAL_SERVER_ERROR.value());
+		appExceptionInfo.setExceptionMsg(e.getMessage());
+		appExceptionInfo.setExceptionHeader(appMessage.exceptionHeader2);
+		appExceptionInfo.setExceptionDesc(appMessage.exceptionDesc3);
 
-		return json;
+		return appExceptionInfo;
 	}
 }

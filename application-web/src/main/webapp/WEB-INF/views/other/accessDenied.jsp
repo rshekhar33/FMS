@@ -60,7 +60,7 @@
 			<!-- Main content -->
 			<div class="content">
 				<div class="error-page">
-					<h2 class="headline text-danger">500</h2>
+					<h2 class="headline text-danger">403</h2>
 
 					<div class="error-content">
 						<h3>

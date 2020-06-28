@@ -27,8 +27,8 @@ public class RoleRestControllerImpl implements RoleRestController {
 	}
 
 	@Override
-	public List<Role> fetchDetailsActive() {
-		return appRoleService.fetchDetailsActiveRoles();
+	public List<Role> fetchActiveDetails() {
+		return appRoleService.fetchActiveDetailsRoles();
 	}
 
 	@Override
@@ -37,7 +37,7 @@ public class RoleRestControllerImpl implements RoleRestController {
 	}
 
 	@Override
-	public Map<String, String> validateSave(final Role role) {
+	public Map<String, Object> validateSave(final Role role) {
 		return appRoleService.validateSaveRole(role);
 	}
 

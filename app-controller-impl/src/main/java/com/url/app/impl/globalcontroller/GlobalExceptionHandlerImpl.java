@@ -1,8 +1,6 @@
 package com.url.app.impl.globalcontroller;
 
 import java.io.IOException;
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -19,6 +17,8 @@ import org.springframework.web.servlet.NoHandlerFoundException;
 
 import com.url.app.config.AppMessage;
 import com.url.app.interf.globalcontroller.GlobalExceptionHandler;
+import com.url.app.pojo.AppExceptionInfo;
+import com.url.app.utility.AppConstant;
 import com.url.app.utility.AppLogMessage;
 import com.url.app.utility.AppResponseKey;
 
@@ -43,13 +43,14 @@ public class GlobalExceptionHandlerImpl implements GlobalExceptionHandler {
 	public void handleNoHandlerException(final HttpServletRequest request, final HttpServletResponse response, final NoHandlerFoundException e) throws IOException {
 		logger.error(AppLogMessage.NO_HANDLER_FOUND_EXCEPTION_MSG, request.getRequestURL(), e.getMessage());
 
-		final Map<String, Object> exceptionInfo = new ConcurrentHashMap<>();
-		exceptionInfo.put(AppResponseKey.STATUS, HttpStatus.NOT_FOUND.value());
-		exceptionInfo.put(AppResponseKey.EXCEPTION_MSG, e.getMessage());
-		exceptionInfo.put(AppResponseKey.EXCEPTION_HEADER, appMessage.exceptionHeader);
-		exceptionInfo.put(AppResponseKey.EXCEPTION_DESC, appMessage.exceptionDesc);
+		final AppExceptionInfo appExceptionInfo = new AppExceptionInfo();
+		appExceptionInfo.setStatus(AppConstant.FAIL);
+		appExceptionInfo.setStatusCode(HttpStatus.NOT_FOUND.value());
+		appExceptionInfo.setExceptionMsg(e.getMessage());
+		appExceptionInfo.setExceptionHeader(appMessage.exceptionHeader);
+		appExceptionInfo.setExceptionDesc(appMessage.exceptionDesc);
 
-		request.setAttribute(AppResponseKey.APP_EXCEPTION_INFO, exceptionInfo);
+		request.setAttribute(AppResponseKey.APP_EXCEPTION_INFO, appExceptionInfo);
 
 		response.sendError(HttpStatus.NOT_FOUND.value());
 	}
@@ -63,13 +64,14 @@ public class GlobalExceptionHandlerImpl implements GlobalExceptionHandler {
 			throws IOException {
 		logger.error(AppLogMessage.METHOD_NOT_SUPPORTED_EXCEPTION_MSG, request.getRequestURL(), e.getMessage());
 
-		final Map<String, Object> exceptionInfo = new ConcurrentHashMap<>();
-		exceptionInfo.put(AppResponseKey.STATUS, HttpStatus.METHOD_NOT_ALLOWED.value());
-		exceptionInfo.put(AppResponseKey.EXCEPTION_MSG, e.getMessage());
-		exceptionInfo.put(AppResponseKey.EXCEPTION_HEADER, appMessage.exceptionHeader);
-		exceptionInfo.put(AppResponseKey.EXCEPTION_DESC, appMessage.exceptionDesc2);
+		final AppExceptionInfo appExceptionInfo = new AppExceptionInfo();
+		appExceptionInfo.setStatus(AppConstant.FAIL);
+		appExceptionInfo.setStatusCode(HttpStatus.METHOD_NOT_ALLOWED.value());
+		appExceptionInfo.setExceptionMsg(e.getMessage());
+		appExceptionInfo.setExceptionHeader(appMessage.exceptionHeader);
+		appExceptionInfo.setExceptionDesc(appMessage.exceptionDesc2);
 
-		request.setAttribute(AppResponseKey.APP_EXCEPTION_INFO, exceptionInfo);
+		request.setAttribute(AppResponseKey.APP_EXCEPTION_INFO, appExceptionInfo);
 
 		response.sendError(HttpStatus.METHOD_NOT_ALLOWED.value(), e.getMessage());
 	}

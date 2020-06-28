@@ -4,7 +4,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.concurrent.ConcurrentHashMap;
 import java.util.stream.Collectors;
 
 import org.slf4j.Logger;
@@ -25,6 +24,7 @@ import com.url.app.dto.validation.AppUserValidationService;
 import com.url.app.interf.dao.AppDao;
 import com.url.app.interf.dao.UserRepository;
 import com.url.app.interf.service.AppUserService;
+import com.url.app.pojo.AppConcurrentHashMap;
 import com.url.app.pojo.LoggedUser;
 import com.url.app.utility.AppCommon;
 import com.url.app.utility.AppConstant;
@@ -137,11 +137,13 @@ public class AppUserServiceImpl implements AppUserService {
 
 	@Override
 	@Transactional
-	public Map<String, String> validateSaveUser(final User formUser) {
+	public Map<String, Object> validateSaveUser(final User formUser) {
 		logger.info(AppLogMessage.USER_MSG, formUser);
 
 		String status = AppConstant.BLANK_STRING;
 		String msg = AppConstant.BLANK_STRING;
+
+		final Map<String, String> invalidData = new AppConcurrentHashMap<>();
 		String userNameError = null;
 		String emailIdError = null;
 
@@ -149,75 +151,77 @@ public class AppUserServiceImpl implements AppUserService {
 			appUserValidationService.validateForUpdate(formUser);
 
 			final Long emailIdCount = userRepository.countByEmailIdAndUserIdNot(formUser.getEmailId(), formUser.getUserId());
-			if (emailIdCount == 0) {
+			if (emailIdCount > 0) {
+				status = AppConstant.FAIL;
 				emailIdError = appDBValidationKey.userEmailExistsError;
 			}
 		} else {
 			appUserValidationService.validateForCreate(formUser);
 
 			final Long userNameCount = userRepository.countByUserName(formUser.getUserName());
-			if (userNameCount == 0) {
+			if (userNameCount > 0) {
+				status = AppConstant.FAIL;
 				userNameError = appDBValidationKey.userUsernameExistsError;
 			}
 			final Long emailIdCount = userRepository.countByEmailId(formUser.getEmailId());
-			if (emailIdCount == 0) {
+			if (emailIdCount > 0) {
+				status = AppConstant.FAIL;
 				emailIdError = appDBValidationKey.userEmailExistsError;
 			}
 		}
+		invalidData.put(AppResponseKey.USER_NAME, userNameError);
+		invalidData.put(AppResponseKey.EMAIL_ID, emailIdError);
 
-		final Integer loggedInUserId = getPrincipalUserUserId();
+		if (AppCommon.isEmpty(status)) {
+			final Integer loggedInUserId = getPrincipalUserUserId();
 
-		User user = new User();
-		if (AppCommon.isPositiveInteger(formUser.getUserId())) {
-			user = userRepository.getOne(formUser.getUserId());
-		} else {
-			user.setUserName(formUser.getUserName());
-			user.setPassword(passwordEncoder.encode(AppConstant.USER_DEFAULT_PASSWORD));
-			user.setIsActive(AppConstant.ACTIVE);
-			user.setCreatedBy(loggedInUserId);
-		}
-		user.setFirstName(formUser.getFirstName());
-		user.setMiddleName(formUser.getMiddleName());
-		user.setLastName(formUser.getLastName());
-		user.setEmailId(formUser.getEmailId());
-		user.setMobileNo(formUser.getMobileNo());
-		user.setModifiedBy(loggedInUserId);
-
-		final Set<UserRoleRelation> removedUserRoleRelations = new HashSet<>(user.getUserRoleRelations());
-		for (Integer roleId : formUser.getRoles()) {
-			final Role role = new Role();
-			role.setRoleId(roleId);
-
-			final UserRoleRelation userRoleRelation = new UserRoleRelation();
-			userRoleRelation.setRole(role);
-			userRoleRelation.setIsActive(AppConstant.ACTIVE);
-			userRoleRelation.setCreatedBy(loggedInUserId);
-			userRoleRelation.setModifiedBy(loggedInUserId);
-
-			user.addUserRoleRelation(userRoleRelation);
-			removedUserRoleRelations.remove(userRoleRelation);
-		}
-		for (UserRoleRelation userRoleRelation : removedUserRoleRelations) {
-			user.removeUserRoleRelation(userRoleRelation);
-		}
-
-		userRepository.save(user);
-		final Integer userId = user.getUserId();
-
-		if (AppCommon.isPositiveInteger(userId)) {
-			status = AppConstant.SUCCESS;
+			User user = new User();
 			if (AppCommon.isPositiveInteger(formUser.getUserId())) {
-				msg = appMessage.userUpdateSuccess;
+				user = userRepository.getOne(formUser.getUserId());
 			} else {
-				msg = appMessage.userAddSuccess;
+				user.setUserName(formUser.getUserName());
+				user.setPassword(passwordEncoder.encode(AppConstant.USER_DEFAULT_PASSWORD));
+				user.setIsActive(AppConstant.ACTIVE);
+				user.setCreatedBy(loggedInUserId);
+			}
+			user.setFirstName(formUser.getFirstName());
+			user.setMiddleName(formUser.getMiddleName());
+			user.setLastName(formUser.getLastName());
+			user.setEmailId(formUser.getEmailId());
+			user.setMobileNo(formUser.getMobileNo());
+			user.setModifiedBy(loggedInUserId);
+
+			final Set<UserRoleRelation> removedUserRoleRelations = new HashSet<>(user.getUserRoleRelations());
+			for (Integer roleId : formUser.getRoles()) {
+				final Role role = new Role();
+				role.setRoleId(roleId);
+
+				final UserRoleRelation userRoleRelation = new UserRoleRelation();
+				userRoleRelation.setRole(role);
+				userRoleRelation.setIsActive(AppConstant.ACTIVE);
+				userRoleRelation.setCreatedBy(loggedInUserId);
+				userRoleRelation.setModifiedBy(loggedInUserId);
+
+				user.addUserRoleRelation(userRoleRelation);
+				removedUserRoleRelations.remove(userRoleRelation);
+			}
+			for (UserRoleRelation userRoleRelation : removedUserRoleRelations) {
+				user.removeUserRoleRelation(userRoleRelation);
+			}
+
+			userRepository.save(user);
+			final Integer userId = user.getUserId();
+
+			if (AppCommon.isPositiveInteger(userId)) {
+				status = AppConstant.SUCCESS;
+				msg = AppCommon.isPositiveInteger(formUser.getUserId()) ? appMessage.userUpdateSuccess : appMessage.userAddSuccess;
 			}
 		}
 
-		final Map<String, String> json = new ConcurrentHashMap<>();
+		final Map<String, Object> json = new AppConcurrentHashMap<>();
 		json.put(AppResponseKey.STATUS, status);
 		json.put(AppResponseKey.MSG, msg);
-		json.put("userName", userNameError);
-		json.put("emailId", emailIdError);
+		json.put(AppResponseKey.INVALID_DATA, invalidData.isEmpty() ? null : invalidData);
 
 		return json;
 	}
@@ -245,7 +249,7 @@ public class AppUserServiceImpl implements AppUserService {
 			}
 		}
 
-		final Map<String, String> json = new ConcurrentHashMap<>();
+		final Map<String, String> json = new AppConcurrentHashMap<>();
 		json.put(AppResponseKey.STATUS, status);
 		json.put(AppResponseKey.MSG, msg);
 

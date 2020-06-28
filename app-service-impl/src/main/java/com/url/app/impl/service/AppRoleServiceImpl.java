@@ -2,7 +2,6 @@ package com.url.app.impl.service;
 
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,6 +16,7 @@ import com.url.app.dto.validation.AppRoleValidationService;
 import com.url.app.interf.dao.RoleRepository;
 import com.url.app.interf.service.AppRoleService;
 import com.url.app.interf.service.AppUserService;
+import com.url.app.pojo.AppConcurrentHashMap;
 import com.url.app.utility.AppCommon;
 import com.url.app.utility.AppConstant;
 import com.url.app.utility.AppLogMessage;
@@ -55,75 +55,72 @@ public class AppRoleServiceImpl implements AppRoleService {
 
 	@Override
 	@Transactional(readOnly = true)
-	public List<Role> fetchDetailsActiveRoles() {
+	public List<Role> fetchActiveDetailsRoles() {
 		return roleRepository.findByIsActiveOrderByRoleId(AppConstant.ACTIVE);
 	}
 
 	@Override
 	@Transactional(readOnly = true)
 	public Role fetchDataRole(final Role formRole) {
-		Role role = null;
-
-		if (AppCommon.isPositiveInteger(formRole.getRoleId())) {
-			role = roleRepository.getOne(formRole.getRoleId());
-		}
-
-		return role;
+		return AppCommon.isPositiveInteger(formRole.getRoleId()) ? roleRepository.getOne(formRole.getRoleId()) : null;
 	}
 
 	@Override
 	@Transactional
-	public Map<String, String> validateSaveRole(final Role formRole) {
+	public Map<String, Object> validateSaveRole(final Role formRole) {
 		logger.info(AppLogMessage.ROLE_MSG, formRole);
 
 		String status = AppConstant.BLANK_STRING;
 		String msg = AppConstant.BLANK_STRING;
+
+		final Map<String, String> invalidData = new AppConcurrentHashMap<>();
 		String roleNameError = null;
 
 		if (AppCommon.isPositiveInteger(formRole.getRoleId())) {
 			appRoleValidationService.validateForUpdate(formRole);
 
 			final Long roleNameCount = roleRepository.countByRoleNameAndRoleIdNot(formRole.getRoleName(), formRole.getRoleId());
-			if (roleNameCount == 0) {
+			if (roleNameCount > 0) {
+				status = AppConstant.FAIL;
 				roleNameError = appDBValidationKey.roleRolenameExistsError;
 			}
 		} else {
 			appRoleValidationService.validateForCreate(formRole);
 
 			final Long roleNameCount = roleRepository.countByRoleName(formRole.getRoleName());
-			if (roleNameCount == 0) {
+			if (roleNameCount > 0) {
+				status = AppConstant.FAIL;
 				roleNameError = appDBValidationKey.roleRolenameExistsError;
 			}
 		}
+		invalidData.put(AppResponseKey.ROLE_NAME, roleNameError);
 
-		final Integer loggedInUserId = appUserService.getPrincipalUserUserId();
+		if (AppCommon.isEmpty(status)) {
+			final Integer loggedInUserId = appUserService.getPrincipalUserUserId();
 
-		Role role = new Role();
-		if (AppCommon.isPositiveInteger(formRole.getRoleId())) {
-			role = roleRepository.getOne(formRole.getRoleId());
-		} else {
-			role.setIsActive(AppConstant.ACTIVE);
-			role.setCreatedBy(loggedInUserId);
-		}
-		role.setRoleName(formRole.getRoleName());
-		role.setModifiedBy(loggedInUserId);
-
-		roleRepository.save(role);
-		final Integer roleId = role.getRoleId();
-
-		if (AppCommon.isPositiveInteger(roleId)) {
-			status = AppConstant.SUCCESS;
+			Role role = new Role();
 			if (AppCommon.isPositiveInteger(formRole.getRoleId())) {
-				msg = appMessage.roleUpdateSuccess;
+				role = roleRepository.getOne(formRole.getRoleId());
 			} else {
-				msg = appMessage.roleAddSuccess;
+				role.setIsActive(AppConstant.ACTIVE);
+				role.setCreatedBy(loggedInUserId);
+			}
+			role.setRoleName(formRole.getRoleName());
+			role.setModifiedBy(loggedInUserId);
+
+			roleRepository.save(role);
+			final Integer roleId = role.getRoleId();
+
+			if (AppCommon.isPositiveInteger(roleId)) {
+				status = AppConstant.SUCCESS;
+				msg = AppCommon.isPositiveInteger(formRole.getRoleId()) ? appMessage.roleUpdateSuccess : appMessage.roleAddSuccess;
 			}
 		}
 
-		final Map<String, String> json = new ConcurrentHashMap<>();
+		final Map<String, Object> json = new AppConcurrentHashMap<>();
 		json.put(AppResponseKey.STATUS, status);
 		json.put(AppResponseKey.MSG, msg);
-		json.put("roleName", roleNameError);
+		json.put(AppResponseKey.INVALID_DATA, invalidData.isEmpty() ? null : invalidData);
 
 		return json;
 	}
@@ -151,7 +148,7 @@ public class AppRoleServiceImpl implements AppRoleService {
 			}
 		}
 
-		final Map<String, String> json = new ConcurrentHashMap<>();
+		final Map<String, String> json = new AppConcurrentHashMap<>();
 		json.put(AppResponseKey.STATUS, status);
 		json.put(AppResponseKey.MSG, msg);
 

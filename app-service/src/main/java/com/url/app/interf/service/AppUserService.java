@@ -79,7 +79,7 @@ public interface AppUserService {
 	 * @param user all the parameters of add/update screen.
 	 * @return status as success if data is valid or else all the validation messages with status as failure in JSON.
 	 */
-	Map<String, String> validateSaveUser(User user);
+	Map<String, Object> validateSaveUser(User user);
 
 	/**
 	 * Validates user activation data.

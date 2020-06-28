@@ -2,7 +2,6 @@ package com.url.app.impl.service;
 
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,6 +16,7 @@ import com.url.app.dto.validation.AppModuleValidationService;
 import com.url.app.interf.dao.ModuleRepository;
 import com.url.app.interf.service.AppModuleService;
 import com.url.app.interf.service.AppUserService;
+import com.url.app.pojo.AppConcurrentHashMap;
 import com.url.app.utility.AppCommon;
 import com.url.app.utility.AppConstant;
 import com.url.app.utility.AppLogMessage;
@@ -56,29 +56,25 @@ public class AppModuleServiceImpl implements AppModuleService {
 	@Override
 	@Transactional(readOnly = true)
 	public Module fetchDataModule(final Module formModule) {
-		Module module = null;
-
-		if (AppCommon.isPositiveInteger(formModule.getModuleId())) {
-			module = moduleRepository.getOne(formModule.getModuleId());
-		}
-
-		return module;
+		return AppCommon.isPositiveInteger(formModule.getModuleId()) ? moduleRepository.getOne(formModule.getModuleId()) : null;
 	}
 
 	@Override
 	@Transactional
-	public Map<String, String> validateSaveModule(final Module formModule) {
+	public Map<String, Object> validateSaveModule(final Module formModule) {
 		logger.info(AppLogMessage.MODULE_MSG, formModule);
 
 		String status = AppConstant.BLANK_STRING;
 		String msg = AppConstant.BLANK_STRING;
+
+		final Map<String, String> invalidData = new AppConcurrentHashMap<>();
 		String moduleNameError = null;
 
 		if (AppCommon.isPositiveInteger(formModule.getModuleId())) {
 			appModuleValidationService.validateForUpdate(formModule);
 
 			final Long moduleNameCount = moduleRepository.countByModuleNameAndModuleIdNot(formModule.getModuleName(), formModule.getModuleId());
-			if (moduleNameCount == 0) {
+			if (moduleNameCount > 0) {
 				status = AppConstant.FAIL;
 				moduleNameError = appDBValidationKey.moduleModulenameExistsError;
 			}
@@ -86,40 +82,39 @@ public class AppModuleServiceImpl implements AppModuleService {
 			appModuleValidationService.validateForCreate(formModule);
 
 			final Long moduleNameCount = moduleRepository.countByModuleName(formModule.getModuleName());
-			if (moduleNameCount == 0) {
+			if (moduleNameCount > 0) {
 				status = AppConstant.FAIL;
 				moduleNameError = appDBValidationKey.moduleModulenameExistsError;
 			}
 		}
+		invalidData.put(AppResponseKey.MODULE_NAME, moduleNameError);
 
-		final Integer loggedInUserId = appUserService.getPrincipalUserUserId();
+		if (AppCommon.isEmpty(status)) {
+			final Integer loggedInUserId = appUserService.getPrincipalUserUserId();
 
-		Module module = new Module();
-		if (AppCommon.isPositiveInteger(formModule.getModuleId())) {
-			module = moduleRepository.getOne(formModule.getModuleId());
-		} else {
-			module.setIsActive(AppConstant.ACTIVE);
-			module.setCreatedBy(loggedInUserId);
-		}
-		module.setModuleName(formModule.getModuleName());
-		module.setModifiedBy(loggedInUserId);
-
-		moduleRepository.save(module);
-		final Integer moduleId = module.getModuleId();
-
-		if (AppCommon.isPositiveInteger(moduleId)) {
-			status = AppConstant.SUCCESS;
+			Module module = new Module();
 			if (AppCommon.isPositiveInteger(formModule.getModuleId())) {
-				msg = appMessage.moduleUpdateSuccess;
+				module = moduleRepository.getOne(formModule.getModuleId());
 			} else {
-				msg = appMessage.moduleAddSuccess;
+				module.setIsActive(AppConstant.ACTIVE);
+				module.setCreatedBy(loggedInUserId);
+			}
+			module.setModuleName(formModule.getModuleName());
+			module.setModifiedBy(loggedInUserId);
+
+			moduleRepository.save(module);
+			final Integer moduleId = module.getModuleId();
+
+			if (AppCommon.isPositiveInteger(moduleId)) {
+				status = AppConstant.SUCCESS;
+				msg = AppCommon.isPositiveInteger(formModule.getModuleId()) ? appMessage.moduleUpdateSuccess : appMessage.moduleAddSuccess;
 			}
 		}
 
-		final Map<String, String> json = new ConcurrentHashMap<>();
+		final Map<String, Object> json = new AppConcurrentHashMap<>();
 		json.put(AppResponseKey.STATUS, status);
 		json.put(AppResponseKey.MSG, msg);
-		json.put("moduleName", moduleNameError);
+		json.put(AppResponseKey.INVALID_DATA, invalidData.isEmpty() ? null : invalidData);
 
 		return json;
 	}
@@ -147,7 +142,7 @@ public class AppModuleServiceImpl implements AppModuleService {
 			}
 		}
 
-		final Map<String, String> json = new ConcurrentHashMap<>();
+		final Map<String, String> json = new AppConcurrentHashMap<>();
 		json.put(AppResponseKey.STATUS, status);
 		json.put(AppResponseKey.MSG, msg);
 

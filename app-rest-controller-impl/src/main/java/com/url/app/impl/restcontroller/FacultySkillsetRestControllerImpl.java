@@ -33,7 +33,7 @@ public class FacultySkillsetRestControllerImpl implements FacultySkillsetRestCon
 	}
 
 	@Override
-	public Map<String, String> validateSave(final Map<String, String> allRequestParams) {
+	public Map<String, Object> validateSave(final Map<String, String> allRequestParams) {
 		return appFacultySkillsetService.validateSaveFacultySkillset(allRequestParams);
 	}
 
