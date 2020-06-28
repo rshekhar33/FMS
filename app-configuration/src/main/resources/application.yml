@@ -1,8 +1,23 @@
-jasypt:  encryptor:    bean: stringEncryptor
+jasypt:
+  encryptor:
+    bean: stringEncryptor
 logging:
-  config: classpath:env-config/default/log4j2.xmlserver:  http2:    enabled: true  error:    path: error  port: 443  ssl:    key-store: classpath:keystore/keystore.p12    key-store-password: ENC(sFaLoX8Kasehiaw+kWEv46Z2CE2MVBER)    key-store-type: PKCS12    key-alias: tomcat    key-password: ENC(C3xpBAsbDcw8Nnd5GhQjA1QG8RRFzdRc)
+  config: classpath:env-config/default/log4j2.xml
+server:
+  error:
+    path: error
+  http2:
+    enabled: true
+  port: 443
+  ssl:
+    key-alias: tomcat
+    key-password: ENC(C3xpBAsbDcw8Nnd5GhQjA1QG8RRFzdRc)
+    key-store: classpath:keystore/keystore.p12
+    key-store-password: ENC(sFaLoX8Kasehiaw+kWEv46Z2CE2MVBER)
+    key-store-type: PKCS12
 spring:
-  datasource:    driver-class-name: com.mysql.cj.jdbc.Driver
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
     password: ENC(bqqYrJp9eaNYxSMtDZKn9Q==)
     url: jdbc:mysql://localhost:3306/fmsdb?useSSL=false
     username: ENC(YI3qbP4x2B+bUjZMMi5ihg==)
@@ -19,5 +34,10 @@ spring:
         format_sql: true
     show-sql: false
   main:
-    allow-bean-definition-overriding: true  mvc:    static-path-pattern: /static/**    throw-exception-if-no-handler-found: true  profiles:    active:#    - default
-    - package
+    allow-bean-definition-overriding: true
+  mvc:
+    static-path-pattern: /static/**
+    throw-exception-if-no-handler-found: true
+  profiles:
+#    active: default
+    active: package
