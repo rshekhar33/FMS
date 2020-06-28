@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
 import java.util.stream.Collectors;
 
 import org.slf4j.Logger;
@@ -16,6 +15,7 @@ import org.springframework.stereotype.Component;
 
 import com.url.app.dto.entity.Action;
 import com.url.app.dto.entity.UrlRolesBean;
+import com.url.app.pojo.AppConcurrentHashMap;
 import com.url.app.pojo.RolesCollection;
 import com.url.app.utility.AppLogMessage;
 
@@ -28,7 +28,7 @@ import com.url.app.utility.AppLogMessage;
 public class AppAuthorization {
 	private static final Logger logger = LoggerFactory.getLogger(AppAuthorization.class);
 
-	private Map<String, RolesCollection> actionRoles = new ConcurrentHashMap<>();
+	private Map<String, RolesCollection> actionRoles = new AppConcurrentHashMap<>();
 	private List<String> applicationAuthSkipUrls = new ArrayList<>();
 	private List<String> applicationUrls = new ArrayList<>();
 

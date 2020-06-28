@@ -33,7 +33,7 @@ public class UserRestControllerImpl implements UserRestController {
 	}
 
 	@Override
-	public Map<String, String> validateSave(final User user) {
+	public Map<String, Object> validateSave(final User user) {
 		return appUserService.validateSaveUser(user);
 	}
 

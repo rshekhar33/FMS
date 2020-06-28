@@ -1,7 +1,5 @@
 package com.url.app.interf.globalrestcontroller;
 
-import java.util.Map;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.ConstraintViolationException;
 
@@ -9,6 +7,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
+
+import com.url.app.pojo.AppExceptionInfo;
 
 /**
  * Global Error Handler for API's.
@@ -23,7 +23,7 @@ public interface GlobalExceptionRestController {
 	 */
 	@ExceptionHandler(value = MethodArgumentNotValidException.class)
 	@ResponseStatus(value = HttpStatus.INTERNAL_SERVER_ERROR)
-	Map<String, String> handleMethodArgumentNotValidException(MethodArgumentNotValidException e);
+	AppExceptionInfo handleMethodArgumentNotValidException(MethodArgumentNotValidException e);
 
 	/**
 	 * ConstraintViolationException
@@ -31,7 +31,7 @@ public interface GlobalExceptionRestController {
 	 */
 	@ExceptionHandler(value = ConstraintViolationException.class)
 	@ResponseStatus(value = HttpStatus.INTERNAL_SERVER_ERROR)
-	Map<String, String> handleConstraintViolationException(ConstraintViolationException e);
+	AppExceptionInfo handleConstraintViolationException(ConstraintViolationException e);
 
 	/**
 	 * Exception
@@ -39,5 +39,5 @@ public interface GlobalExceptionRestController {
 	 */
 	@ExceptionHandler(value = Exception.class)
 	@ResponseStatus(value = HttpStatus.INTERNAL_SERVER_ERROR)
-	Map<String, Object> handleAllException(HttpServletRequest request, Exception e);
+	AppExceptionInfo handleAllException(HttpServletRequest request, Exception e);
 }

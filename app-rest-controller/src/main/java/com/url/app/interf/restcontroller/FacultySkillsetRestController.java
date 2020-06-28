@@ -37,7 +37,7 @@ public interface FacultySkillsetRestController {
 	 * Validate and save data of on add/update faculty skillset screen.
 	 */
 	@PostMapping(value = AppUrlView.PATH_VALIDATE_SAVE, produces = MediaType.APPLICATION_JSON_VALUE)
-	Map<String, String> validateSave(@RequestParam Map<String, String> allRequestParams);
+	Map<String, Object> validateSave(@RequestParam Map<String, String> allRequestParams);
 
 	/**
 	 * Validate and save data of on faculty skillset activation screen.

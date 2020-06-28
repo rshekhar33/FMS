@@ -58,13 +58,13 @@
 				<div class="error-page">
 					<div class="error-content">
 						<h3>
-							<i class="fas fa-exclamation-triangle text-danger"></i> ${exceptionHeader}
+							<i class="fas fa-exclamation-triangle text-danger"></i> ${appExceptionInfo.exceptionHeader}
 						</h3>
 
 						<p>
-							${exceptionDesc}
+							${appExceptionInfo.exceptionDesc}
 						</p>
-						<!-- Error Message : ${exceptionStack} -->
+						<!-- Error Message : ${appExceptionInfo.exceptionStack} -->
 					</div>
 				</div>
 				<!-- /.error-page -->

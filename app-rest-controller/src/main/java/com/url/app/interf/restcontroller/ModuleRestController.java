@@ -35,7 +35,7 @@ public interface ModuleRestController {
 	 * Validate and save data of on add/update module screen.
 	 */
 	@PostMapping(value = AppUrlView.PATH_VALIDATE_SAVE, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-	Map<String, String> validateSave(@RequestBody Module module);
+	Map<String, Object> validateSave(@RequestBody Module module);
 
 	/**
 	 * Validate and save data of on module activation screen.

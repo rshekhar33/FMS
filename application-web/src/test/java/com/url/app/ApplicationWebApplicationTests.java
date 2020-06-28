@@ -21,7 +21,7 @@ import com.url.app.dto.validation.ValidationActivateSequence;
 import com.url.app.utility.AppConstant;
 
 @SpringBootTest
-public class ApplicationWebApplicationTests {
+class ApplicationWebApplicationTests {
 	private static final Logger logger = LoggerFactory.getLogger(ApplicationWebApplicationTests.class);
 
 	@Autowired
@@ -31,12 +31,12 @@ public class ApplicationWebApplicationTests {
 	private LocalValidatorFactoryBean localValidatorFactoryBean;
 
 	@Test
-	public void contextLoads() {
+	void contextLoads() {
 		assertTrue(true);
 	}
 
 	@Test
-	public void jasyptEncDecr() {
+	void jasyptEncDecr() {
 		final String plainText = AppConstant.USER_DEFAULT_PASSWORD;
 		logger.info("plainText : {}", plainText);
 
@@ -50,7 +50,7 @@ public class ApplicationWebApplicationTests {
 	}
 
 	@Test
-	public void validationTest() {
+	void validationTest() {
 		final User user = new User();
 
 		final Validator validator = localValidatorFactoryBean.getValidator();

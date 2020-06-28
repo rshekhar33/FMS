@@ -37,7 +37,7 @@ public interface AppFacultySkillsetService {
 	 * @param allRequestParams all the parameters of add/update screen.
 	 * @return status as success if data is valid or else all the validation messages with status as failure in JSON.
 	 */
-	Map<String, String> validateSaveFacultySkillset(Map<String, String> allRequestParams);
+	Map<String, Object> validateSaveFacultySkillset(Map<String, String> allRequestParams);
 
 	/**
 	 * Validates facultySkillset activation data.

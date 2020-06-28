@@ -36,7 +36,7 @@ public interface UserRestController {
 	 * Validate and save data of on add/update user screen.
 	 */
 	@PostMapping(value = AppUrlView.PATH_VALIDATE_SAVE, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-	Map<String, String> validateSave(@RequestBody User user);
+	Map<String, Object> validateSave(@RequestBody User user);
 
 	/**
 	 * Validate and save data of on user activation screen.
