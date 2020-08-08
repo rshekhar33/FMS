@@ -7,8 +7,9 @@
 	<meta charset="utf-8">
 	<sec:csrfMetaTags/>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta http-equiv="x-ua-compatible" content="ie=edge">
 	<title>${appTitle} | Dashboard</title>
+	<!-- Google Font: Source Sans Pro -->
+	<link rel="stylesheet" href="${contextPath}static/resources/google-fonts/google-fonts.css">
 	<!-- Font Awesome Icons -->
 	<link rel="stylesheet" href="${contextPath}static/resources/font-awesome/css/all.min.css">
 	<!-- IonIcons -->
@@ -17,19 +18,16 @@
 	<link rel="stylesheet" href="${contextPath}static/resources/overlayScrollbars/css/OverlayScrollbars.min.css">
 	<!-- Theme style -->
 	<link rel="stylesheet" href="${contextPath}static/css/adminlte.min.css">
-	<!-- Google Font: Source Sans Pro -->
-	<link rel="stylesheet" href="${contextPath}static/resources/google-fonts/google-fonts.css">
 	<link rel="shortcut icon" href="${contextPath}static/images/favicon.ico" />
 </head>
 <!--
-BODY TAG OPTIONS:
-=================
-Apply one or more of the following classes to to the body tag
-to get the desired effect
-|---------------------------------------------------------|
-|LAYOUT OPTIONS | sidebar-collapse                        |
-|               | sidebar-mini                            |
-|---------------------------------------------------------|
+`body` tag options:
+
+  Apply one or more of the following classes to to the body tag
+  to get the desired effect
+
+  * sidebar-collapse
+  * sidebar-mini
 -->
 <body class="hold-transition sidebar-mini text-sm layout-fixed layout-navbar-fixed layout-footer-fixed">
 	<div class="wrapper">
@@ -306,7 +304,9 @@ to get the desired effect
 
 	<!-- OPTIONAL SCRIPTS -->
 	<script src="${contextPath}static/resources/chart.js/Chart.min.js"></script>
+	<!-- AdminLTE for demo purposes -->
 	<script src="${contextPath}static/js/demo.js"></script>
+	<!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 	<script src="${contextPath}static/js/pages/dashboard/dashboard3.js"></script>
 </body>
 </html>

@@ -7,7 +7,6 @@
 <head>
 	<meta charset="utf-8">
 	<sec:csrfMetaTags/>
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<title>${appTitle} | Sign Up</title>
 	<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
 	<link rel="stylesheet" href="${contextPath}static/css/normalize.css">
@@ -39,7 +38,7 @@
 							</span>
 						</div>
 						<div class="logmod__form">
-							<form accept-charset="utf-8" action="#" onsubmit="return false;" method="post" id="regForm" class="simform">
+							<form accept-charset="utf-8" onsubmit="return false;" method="post" id="regForm" class="simform">
 								<sec:csrfInput/>
 								<div class="sminputs">
 									<div class="input string optional">
@@ -90,7 +89,7 @@
 									</div>
 								</div>
 								<div class="simform__actions">
-									<input class="sumbit" id="register" name="register" type="submit" onclick="validateSubmitFun();" value="Create Account" />
+									<input class="sumbit" id="register" name="register" type="submit" value="Create Account" />
 									<span class="simform__actions-sidetext">
 										Click here to <a href="${contextPath}login">Sign In</a><br/>
 										By creating an account you agree to our 

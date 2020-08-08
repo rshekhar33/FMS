@@ -34,7 +34,7 @@ public class AppSQL {
 
 	public static final String QRY_FIND_ALL_USER_ROLE_RELATION = "SELECT u FROM UserRoleRelation u";
 
-	public static final String QRY_SELECT_URL_ROLE_ID = "select distinct new com.url.app.dto.entity.UrlRolesBean(a.actionPath, r.roleId) "
+	public static final String QRY_SELECT_URL_ROLE_ID = "select distinct new com.url.app.pojo.UrlRolesBean(a.actionPath, r.roleId) "
 			+ "from RolePrivilegeRelation rpr "
 			+ "inner join rpr.id.role r "
 			+ "inner join rpr.id.privilege p "

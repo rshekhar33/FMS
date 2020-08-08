@@ -10,7 +10,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler;
+import org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler;
 
 import com.url.app.interf.service.AppUserService;
 import com.url.app.utility.AppLogMessage;
@@ -20,7 +20,7 @@ import com.url.app.utility.AppLogMessage;
  * 
  * @author Shekhar Shinde
  */
-public class LoginSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
+public class LoginSuccessHandler extends SavedRequestAwareAuthenticationSuccessHandler {
 	private static final Logger logger = LoggerFactory.getLogger(LoginSuccessHandler.class);
 
 	@Autowired

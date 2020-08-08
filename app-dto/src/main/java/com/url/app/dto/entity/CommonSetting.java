@@ -21,7 +21,7 @@ import com.url.app.utility.AppSQL;
 @Table(name = "common_setting")
 @JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 @NamedQuery(name = "CommonSetting.findAll", query = AppSQL.QRY_FIND_ALL_COMMON_SETTING)
-public class CommonSetting implements Serializable {
+public class CommonSetting extends BaseEntity implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id

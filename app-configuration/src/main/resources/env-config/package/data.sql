@@ -1,10 +1,10 @@
 -- -----------------------------------------------------
 -- Data for table `common_setting`
 -- -----------------------------------------------------
-INSERT INTO `common_setting` (`common_setting_id`, `type`, `value`, `order_number`) VALUES (1, 'coursetypecode_counter', '5', 1);
-INSERT INTO `common_setting` (`common_setting_id`, `type`, `value`, `order_number`) VALUES (2, 'coursecode_counter', '5', 1);
-INSERT INTO `common_setting` (`common_setting_id`, `type`, `value`, `order_number`) VALUES (3, 'registration_role', '3', 1);
-INSERT INTO `common_setting` (`common_setting_id`, `type`, `value`, `order_number`) VALUES (4, 'faculty_role', '2', 1);
+INSERT INTO `common_setting` (`common_setting_id`, `type`, `value`, `order_number`, `created_by`, `created_date`, `modified_by`, `modified_date`) VALUES (1, 'coursetypecode_counter', '5', 1, 1, now(), 1, now());
+INSERT INTO `common_setting` (`common_setting_id`, `type`, `value`, `order_number`, `created_by`, `created_date`, `modified_by`, `modified_date`) VALUES (2, 'coursecode_counter', '5', 1, 1, now(), 1, now());
+INSERT INTO `common_setting` (`common_setting_id`, `type`, `value`, `order_number`, `created_by`, `created_date`, `modified_by`, `modified_date`) VALUES (3, 'registration_role', '3', 1, 1, now(), 1, now());
+INSERT INTO `common_setting` (`common_setting_id`, `type`, `value`, `order_number`, `created_by`, `created_date`, `modified_by`, `modified_date`) VALUES (4, 'faculty_role', '2', 1, 1, now(), 1, now());
 
 -- -----------------------------------------------------
 -- Data for table `user`
@@ -49,27 +49,27 @@ INSERT INTO `user_role_relation` (`user_id`, `role_id`, `created_by`, `created_d
 -- -----------------------------------------------------
 -- Data for table `privilege`
 -- -----------------------------------------------------
-INSERT INTO `privilege` (`privilege_id`, `privilege_name`, `description`, `created_by`, `created_date`, `is_active`) VALUES (1, 'Dashboard', NULL, 1, now(), 1);
-INSERT INTO `privilege` (`privilege_id`, `privilege_name`, `description`, `created_by`, `created_date`, `is_active`) VALUES (2, 'User Listing', NULL, 1, now(), 1);
-INSERT INTO `privilege` (`privilege_id`, `privilege_name`, `description`, `created_by`, `created_date`, `is_active`) VALUES (3, 'Add User', NULL, 1, now(), 1);
-INSERT INTO `privilege` (`privilege_id`, `privilege_name`, `description`, `created_by`, `created_date`, `is_active`) VALUES (4, 'Edit User', NULL, 1, now(), 1);
-INSERT INTO `privilege` (`privilege_id`, `privilege_name`, `description`, `created_by`, `created_date`, `is_active`) VALUES (5, 'Activate/Inactivate User', NULL, 1, now(), 1);
-INSERT INTO `privilege` (`privilege_id`, `privilege_name`, `description`, `created_by`, `created_date`, `is_active`) VALUES (6, 'Module Listing', NULL, 1, now(), 1);
-INSERT INTO `privilege` (`privilege_id`, `privilege_name`, `description`, `created_by`, `created_date`, `is_active`) VALUES (7, 'Add Module', NULL, 1, now(), 1);
-INSERT INTO `privilege` (`privilege_id`, `privilege_name`, `description`, `created_by`, `created_date`, `is_active`) VALUES (8, 'Edit Module', NULL, 1, now(), 1);
-INSERT INTO `privilege` (`privilege_id`, `privilege_name`, `description`, `created_by`, `created_date`, `is_active`) VALUES (9, 'Activate/Inactivate Module', NULL, 1, now(), 1);
-INSERT INTO `privilege` (`privilege_id`, `privilege_name`, `description`, `created_by`, `created_date`, `is_active`) VALUES (10, 'Course Type Listing', NULL, 1, now(), 1);
-INSERT INTO `privilege` (`privilege_id`, `privilege_name`, `description`, `created_by`, `created_date`, `is_active`) VALUES (11, 'Add Course Type', NULL, 1, now(), 1);
-INSERT INTO `privilege` (`privilege_id`, `privilege_name`, `description`, `created_by`, `created_date`, `is_active`) VALUES (12, 'Edit Course Type', NULL, 1, now(), 1);
-INSERT INTO `privilege` (`privilege_id`, `privilege_name`, `description`, `created_by`, `created_date`, `is_active`) VALUES (13, 'Activate/Inactivate Course Type', NULL, 1, now(), 1);
-INSERT INTO `privilege` (`privilege_id`, `privilege_name`, `description`, `created_by`, `created_date`, `is_active`) VALUES (14, 'Role Listing', NULL, 1, now(), 1);
-INSERT INTO `privilege` (`privilege_id`, `privilege_name`, `description`, `created_by`, `created_date`, `is_active`) VALUES (15, 'Add Role', NULL, 1, now(), 1);
-INSERT INTO `privilege` (`privilege_id`, `privilege_name`, `description`, `created_by`, `created_date`, `is_active`) VALUES (16, 'Edit Role', NULL, 1, now(), 1);
-INSERT INTO `privilege` (`privilege_id`, `privilege_name`, `description`, `created_by`, `created_date`, `is_active`) VALUES (17, 'Activate/Inactivate Role', NULL, 1, now(), 1);
-INSERT INTO `privilege` (`privilege_id`, `privilege_name`, `description`, `created_by`, `created_date`, `is_active`) VALUES (18, 'Faculty Skillset Listing', NULL, 1, now(), 1);
-INSERT INTO `privilege` (`privilege_id`, `privilege_name`, `description`, `created_by`, `created_date`, `is_active`) VALUES (19, 'Add Faculty Skillset', NULL, 1, now(), 1);
-INSERT INTO `privilege` (`privilege_id`, `privilege_name`, `description`, `created_by`, `created_date`, `is_active`) VALUES (20, 'Edit Faculty Skillset', NULL, 1, now(), 1);
-INSERT INTO `privilege` (`privilege_id`, `privilege_name`, `description`, `created_by`, `created_date`, `is_active`) VALUES (21, 'Activate/Inactivate Faculty Skillset', NULL, 1, now(), 1);
+INSERT INTO `privilege` (`privilege_id`, `privilege_name`, `description`, `created_by`, `created_date`, `modified_by`, `modified_date`, `is_active`) VALUES (1, 'Dashboard', NULL, 1, now(), 1, now(), 1);
+INSERT INTO `privilege` (`privilege_id`, `privilege_name`, `description`, `created_by`, `created_date`, `modified_by`, `modified_date`, `is_active`) VALUES (2, 'User Listing', NULL, 1, now(), 1, now(), 1);
+INSERT INTO `privilege` (`privilege_id`, `privilege_name`, `description`, `created_by`, `created_date`, `modified_by`, `modified_date`, `is_active`) VALUES (3, 'Add User', NULL, 1, now(), 1, now(), 1);
+INSERT INTO `privilege` (`privilege_id`, `privilege_name`, `description`, `created_by`, `created_date`, `modified_by`, `modified_date`, `is_active`) VALUES (4, 'Edit User', NULL, 1, now(), 1, now(), 1);
+INSERT INTO `privilege` (`privilege_id`, `privilege_name`, `description`, `created_by`, `created_date`, `modified_by`, `modified_date`, `is_active`) VALUES (5, 'Activate/Inactivate User', NULL, 1, now(), 1, now(), 1);
+INSERT INTO `privilege` (`privilege_id`, `privilege_name`, `description`, `created_by`, `created_date`, `modified_by`, `modified_date`, `is_active`) VALUES (6, 'Module Listing', NULL, 1, now(), 1, now(), 1);
+INSERT INTO `privilege` (`privilege_id`, `privilege_name`, `description`, `created_by`, `created_date`, `modified_by`, `modified_date`, `is_active`) VALUES (7, 'Add Module', NULL, 1, now(), 1, now(), 1);
+INSERT INTO `privilege` (`privilege_id`, `privilege_name`, `description`, `created_by`, `created_date`, `modified_by`, `modified_date`, `is_active`) VALUES (8, 'Edit Module', NULL, 1, now(), 1, now(), 1);
+INSERT INTO `privilege` (`privilege_id`, `privilege_name`, `description`, `created_by`, `created_date`, `modified_by`, `modified_date`, `is_active`) VALUES (9, 'Activate/Inactivate Module', NULL, 1, now(), 1, now(), 1);
+INSERT INTO `privilege` (`privilege_id`, `privilege_name`, `description`, `created_by`, `created_date`, `modified_by`, `modified_date`, `is_active`) VALUES (10, 'Course Type Listing', NULL, 1, now(), 1, now(), 1);
+INSERT INTO `privilege` (`privilege_id`, `privilege_name`, `description`, `created_by`, `created_date`, `modified_by`, `modified_date`, `is_active`) VALUES (11, 'Add Course Type', NULL, 1, now(), 1, now(), 1);
+INSERT INTO `privilege` (`privilege_id`, `privilege_name`, `description`, `created_by`, `created_date`, `modified_by`, `modified_date`, `is_active`) VALUES (12, 'Edit Course Type', NULL, 1, now(), 1, now(), 1);
+INSERT INTO `privilege` (`privilege_id`, `privilege_name`, `description`, `created_by`, `created_date`, `modified_by`, `modified_date`, `is_active`) VALUES (13, 'Activate/Inactivate Course Type', NULL, 1, now(), 1, now(), 1);
+INSERT INTO `privilege` (`privilege_id`, `privilege_name`, `description`, `created_by`, `created_date`, `modified_by`, `modified_date`, `is_active`) VALUES (14, 'Role Listing', NULL, 1, now(), 1, now(), 1);
+INSERT INTO `privilege` (`privilege_id`, `privilege_name`, `description`, `created_by`, `created_date`, `modified_by`, `modified_date`, `is_active`) VALUES (15, 'Add Role', NULL, 1, now(), 1, now(), 1);
+INSERT INTO `privilege` (`privilege_id`, `privilege_name`, `description`, `created_by`, `created_date`, `modified_by`, `modified_date`, `is_active`) VALUES (16, 'Edit Role', NULL, 1, now(), 1, now(), 1);
+INSERT INTO `privilege` (`privilege_id`, `privilege_name`, `description`, `created_by`, `created_date`, `modified_by`, `modified_date`, `is_active`) VALUES (17, 'Activate/Inactivate Role', NULL, 1, now(), 1, now(), 1);
+INSERT INTO `privilege` (`privilege_id`, `privilege_name`, `description`, `created_by`, `created_date`, `modified_by`, `modified_date`, `is_active`) VALUES (18, 'Faculty Skillset Listing', NULL, 1, now(), 1, now(), 1);
+INSERT INTO `privilege` (`privilege_id`, `privilege_name`, `description`, `created_by`, `created_date`, `modified_by`, `modified_date`, `is_active`) VALUES (19, 'Add Faculty Skillset', NULL, 1, now(), 1, now(), 1);
+INSERT INTO `privilege` (`privilege_id`, `privilege_name`, `description`, `created_by`, `created_date`, `modified_by`, `modified_date`, `is_active`) VALUES (20, 'Edit Faculty Skillset', NULL, 1, now(), 1, now(), 1);
+INSERT INTO `privilege` (`privilege_id`, `privilege_name`, `description`, `created_by`, `created_date`, `modified_by`, `modified_date`, `is_active`) VALUES (21, 'Activate/Inactivate Faculty Skillset', NULL, 1, now(), 1, now(), 1);
 
 -- -----------------------------------------------------
 -- Data for table `role_privilege_relation`
@@ -97,52 +97,52 @@ INSERT INTO `role_privilege_relation` (`role_id`, `privilege_id`, `created_by`, 
 -- -----------------------------------------------------
 -- Data for table `action`
 -- -----------------------------------------------------
-INSERT INTO `action` (`action_id`, `privilege_id`, `action_path`, `is_skip`, `is_active`) VALUES (DEFAULT, NULL, '', 1, 1);
-INSERT INTO `action` (`action_id`, `privilege_id`, `action_path`, `is_skip`, `is_active`) VALUES (DEFAULT, NULL, 'login', 1, 1);
-INSERT INTO `action` (`action_id`, `privilege_id`, `action_path`, `is_skip`, `is_active`) VALUES (DEFAULT, NULL, 'home', 1, 1);
-INSERT INTO `action` (`action_id`, `privilege_id`, `action_path`, `is_skip`, `is_active`) VALUES (DEFAULT, NULL, 'loginCheck', 1, 1);
-INSERT INTO `action` (`action_id`, `privilege_id`, `action_path`, `is_skip`, `is_active`) VALUES (DEFAULT, NULL, 'logout', 1, 1);
-INSERT INTO `action` (`action_id`, `privilege_id`, `action_path`, `is_skip`, `is_active`) VALUES (DEFAULT, NULL, 'signUp', 1, 1);
-INSERT INTO `action` (`action_id`, `privilege_id`, `action_path`, `is_skip`, `is_active`) VALUES (DEFAULT, NULL, 'invalidSession', 1, 1);
-INSERT INTO `action` (`action_id`, `privilege_id`, `action_path`, `is_skip`, `is_active`) VALUES (DEFAULT, NULL, 'sessionExpired', 1, 1);
-INSERT INTO `action` (`action_id`, `privilege_id`, `action_path`, `is_skip`, `is_active`) VALUES (DEFAULT, 1, 'dashboard/dashboard', 0, 1);
-INSERT INTO `action` (`action_id`, `privilege_id`, `action_path`, `is_skip`, `is_active`) VALUES (DEFAULT, 2, 'user/list', 0, 1);
-INSERT INTO `action` (`action_id`, `privilege_id`, `action_path`, `is_skip`, `is_active`) VALUES (DEFAULT, 2, 'user/fetchDetails', 0, 1);
-INSERT INTO `action` (`action_id`, `privilege_id`, `action_path`, `is_skip`, `is_active`) VALUES (DEFAULT, 3, 'user/add', 0, 1);
-INSERT INTO `action` (`action_id`, `privilege_id`, `action_path`, `is_skip`, `is_active`) VALUES (DEFAULT, 3, 'role/fetchActiveDetails', 0, 1);
-INSERT INTO `action` (`action_id`, `privilege_id`, `action_path`, `is_skip`, `is_active`) VALUES (DEFAULT, 3, 'user/validateSave', 0, 1);
-INSERT INTO `action` (`action_id`, `privilege_id`, `action_path`, `is_skip`, `is_active`) VALUES (DEFAULT, 4, 'user/update', 0, 1);
-INSERT INTO `action` (`action_id`, `privilege_id`, `action_path`, `is_skip`, `is_active`) VALUES (DEFAULT, 4, 'user/fetchData', 0, 1);
-INSERT INTO `action` (`action_id`, `privilege_id`, `action_path`, `is_skip`, `is_active`) VALUES (DEFAULT, 4, 'role/fetchActiveDetails', 0, 1);
-INSERT INTO `action` (`action_id`, `privilege_id`, `action_path`, `is_skip`, `is_active`) VALUES (DEFAULT, 4, 'user/validateSave', 0, 1);
-INSERT INTO `action` (`action_id`, `privilege_id`, `action_path`, `is_skip`, `is_active`) VALUES (DEFAULT, 5, 'user/activation', 0, 1);
-INSERT INTO `action` (`action_id`, `privilege_id`, `action_path`, `is_skip`, `is_active`) VALUES (DEFAULT, 6, 'module/list', 0, 1);
-INSERT INTO `action` (`action_id`, `privilege_id`, `action_path`, `is_skip`, `is_active`) VALUES (DEFAULT, 6, 'module/fetchDetails', 0, 1);
-INSERT INTO `action` (`action_id`, `privilege_id`, `action_path`, `is_skip`, `is_active`) VALUES (DEFAULT, 7, 'module/add', 0, 1);
-INSERT INTO `action` (`action_id`, `privilege_id`, `action_path`, `is_skip`, `is_active`) VALUES (DEFAULT, 7, 'module/fetchData', 0, 1);
-INSERT INTO `action` (`action_id`, `privilege_id`, `action_path`, `is_skip`, `is_active`) VALUES (DEFAULT, 7, 'module/validateSave', 0, 1);
-INSERT INTO `action` (`action_id`, `privilege_id`, `action_path`, `is_skip`, `is_active`) VALUES (DEFAULT, 8, 'module/update', 0, 1);
-INSERT INTO `action` (`action_id`, `privilege_id`, `action_path`, `is_skip`, `is_active`) VALUES (DEFAULT, 8, 'module/fetchData', 0, 1);
-INSERT INTO `action` (`action_id`, `privilege_id`, `action_path`, `is_skip`, `is_active`) VALUES (DEFAULT, 8, 'module/validateSave', 0, 1);
-INSERT INTO `action` (`action_id`, `privilege_id`, `action_path`, `is_skip`, `is_active`) VALUES (DEFAULT, 9, 'module/activation', 0, 1);
-INSERT INTO `action` (`action_id`, `privilege_id`, `action_path`, `is_skip`, `is_active`) VALUES (DEFAULT, 10, 'courseType/list', 0, 1);
-INSERT INTO `action` (`action_id`, `privilege_id`, `action_path`, `is_skip`, `is_active`) VALUES (DEFAULT, 10, 'courseType/fetchDetails', 0, 1);
-INSERT INTO `action` (`action_id`, `privilege_id`, `action_path`, `is_skip`, `is_active`) VALUES (DEFAULT, 11, 'courseType/add', 0, 1);
-INSERT INTO `action` (`action_id`, `privilege_id`, `action_path`, `is_skip`, `is_active`) VALUES (DEFAULT, 11, 'courseType/fetchData', 0, 1);
-INSERT INTO `action` (`action_id`, `privilege_id`, `action_path`, `is_skip`, `is_active`) VALUES (DEFAULT, 11, 'courseType/validateSave', 0, 1);
-INSERT INTO `action` (`action_id`, `privilege_id`, `action_path`, `is_skip`, `is_active`) VALUES (DEFAULT, 12, 'courseType/update', 0, 1);
-INSERT INTO `action` (`action_id`, `privilege_id`, `action_path`, `is_skip`, `is_active`) VALUES (DEFAULT, 12, 'courseType/fetchData', 0, 1);
-INSERT INTO `action` (`action_id`, `privilege_id`, `action_path`, `is_skip`, `is_active`) VALUES (DEFAULT, 12, 'courseType/validateSave', 0, 1);
-INSERT INTO `action` (`action_id`, `privilege_id`, `action_path`, `is_skip`, `is_active`) VALUES (DEFAULT, 13, 'courseType/activation', 0, 1);
-INSERT INTO `action` (`action_id`, `privilege_id`, `action_path`, `is_skip`, `is_active`) VALUES (DEFAULT, 14, 'role/list', 0, 1);
-INSERT INTO `action` (`action_id`, `privilege_id`, `action_path`, `is_skip`, `is_active`) VALUES (DEFAULT, 14, 'role/fetchDetails', 0, 1);
-INSERT INTO `action` (`action_id`, `privilege_id`, `action_path`, `is_skip`, `is_active`) VALUES (DEFAULT, 15, 'role/add', 0, 1);
-INSERT INTO `action` (`action_id`, `privilege_id`, `action_path`, `is_skip`, `is_active`) VALUES (DEFAULT, 15, 'role/fetchData', 0, 1);
-INSERT INTO `action` (`action_id`, `privilege_id`, `action_path`, `is_skip`, `is_active`) VALUES (DEFAULT, 15, 'role/validateSave', 0, 1);
-INSERT INTO `action` (`action_id`, `privilege_id`, `action_path`, `is_skip`, `is_active`) VALUES (DEFAULT, 16, 'role/update', 0, 1);
-INSERT INTO `action` (`action_id`, `privilege_id`, `action_path`, `is_skip`, `is_active`) VALUES (DEFAULT, 16, 'role/fetchData', 0, 1);
-INSERT INTO `action` (`action_id`, `privilege_id`, `action_path`, `is_skip`, `is_active`) VALUES (DEFAULT, 16, 'role/validateSave', 0, 1);
-INSERT INTO `action` (`action_id`, `privilege_id`, `action_path`, `is_skip`, `is_active`) VALUES (DEFAULT, 17, 'role/activation', 0, 1);
+INSERT INTO `action` (`action_id`, `privilege_id`, `action_path`, `created_by`, `created_date`, `modified_by`, `modified_date`, `is_active`, `is_skip`) VALUES (DEFAULT, NULL, '', 1, now(), 1, now(), 1, 1);
+INSERT INTO `action` (`action_id`, `privilege_id`, `action_path`, `created_by`, `created_date`, `modified_by`, `modified_date`, `is_active`, `is_skip`) VALUES (DEFAULT, NULL, 'login', 1, now(), 1, now(), 1, 1);
+INSERT INTO `action` (`action_id`, `privilege_id`, `action_path`, `created_by`, `created_date`, `modified_by`, `modified_date`, `is_active`, `is_skip`) VALUES (DEFAULT, NULL, 'home', 1, now(), 1, now(), 1, 1);
+INSERT INTO `action` (`action_id`, `privilege_id`, `action_path`, `created_by`, `created_date`, `modified_by`, `modified_date`, `is_active`, `is_skip`) VALUES (DEFAULT, NULL, 'loginCheck', 1, now(), 1, now(), 1, 1);
+INSERT INTO `action` (`action_id`, `privilege_id`, `action_path`, `created_by`, `created_date`, `modified_by`, `modified_date`, `is_active`, `is_skip`) VALUES (DEFAULT, NULL, 'logout', 1, now(), 1, now(), 1, 1);
+INSERT INTO `action` (`action_id`, `privilege_id`, `action_path`, `created_by`, `created_date`, `modified_by`, `modified_date`, `is_active`, `is_skip`) VALUES (DEFAULT, NULL, 'signUp', 1, now(), 1, now(), 1, 1);
+INSERT INTO `action` (`action_id`, `privilege_id`, `action_path`, `created_by`, `created_date`, `modified_by`, `modified_date`, `is_active`, `is_skip`) VALUES (DEFAULT, NULL, 'invalidSession', 1, now(), 1, now(), 1, 1);
+INSERT INTO `action` (`action_id`, `privilege_id`, `action_path`, `created_by`, `created_date`, `modified_by`, `modified_date`, `is_active`, `is_skip`) VALUES (DEFAULT, NULL, 'sessionExpired', 1, now(), 1, now(), 1, 1);
+INSERT INTO `action` (`action_id`, `privilege_id`, `action_path`, `created_by`, `created_date`, `modified_by`, `modified_date`, `is_active`, `is_skip`) VALUES (DEFAULT, 1, 'dashboard/dashboard', 1, now(), 1, now(), 1, 0);
+INSERT INTO `action` (`action_id`, `privilege_id`, `action_path`, `created_by`, `created_date`, `modified_by`, `modified_date`, `is_active`, `is_skip`) VALUES (DEFAULT, 2, 'user/list', 1, now(), 1, now(), 1, 0);
+INSERT INTO `action` (`action_id`, `privilege_id`, `action_path`, `created_by`, `created_date`, `modified_by`, `modified_date`, `is_active`, `is_skip`) VALUES (DEFAULT, 2, 'user/fetchDetails', 1, now(), 1, now(), 1, 0);
+INSERT INTO `action` (`action_id`, `privilege_id`, `action_path`, `created_by`, `created_date`, `modified_by`, `modified_date`, `is_active`, `is_skip`) VALUES (DEFAULT, 3, 'user/add', 1, now(), 1, now(), 1, 0);
+INSERT INTO `action` (`action_id`, `privilege_id`, `action_path`, `created_by`, `created_date`, `modified_by`, `modified_date`, `is_active`, `is_skip`) VALUES (DEFAULT, 3, 'role/fetchActiveDetails', 1, now(), 1, now(), 1, 0);
+INSERT INTO `action` (`action_id`, `privilege_id`, `action_path`, `created_by`, `created_date`, `modified_by`, `modified_date`, `is_active`, `is_skip`) VALUES (DEFAULT, 3, 'user/validateSave', 1, now(), 1, now(), 1, 0);
+INSERT INTO `action` (`action_id`, `privilege_id`, `action_path`, `created_by`, `created_date`, `modified_by`, `modified_date`, `is_active`, `is_skip`) VALUES (DEFAULT, 4, 'user/update', 1, now(), 1, now(), 1, 0);
+INSERT INTO `action` (`action_id`, `privilege_id`, `action_path`, `created_by`, `created_date`, `modified_by`, `modified_date`, `is_active`, `is_skip`) VALUES (DEFAULT, 4, 'user/fetchData', 1, now(), 1, now(), 1, 0);
+INSERT INTO `action` (`action_id`, `privilege_id`, `action_path`, `created_by`, `created_date`, `modified_by`, `modified_date`, `is_active`, `is_skip`) VALUES (DEFAULT, 4, 'role/fetchActiveDetails', 1, now(), 1, now(), 1, 0);
+INSERT INTO `action` (`action_id`, `privilege_id`, `action_path`, `created_by`, `created_date`, `modified_by`, `modified_date`, `is_active`, `is_skip`) VALUES (DEFAULT, 4, 'user/validateSave', 1, now(), 1, now(), 1, 0);
+INSERT INTO `action` (`action_id`, `privilege_id`, `action_path`, `created_by`, `created_date`, `modified_by`, `modified_date`, `is_active`, `is_skip`) VALUES (DEFAULT, 5, 'user/activation', 1, now(), 1, now(), 1, 0);
+INSERT INTO `action` (`action_id`, `privilege_id`, `action_path`, `created_by`, `created_date`, `modified_by`, `modified_date`, `is_active`, `is_skip`) VALUES (DEFAULT, 6, 'module/list', 1, now(), 1, now(), 1, 0);
+INSERT INTO `action` (`action_id`, `privilege_id`, `action_path`, `created_by`, `created_date`, `modified_by`, `modified_date`, `is_active`, `is_skip`) VALUES (DEFAULT, 6, 'module/fetchDetails', 1, now(), 1, now(), 1, 0);
+INSERT INTO `action` (`action_id`, `privilege_id`, `action_path`, `created_by`, `created_date`, `modified_by`, `modified_date`, `is_active`, `is_skip`) VALUES (DEFAULT, 7, 'module/add', 1, now(), 1, now(), 1, 0);
+INSERT INTO `action` (`action_id`, `privilege_id`, `action_path`, `created_by`, `created_date`, `modified_by`, `modified_date`, `is_active`, `is_skip`) VALUES (DEFAULT, 7, 'module/fetchData', 1, now(), 1, now(), 1, 0);
+INSERT INTO `action` (`action_id`, `privilege_id`, `action_path`, `created_by`, `created_date`, `modified_by`, `modified_date`, `is_active`, `is_skip`) VALUES (DEFAULT, 7, 'module/validateSave', 1, now(), 1, now(), 1, 0);
+INSERT INTO `action` (`action_id`, `privilege_id`, `action_path`, `created_by`, `created_date`, `modified_by`, `modified_date`, `is_active`, `is_skip`) VALUES (DEFAULT, 8, 'module/update', 1, now(), 1, now(), 1, 0);
+INSERT INTO `action` (`action_id`, `privilege_id`, `action_path`, `created_by`, `created_date`, `modified_by`, `modified_date`, `is_active`, `is_skip`) VALUES (DEFAULT, 8, 'module/fetchData', 1, now(), 1, now(), 1, 0);
+INSERT INTO `action` (`action_id`, `privilege_id`, `action_path`, `created_by`, `created_date`, `modified_by`, `modified_date`, `is_active`, `is_skip`) VALUES (DEFAULT, 8, 'module/validateSave', 1, now(), 1, now(), 1, 0);
+INSERT INTO `action` (`action_id`, `privilege_id`, `action_path`, `created_by`, `created_date`, `modified_by`, `modified_date`, `is_active`, `is_skip`) VALUES (DEFAULT, 9, 'module/activation', 1, now(), 1, now(), 1, 0);
+INSERT INTO `action` (`action_id`, `privilege_id`, `action_path`, `created_by`, `created_date`, `modified_by`, `modified_date`, `is_active`, `is_skip`) VALUES (DEFAULT, 10, 'courseType/list', 1, now(), 1, now(), 1, 0);
+INSERT INTO `action` (`action_id`, `privilege_id`, `action_path`, `created_by`, `created_date`, `modified_by`, `modified_date`, `is_active`, `is_skip`) VALUES (DEFAULT, 10, 'courseType/fetchDetails', 1, now(), 1, now(), 1, 0);
+INSERT INTO `action` (`action_id`, `privilege_id`, `action_path`, `created_by`, `created_date`, `modified_by`, `modified_date`, `is_active`, `is_skip`) VALUES (DEFAULT, 11, 'courseType/add', 1, now(), 1, now(), 1, 0);
+INSERT INTO `action` (`action_id`, `privilege_id`, `action_path`, `created_by`, `created_date`, `modified_by`, `modified_date`, `is_active`, `is_skip`) VALUES (DEFAULT, 11, 'courseType/fetchData', 1, now(), 1, now(), 1, 0);
+INSERT INTO `action` (`action_id`, `privilege_id`, `action_path`, `created_by`, `created_date`, `modified_by`, `modified_date`, `is_active`, `is_skip`) VALUES (DEFAULT, 11, 'courseType/validateSave', 1, now(), 1, now(), 1, 0);
+INSERT INTO `action` (`action_id`, `privilege_id`, `action_path`, `created_by`, `created_date`, `modified_by`, `modified_date`, `is_active`, `is_skip`) VALUES (DEFAULT, 12, 'courseType/update', 1, now(), 1, now(), 1, 0);
+INSERT INTO `action` (`action_id`, `privilege_id`, `action_path`, `created_by`, `created_date`, `modified_by`, `modified_date`, `is_active`, `is_skip`) VALUES (DEFAULT, 12, 'courseType/fetchData', 1, now(), 1, now(), 1, 0);
+INSERT INTO `action` (`action_id`, `privilege_id`, `action_path`, `created_by`, `created_date`, `modified_by`, `modified_date`, `is_active`, `is_skip`) VALUES (DEFAULT, 12, 'courseType/validateSave', 1, now(), 1, now(), 1, 0);
+INSERT INTO `action` (`action_id`, `privilege_id`, `action_path`, `created_by`, `created_date`, `modified_by`, `modified_date`, `is_active`, `is_skip`) VALUES (DEFAULT, 13, 'courseType/activation', 1, now(), 1, now(), 1, 0);
+INSERT INTO `action` (`action_id`, `privilege_id`, `action_path`, `created_by`, `created_date`, `modified_by`, `modified_date`, `is_active`, `is_skip`) VALUES (DEFAULT, 14, 'role/list', 1, now(), 1, now(), 1, 0);
+INSERT INTO `action` (`action_id`, `privilege_id`, `action_path`, `created_by`, `created_date`, `modified_by`, `modified_date`, `is_active`, `is_skip`) VALUES (DEFAULT, 14, 'role/fetchDetails', 1, now(), 1, now(), 1, 0);
+INSERT INTO `action` (`action_id`, `privilege_id`, `action_path`, `created_by`, `created_date`, `modified_by`, `modified_date`, `is_active`, `is_skip`) VALUES (DEFAULT, 15, 'role/add', 1, now(), 1, now(), 1, 0);
+INSERT INTO `action` (`action_id`, `privilege_id`, `action_path`, `created_by`, `created_date`, `modified_by`, `modified_date`, `is_active`, `is_skip`) VALUES (DEFAULT, 15, 'role/fetchData', 1, now(), 1, now(), 1, 0);
+INSERT INTO `action` (`action_id`, `privilege_id`, `action_path`, `created_by`, `created_date`, `modified_by`, `modified_date`, `is_active`, `is_skip`) VALUES (DEFAULT, 15, 'role/validateSave', 1, now(), 1, now(), 1, 0);
+INSERT INTO `action` (`action_id`, `privilege_id`, `action_path`, `created_by`, `created_date`, `modified_by`, `modified_date`, `is_active`, `is_skip`) VALUES (DEFAULT, 16, 'role/update', 1, now(), 1, now(), 1, 0);
+INSERT INTO `action` (`action_id`, `privilege_id`, `action_path`, `created_by`, `created_date`, `modified_by`, `modified_date`, `is_active`, `is_skip`) VALUES (DEFAULT, 16, 'role/fetchData', 1, now(), 1, now(), 1, 0);
+INSERT INTO `action` (`action_id`, `privilege_id`, `action_path`, `created_by`, `created_date`, `modified_by`, `modified_date`, `is_active`, `is_skip`) VALUES (DEFAULT, 16, 'role/validateSave', 1, now(), 1, now(), 1, 0);
+INSERT INTO `action` (`action_id`, `privilege_id`, `action_path`, `created_by`, `created_date`, `modified_by`, `modified_date`, `is_active`, `is_skip`) VALUES (DEFAULT, 17, 'role/activation', 1, now(), 1, now(), 1, 0);
 
 -- -----------------------------------------------------
 -- Data for table `module`

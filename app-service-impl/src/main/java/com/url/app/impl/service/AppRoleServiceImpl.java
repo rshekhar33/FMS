@@ -9,13 +9,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.url.app.config.AppDBValidationMessage;
 import com.url.app.config.AppMessage;
 import com.url.app.dto.entity.Role;
 import com.url.app.dto.validation.AppRoleValidationService;
 import com.url.app.interf.dao.RoleRepository;
 import com.url.app.interf.service.AppRoleService;
 import com.url.app.interf.service.AppUserService;
+import com.url.app.interf.service.AppValidationService;
 import com.url.app.pojo.AppConcurrentHashMap;
 import com.url.app.utility.AppCommon;
 import com.url.app.utility.AppConstant;
@@ -42,10 +42,10 @@ public class AppRoleServiceImpl implements AppRoleService {
 	private AppMessage appMessage;
 
 	@Autowired
-	private AppDBValidationMessage appDBValidationKey;
+	private AppRoleValidationService appRoleValidationService;
 
 	@Autowired
-	private AppRoleValidationService appRoleValidationService;
+	private AppValidationService appValidationService;
 
 	@Override
 	@Transactional(readOnly = true)
@@ -73,27 +73,10 @@ public class AppRoleServiceImpl implements AppRoleService {
 		String status = AppConstant.BLANK_STRING;
 		String msg = AppConstant.BLANK_STRING;
 
-		final Map<String, String> invalidData = new AppConcurrentHashMap<>();
-		String roleNameError = null;
-
-		if (AppCommon.isPositiveInteger(formRole.getRoleId())) {
-			appRoleValidationService.validateForUpdate(formRole);
-
-			final Long roleNameCount = roleRepository.countByRoleNameAndRoleIdNot(formRole.getRoleName(), formRole.getRoleId());
-			if (roleNameCount > 0) {
-				status = AppConstant.FAIL;
-				roleNameError = appDBValidationKey.roleRolenameExistsError;
-			}
-		} else {
-			appRoleValidationService.validateForCreate(formRole);
-
-			final Long roleNameCount = roleRepository.countByRoleName(formRole.getRoleName());
-			if (roleNameCount > 0) {
-				status = AppConstant.FAIL;
-				roleNameError = appDBValidationKey.roleRolenameExistsError;
-			}
+		final Map<String, String> invalidData = appValidationService.validateRole(formRole);
+		if (!invalidData.isEmpty()) {
+			status = AppConstant.FAIL;
 		}
-		invalidData.put(AppResponseKey.ROLE_NAME, roleNameError);
 
 		if (AppCommon.isEmpty(status)) {
 			final Integer loggedInUserId = appUserService.getPrincipalUserUserId();

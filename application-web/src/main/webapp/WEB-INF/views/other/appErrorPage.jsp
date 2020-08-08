@@ -7,8 +7,9 @@
 	<meta charset="utf-8">
 	<sec:csrfMetaTags/>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta http-equiv="x-ua-compatible" content="ie=edge">
 	<title>${appTitle}</title>
+	<!-- Google Font: Source Sans Pro -->
+	<link rel="stylesheet" href="${contextPath}static/resources/google-fonts/google-fonts.css">
 	<!-- Font Awesome Icons -->
 	<link rel="stylesheet" href="${contextPath}static/resources/font-awesome/css/all.min.css">
 	<!-- IonIcons -->
@@ -17,8 +18,6 @@
 	<link rel="stylesheet" href="${contextPath}static/resources/overlayScrollbars/css/OverlayScrollbars.min.css">
 	<!-- Theme style -->
 	<link rel="stylesheet" href="${contextPath}static/css/adminlte.min.css">
-	<!-- Google Font: Source Sans Pro -->
-	<link rel="stylesheet" href="${contextPath}static/resources/google-fonts/google-fonts.css">
 	<link rel="shortcut icon" href="${contextPath}static/images/favicon.ico" />
 </head>
 <body class="hold-transition sidebar-mini text-sm layout-fixed layout-navbar-fixed layout-footer-fixed">

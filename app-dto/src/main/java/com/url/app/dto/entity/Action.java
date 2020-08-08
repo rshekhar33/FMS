@@ -25,7 +25,7 @@ import com.url.app.utility.AppSQL;
 @Table(name = "action")
 @JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 @NamedQuery(name = "Action.findAll", query = AppSQL.QRY_FIND_ALL_ACTION)
-public class Action implements Serializable {
+public class Action extends BaseEntity implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
