@@ -77,6 +77,7 @@ public class AppRoleServiceImpl implements AppRoleService {
 		if (!invalidData.isEmpty()) {
 			status = AppConstant.FAIL;
 		}
+		invalidData.put(AppResponseKey.ROLE_NAME, roleNameError);
 
 		if (AppCommon.isEmpty(status)) {
 			final Integer loggedInUserId = appUserService.getPrincipalUserUserId();

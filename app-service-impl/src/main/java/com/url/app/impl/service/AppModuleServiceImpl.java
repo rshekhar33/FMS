@@ -71,6 +71,7 @@ public class AppModuleServiceImpl implements AppModuleService {
 		if (!invalidData.isEmpty()) {
 			status = AppConstant.FAIL;
 		}
+		invalidData.put(AppResponseKey.MODULE_NAME, moduleNameError);
 
 		if (AppCommon.isEmpty(status)) {
 			final Integer loggedInUserId = appUserService.getPrincipalUserUserId();
