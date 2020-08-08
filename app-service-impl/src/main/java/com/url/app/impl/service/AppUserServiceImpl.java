@@ -14,7 +14,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.url.app.config.AppDBValidationMessage;
 import com.url.app.config.AppMessage;
 import com.url.app.dto.entity.Role;
 import com.url.app.dto.entity.User;
@@ -24,6 +23,7 @@ import com.url.app.dto.validation.AppUserValidationService;
 import com.url.app.interf.dao.AppDao;
 import com.url.app.interf.dao.UserRepository;
 import com.url.app.interf.service.AppUserService;
+import com.url.app.interf.service.AppValidationService;
 import com.url.app.pojo.AppConcurrentHashMap;
 import com.url.app.pojo.LoggedUser;
 import com.url.app.utility.AppCommon;
@@ -54,10 +54,10 @@ public class AppUserServiceImpl implements AppUserService {
 	private AppMessage appMessage;
 
 	@Autowired
-	private AppDBValidationMessage appDBValidationKey;
+	private AppUserValidationService appUserValidationService;
 
 	@Autowired
-	private AppUserValidationService appUserValidationService;
+	private AppValidationService appValidationService;
 
 	@Override
 	public LoggedUser getPrincipal() {
@@ -143,34 +143,10 @@ public class AppUserServiceImpl implements AppUserService {
 		String status = AppConstant.BLANK_STRING;
 		String msg = AppConstant.BLANK_STRING;
 
-		final Map<String, String> invalidData = new AppConcurrentHashMap<>();
-		String userNameError = null;
-		String emailIdError = null;
-
-		if (AppCommon.isPositiveInteger(formUser.getUserId())) {
-			appUserValidationService.validateForUpdate(formUser);
-
-			final Long emailIdCount = userRepository.countByEmailIdAndUserIdNot(formUser.getEmailId(), formUser.getUserId());
-			if (emailIdCount > 0) {
-				status = AppConstant.FAIL;
-				emailIdError = appDBValidationKey.userEmailExistsError;
-			}
-		} else {
-			appUserValidationService.validateForCreate(formUser);
-
-			final Long userNameCount = userRepository.countByUserName(formUser.getUserName());
-			if (userNameCount > 0) {
-				status = AppConstant.FAIL;
-				userNameError = appDBValidationKey.userUsernameExistsError;
-			}
-			final Long emailIdCount = userRepository.countByEmailId(formUser.getEmailId());
-			if (emailIdCount > 0) {
-				status = AppConstant.FAIL;
-				emailIdError = appDBValidationKey.userEmailExistsError;
-			}
+		final Map<String, String> invalidData = appValidationService.validateUser(formUser);
+		if (!invalidData.isEmpty()) {
+			status = AppConstant.FAIL;
 		}
-		invalidData.put(AppResponseKey.USER_NAME, userNameError);
-		invalidData.put(AppResponseKey.EMAIL_ID, emailIdError);
 
 		if (AppCommon.isEmpty(status)) {
 			final Integer loggedInUserId = getPrincipalUserUserId();

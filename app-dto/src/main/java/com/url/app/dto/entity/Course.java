@@ -9,7 +9,6 @@ import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.EntityListeners;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -23,9 +22,6 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedDate;
-import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
@@ -37,10 +33,9 @@ import com.url.app.utility.AppSQL;
  */
 @Entity
 @Table(name = "course")
-@EntityListeners(AuditingEntityListener.class)
 @JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 @NamedQuery(name = "Course.findAll", query = AppSQL.QRY_FIND_ALL_COURSE)
-public class Course implements Serializable {
+public class Course extends BaseEntity implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -51,28 +46,12 @@ public class Course implements Serializable {
 	@Column(name = "course_code", unique = true, nullable = false, length = 50)
 	private String courseCode;
 
-	@Column(name = "created_by", updatable = false, nullable = false)
-	private Integer createdBy;
-
-	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "created_date", updatable = false, nullable = false)
-	@CreatedDate
-	private Date createdDate;
-
 	@Temporal(TemporalType.DATE)
 	@Column(name = "end_date")
 	private Date endDate;
 
 	@Column(name = "is_active", nullable = false)
 	private Integer isActive;
-
-	@Column(name = "modified_by", nullable = false)
-	private Integer modifiedBy;
-
-	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "modified_date", nullable = false)
-	@LastModifiedDate
-	private Date modifiedDate;
 
 	@Temporal(TemporalType.DATE)
 	@DateTimeFormat(pattern = "MM/dd/yyyy")
@@ -115,22 +94,6 @@ public class Course implements Serializable {
 		this.courseCode = courseCode;
 	}
 
-	public Integer getCreatedBy() {
-		return this.createdBy;
-	}
-
-	public void setCreatedBy(Integer createdBy) {
-		this.createdBy = createdBy;
-	}
-
-	public Date getCreatedDate() {
-		return this.createdDate;
-	}
-
-	public void setCreatedDate(Date createdDate) {
-		this.createdDate = createdDate;
-	}
-
 	public Date getEndDate() {
 		return this.endDate;
 	}
@@ -145,22 +108,6 @@ public class Course implements Serializable {
 
 	public void setIsActive(Integer isActive) {
 		this.isActive = isActive;
-	}
-
-	public Integer getModifiedBy() {
-		return this.modifiedBy;
-	}
-
-	public void setModifiedBy(Integer modifiedBy) {
-		this.modifiedBy = modifiedBy;
-	}
-
-	public Date getModifiedDate() {
-		return this.modifiedDate;
-	}
-
-	public void setModifiedDate(Date modifiedDate) {
-		this.modifiedDate = modifiedDate;
 	}
 
 	public Date getStartDate() {

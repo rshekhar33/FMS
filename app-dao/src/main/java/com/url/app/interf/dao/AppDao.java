@@ -4,9 +4,9 @@ import java.util.List;
 
 import com.url.app.dto.entity.Action;
 import com.url.app.dto.entity.FacultySkillsetMng;
-import com.url.app.dto.entity.UrlRolesBean;
 import com.url.app.dto.entity.User;
 import com.url.app.dto.entity.UserMng;
+import com.url.app.pojo.UrlRolesBean;
 
 /**
  * Dao Layer of application.
