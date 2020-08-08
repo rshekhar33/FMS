@@ -19,6 +19,8 @@ import org.springframework.web.multipart.support.MultipartFilter;
 import com.url.app.utility.AppConstant;
 
 /**
+ * Application beans.
+ * 
  * @author Shekhar Shinde
  */
 @Configuration

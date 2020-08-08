@@ -41,6 +41,10 @@ public class RolesCollection {
 
 	@Override
 	public String toString() {
-		return "RolesCollection [roleList=" + roleList + ", roleArr=" + Arrays.toString(roleArr) + "]";
+		final int maxLen = 10;
+		StringBuilder builder = new StringBuilder();
+		builder.append("RolesCollection [roleList=").append(roleList != null ? roleList.subList(0, Math.min(roleList.size(), maxLen)) : null).append(", roleArr=")
+				.append(roleArr != null ? Arrays.asList(roleArr).subList(0, Math.min(roleArr.length, maxLen)) : null).append("]");
+		return builder.toString();
 	}
 }

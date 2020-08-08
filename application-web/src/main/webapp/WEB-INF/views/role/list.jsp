@@ -7,8 +7,9 @@
 	<meta charset="utf-8">
 	<sec:csrfMetaTags/>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta http-equiv="x-ua-compatible" content="ie=edge">
 	<title>${appTitle} | All Roles</title>
+	<!-- Google Font: Source Sans Pro -->
+	<link rel="stylesheet" href="${contextPath}static/resources/google-fonts/google-fonts.css">
 	<!-- Font Awesome Icons -->
 	<link rel="stylesheet" href="${contextPath}static/resources/font-awesome/css/all.min.css">
 	<!-- IonIcons -->
@@ -22,8 +23,6 @@
 	<link rel="stylesheet" href="${contextPath}static/resources/semantic-ui/css/checkbox.min.css">
 	<!-- Theme style -->
 	<link rel="stylesheet" href="${contextPath}static/css/adminlte.min.css">
-	<!-- Google Font: Source Sans Pro -->
-	<link rel="stylesheet" href="${contextPath}static/resources/google-fonts/google-fonts.css">
 	<link rel="stylesheet" href="${contextPath}static/css/override.css">
 	<link rel="shortcut icon" href="${contextPath}static/images/favicon.ico" />
 </head>

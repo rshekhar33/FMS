@@ -8,7 +8,6 @@
 	<meta charset="utf-8">
 	<sec:csrfMetaTags/>
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-	<meta http-equiv="x-ua-compatible" content="ie=edge">
 	<title>${appTitle} | Login</title>
 	<link rel="stylesheet" href="${contextPath}static/css/normalize.css">
 	<link rel="stylesheet" href="${contextPath}static/css/style.css">

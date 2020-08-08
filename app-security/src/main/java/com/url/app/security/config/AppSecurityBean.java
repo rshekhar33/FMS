@@ -15,6 +15,8 @@ import com.url.app.security.service.AppUserDetailsService;
 import com.url.app.utility.AppUrlView;
 
 /**
+ * Application security beans.
+ * 
  * @author Shekhar Shinde
  */
 @Configuration
@@ -48,6 +50,7 @@ public class AppSecurityBean {
 	public LoginSuccessHandler loginSuccessHandlerWeb() {
 		final LoginSuccessHandler loginSuccessHandler = new LoginSuccessHandler();
 		loginSuccessHandler.setDefaultTargetUrl(AppUrlView.URL_LOGIN_SUCCESS);
+		loginSuccessHandler.setUseReferer(true);
 
 		return loginSuccessHandler;
 	}

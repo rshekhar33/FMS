@@ -1,7 +1,6 @@
 package com.url.app.dto.entity;
 
 import java.io.Serializable;
-import java.util.Date;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
@@ -9,18 +8,12 @@ import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.EntityListeners;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -31,24 +24,15 @@ import com.url.app.utility.AppSQL;
  */
 @Entity
 @Table(name = "privilege")
-@EntityListeners(AuditingEntityListener.class)
 @JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 @NamedQuery(name = "Privilege.findAll", query = AppSQL.QRY_FIND_ALL_PRIVILEGE)
-public class Privilege implements Serializable {
+public class Privilege extends BaseEntity implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "privilege_id", unique = true, nullable = false)
 	private Integer privilegeId;
-
-	@Column(name = "created_by", updatable = false, nullable = false)
-	private Integer createdBy;
-
-	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "created_date", updatable = false, nullable = false)
-	@CreatedDate
-	private Date createdDate;
 
 	@Column(length = 500)
 	private String description;
@@ -79,22 +63,6 @@ public class Privilege implements Serializable {
 
 	public void setPrivilegeId(Integer privilegeId) {
 		this.privilegeId = privilegeId;
-	}
-
-	public Integer getCreatedBy() {
-		return this.createdBy;
-	}
-
-	public void setCreatedBy(Integer createdBy) {
-		this.createdBy = createdBy;
-	}
-
-	public Date getCreatedDate() {
-		return this.createdDate;
-	}
-
-	public void setCreatedDate(Date createdDate) {
-		this.createdDate = createdDate;
 	}
 
 	public String getDescription() {

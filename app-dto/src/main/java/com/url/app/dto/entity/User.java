@@ -10,7 +10,6 @@ import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.EntityListeners;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -30,10 +29,6 @@ import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Positive;
 import javax.validation.constraints.Size;
 
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedDate;
-import org.springframework.data.jpa.domain.support.AuditingEntityListener;
-
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.url.app.dto.validation.BasicActivateGroup;
@@ -48,10 +43,9 @@ import com.url.app.utility.AppSQL;
  */
 @Entity
 @Table(name = "user")
-@EntityListeners(AuditingEntityListener.class)
 @JsonIgnoreProperties({ "password", "hibernateLazyInitializer", "handler" })
 @NamedQuery(name = "User.findAll", query = AppSQL.QRY_FIND_ALL_USER)
-public class User implements Serializable {
+public class User extends BaseEntity implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -60,14 +54,6 @@ public class User implements Serializable {
 	@NotNull(groups = BasicActivateGroup.class, message = AppBasicValidationKey.UPDATE_FAILED_ERROR)
 	@Positive(groups = BasicActivateGroup.class, message = AppBasicValidationKey.UPDATE_FAILED_ERROR)
 	private Integer userId;
-
-	@Column(name = "created_by", updatable = false, nullable = false)
-	private Integer createdBy;
-
-	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "created_date", updatable = false, nullable = false)
-	@CreatedDate
-	private Date createdDate;
 
 	@Column(name = "email_id", nullable = false, length = 100)
 	@NotBlank(groups = { BasicCreateGroup.class, BasicUpdateGroup.class }, message = AppBasicValidationKey.MANDATORY_FIELD_ERROR)
@@ -117,14 +103,6 @@ public class User implements Serializable {
 	@Size(groups = { BasicCreateGroup.class, BasicUpdateGroup.class }, min = 10, max = 10, message = AppBasicValidationKey.USER_MOBILE_LENGTH_ERROR)
 	private String mobileNo;
 
-	@Column(name = "modified_by", nullable = false)
-	private Integer modifiedBy;
-
-	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "modified_date", nullable = false)
-	@LastModifiedDate
-	private Date modifiedDate;
-
 	@Column(nullable = false, length = 100)
 	private String password;
 
@@ -158,22 +136,6 @@ public class User implements Serializable {
 
 	public void setUserId(Integer userId) {
 		this.userId = userId;
-	}
-
-	public Integer getCreatedBy() {
-		return this.createdBy;
-	}
-
-	public void setCreatedBy(Integer createdBy) {
-		this.createdBy = createdBy;
-	}
-
-	public Date getCreatedDate() {
-		return this.createdDate;
-	}
-
-	public void setCreatedDate(Date createdDate) {
-		this.createdDate = createdDate;
 	}
 
 	public String getEmailId() {
@@ -246,22 +208,6 @@ public class User implements Serializable {
 
 	public void setMobileNo(String mobileNo) {
 		this.mobileNo = mobileNo;
-	}
-
-	public Integer getModifiedBy() {
-		return this.modifiedBy;
-	}
-
-	public void setModifiedBy(Integer modifiedBy) {
-		this.modifiedBy = modifiedBy;
-	}
-
-	public Date getModifiedDate() {
-		return this.modifiedDate;
-	}
-
-	public void setModifiedDate(Date modifiedDate) {
-		this.modifiedDate = modifiedDate;
 	}
 
 	public String getPassword() {

@@ -5,7 +5,7 @@ import java.util.Map;
 /**
  * Application exception response object.
  * 
- * @author SHEKHAR
+ * @author Shekhar Shinde
  */
 public class AppExceptionInfo {
 	private String status;
@@ -78,7 +78,10 @@ public class AppExceptionInfo {
 
 	@Override
 	public String toString() {
-		return "AppExceptionInfo [status=" + status + ", statusCode=" + statusCode + ", exceptionMsg=" + exceptionMsg + ", exceptionHeader=" + exceptionHeader
-				+ ", exceptionDesc=" + exceptionDesc + ", exceptionStack=" + exceptionStack + ", invalidData=" + invalidData + "]";
+		StringBuilder builder = new StringBuilder();
+		builder.append("AppExceptionInfo [status=").append(status).append(", statusCode=").append(statusCode).append(", exceptionMsg=").append(exceptionMsg)
+				.append(", exceptionHeader=").append(exceptionHeader).append(", exceptionDesc=").append(exceptionDesc).append(", exceptionStack=").append(exceptionStack)
+				.append(", invalidData=").append(invalidData).append("]");
+		return builder.toString();
 	}
 }

@@ -10,6 +10,17 @@
 
 	<!-- Sidebar -->
 	<div class="sidebar">
+		<!-- SidebarSearch Form -->
+		<div class="form-inline">
+			<div class="input-group" data-widget="sidebar-search">
+				<input class="form-control form-control-sidebar" type="search" placeholder="Search" aria-label="Search">
+				<div class="input-group-append">
+					<button class="btn btn-sidebar">
+						<i class="fas fa-search fa-fw"></i>
+					</button>
+				</div>
+			</div>
+		</div>
 		<!-- Sidebar Menu -->
 		<nav class="mt-2">
 			<ul class="nav nav-pills nav-sidebar flex-column nav-child-indent nav-legacy nav-flat" data-widget="treeview" role="menu" data-accordion="false">
@@ -23,7 +34,7 @@
 				</li>
 				</c:if>
 				<c:if test="${appAuthorization.isAccessAllowed('user/list') || appAuthorization.isAccessAllowed('user/add')}">
-				<li class="nav-item has-treeview ${userMenuOpenCls}">
+				<li class="nav-item ${userMenuOpenCls}">
 					<a href="#" class="nav-link">
 						<i class="nav-icon fas fa-users"></i>
 						<p>
@@ -51,7 +62,7 @@
 				</li>
 				</c:if>
 				<c:if test="${appAuthorization.isAccessAllowed('module/list') || appAuthorization.isAccessAllowed('module/add')}">
-				<li class="nav-item has-treeview ${moduleMenuOpenCls}">
+				<li class="nav-item ${moduleMenuOpenCls}">
 					<a href="#" class="nav-link">
 						<i class="nav-icon fas fa-book"></i>
 						<p>
@@ -79,7 +90,7 @@
 				</li>
 				</c:if>
 				<c:if test="${appAuthorization.isAccessAllowed('courseType/list') || appAuthorization.isAccessAllowed('courseType/add')}">
-				<li class="nav-item has-treeview ${courseTypeMenuOpenCls}">
+				<li class="nav-item ${courseTypeMenuOpenCls}">
 					<a href="#" class="nav-link">
 						<i class="nav-icon far fa-file-alt"></i>
 						<p>
@@ -107,7 +118,7 @@
 				</li>
 				</c:if>
 				<c:if test="${appAuthorization.isAccessAllowed('role/list') || appAuthorization.isAccessAllowed('role/add')}">
-				<li class="nav-item has-treeview ${roleMenuOpenCls}">
+				<li class="nav-item ${roleMenuOpenCls}">
 					<a href="#" class="nav-link">
 						<i class="nav-icon fas fa-wrench"></i>
 						<p>
@@ -135,7 +146,7 @@
 				</li>
 				</c:if>
 				<c:if test="${appAuthorization.isAccessAllowed('facultySkillset/list') || appAuthorization.isAccessAllowed('facultySkillset/add')}">
-				<li class="nav-item has-treeview ${facultySkillsetMenuOpenCls}">
+				<li class="nav-item ${facultySkillsetMenuOpenCls}">
 					<a href="#" class="nav-link">
 						<i class="nav-icon fas fa-wrench"></i>
 						<p>

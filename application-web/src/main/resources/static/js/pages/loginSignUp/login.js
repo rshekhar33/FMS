@@ -1,23 +1,23 @@
-var LoginModalController = {
-	inputElementsName : ".logmod__form .input",
-	hidePasswordName : ".hide-password",
+var LoginController = {
+	elements: {},
 
-	inputElements : null,
-	hidePassword : null,
+	findElements: function () {
+		this.elements.inputs = $(".logmod__form .input");
+		this.elements.hidePass = $(".hide-password");
+		this.elements.loginBtn = $("#login");
+		this.elements.userNameError = $("#userNameError");
+		this.elements.loginError = $("#loginError");
+		this.elements.userName = $("#userName");
+		this.elements.password = $("#password");
+		this.elements.passwordEnc = $("#passwordEnc");
+		this.elements.loginForm = $("#loginForm");
 
-	findElements : function() {
-		var base = this;
-
-		base.inputElements = $(base.inputElementsName);
-		base.hidePassword = $(base.hidePasswordName);
-
-		return base;
+		return this;
 	},
-
-	addClickEvents : function() {
+	addClickEvents: function () {
 		var base = this;
 
-		base.hidePassword.on("click", function(e) {
+		base.elements.hidePass.on("click", function (e) {
 			var $this = $(this), $pwInput = $this.prev("input");
 
 			if ($pwInput.attr("type") == "password") {
@@ -29,45 +29,53 @@ var LoginModalController = {
 			}
 		});
 
-		base.inputElements.find("label").on("click", function(e) {
+		base.elements.inputs.find("label").on("click", function (e) {
 			var $this = $(this), $input = $this.next("input");
 
 			$input.focus();
 		});
 
+		base.elements.loginBtn.click(function () {
+			base.validateSubmitFun();
+		});
+
 		return base;
 	},
+	validateFun: function () {
+		var isValid = true;
+		this.elements.userNameError.text("");
+		this.elements.loginError.text("");
+		var userName = this.elements.userName.val();
+		var password = this.elements.password.val();
 
-	initialize : function() {
-		var base = this;
+		if (Validation.isEmpty(userName)) {
+			isValid = false;
+			this.elements.userNameError.text("Username cannot be left Empty!");
+		}
+		if (Validation.isEmpty(password)) {
+			isValid = false;
+			this.elements.loginError.text("Password cannot be left Empty!");
+		}
 
-		base.findElements().addClickEvents();
+		return isValid;
+	},
+	submitFun: function () {
+		this.elements.password.prop("disabled", true);
+		this.elements.passwordEnc.val(encryptString(this.elements.password.val()));
+		this.elements.loginForm.submit();
+	},
+	validateSubmitFun: function () {
+		var isValid = this.validateFun();
+
+		if (isValid) {
+			this.submitFun();
+		}
+	},
+	initialize: function () {
+		this.findElements().addClickEvents();
 	}
 };
 
-$(function() {
-	LoginModalController.initialize();
-
-	$("#login").click(function() {
-		var validation = true;
-		$("#userNameError").text("");
-		$("#loginError").text("");
-		var userName = $("#userName").val();
-		var password = $("#password").val();
-
-		if (isEmpty(userName)) {
-			validation = false;
-			$("#userNameError").text("Username cannot be left Empty!");
-		}
-		if (isEmpty(password)) {
-			validation = false;
-			$("#loginError").text("Password cannot be left Empty!");
-		}
-
-		if (validation) {
-			$("#password").prop("disabled", true);
-			$("#passwordEnc").val(encryptString(password));
-			$("#loginForm").submit();
-		}
-	});
+$(function () {
+	LoginController.initialize();
 });

@@ -9,13 +9,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.url.app.config.AppDBValidationMessage;
 import com.url.app.config.AppMessage;
 import com.url.app.dto.entity.Module;
 import com.url.app.dto.validation.AppModuleValidationService;
 import com.url.app.interf.dao.ModuleRepository;
 import com.url.app.interf.service.AppModuleService;
 import com.url.app.interf.service.AppUserService;
+import com.url.app.interf.service.AppValidationService;
 import com.url.app.pojo.AppConcurrentHashMap;
 import com.url.app.utility.AppCommon;
 import com.url.app.utility.AppConstant;
@@ -42,10 +42,10 @@ public class AppModuleServiceImpl implements AppModuleService {
 	private AppMessage appMessage;
 
 	@Autowired
-	private AppDBValidationMessage appDBValidationKey;
+	private AppModuleValidationService appModuleValidationService;
 
 	@Autowired
-	private AppModuleValidationService appModuleValidationService;
+	private AppValidationService appValidationService;
 
 	@Override
 	@Transactional(readOnly = true)
@@ -67,27 +67,10 @@ public class AppModuleServiceImpl implements AppModuleService {
 		String status = AppConstant.BLANK_STRING;
 		String msg = AppConstant.BLANK_STRING;
 
-		final Map<String, String> invalidData = new AppConcurrentHashMap<>();
-		String moduleNameError = null;
-
-		if (AppCommon.isPositiveInteger(formModule.getModuleId())) {
-			appModuleValidationService.validateForUpdate(formModule);
-
-			final Long moduleNameCount = moduleRepository.countByModuleNameAndModuleIdNot(formModule.getModuleName(), formModule.getModuleId());
-			if (moduleNameCount > 0) {
-				status = AppConstant.FAIL;
-				moduleNameError = appDBValidationKey.moduleModulenameExistsError;
-			}
-		} else {
-			appModuleValidationService.validateForCreate(formModule);
-
-			final Long moduleNameCount = moduleRepository.countByModuleName(formModule.getModuleName());
-			if (moduleNameCount > 0) {
-				status = AppConstant.FAIL;
-				moduleNameError = appDBValidationKey.moduleModulenameExistsError;
-			}
+		final Map<String, String> invalidData = appValidationService.validateModule(formModule);
+		if (!invalidData.isEmpty()) {
+			status = AppConstant.FAIL;
 		}
-		invalidData.put(AppResponseKey.MODULE_NAME, moduleNameError);
 
 		if (AppCommon.isEmpty(status)) {
 			final Integer loggedInUserId = appUserService.getPrincipalUserUserId();

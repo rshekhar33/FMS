@@ -1,90 +1,119 @@
-$(function() {
-	loadDataFun();
-});
+var CrudController = {
+	elements: {},
 
-function goToListCourseTypes() {
-	location.href = contextPath + "courseType/list";
-}
+	findElements: function () {
+		this.elements.submitBtn = $("#submitBtn");
+		this.elements.courseTypeId = $("#courseTypeId");
+		this.elements.courseTypeCode = $("#courseTypeCode");
+		this.elements.courseTypeName = $("#courseTypeName");
+		this.elements.noOfDays = $("#noOfDays");
+		this.elements.errMsgs = $(".errMsgCls");
+		this.elements.validationFields = $(".validationField");
+		this.elements.courseTypeForm = $("#courseTypeForm");
 
-function loadDataFun() {
-	showLoaderRight(true);
-	var courseTypeId = $("#courseTypeId").val();
-	if (!isEmpty(courseTypeId)) {
-		var url = "courseType/fetchData";
-		var data = {
-			courseTypeId : courseTypeId
-		};
-		var doneCallbackFun = function(responseObj) {
-			var courseType = responseObj;
+		return this;
+	},
+	addClickEvents: function () {
+		var base = this;
 
-			if (courseType != null) {
-				$("#courseTypeCode").val(courseType.courseTypeCode);
-				$("#courseTypeName").val(courseType.courseTypeName);
-				$("#noOfDays").val(courseType.noOfDays);
-			}
-			showLoaderRight(false);
+		base.elements.submitBtn.click(function () {
+			base.validateSubmitFun();
+		});
 
-			return courseType;
-		};
+		return base;
+	},
+	goToListCourseTypes: function () {
+		location.href = contextPath + "courseType/list";
+	},
+	loadDataFun: function () {
+		var base = this;
 
-		return callAjaxPostFun(url, data, doneCallbackFun, errorFun1);
-	} else {
-		showLoaderRight(false);
-		return $.when(null);
-	}
-}
+		Loader.showLoaderRight(true);
+		var courseTypeId = base.elements.courseTypeId.val();
+		if (!Validation.isEmpty(courseTypeId)) {
+			var url = "courseType/fetchData";
+			var data = {
+				courseTypeId: courseTypeId
+			};
+			var doneCallbackFun = function (responseObj) {
+				var courseType = responseObj;
 
-function validateFun(dataObj) {
-	$(".errMsgCls").html("");
-	$(".errMsgCls").addClass("d-none");
-
-	$(".validationField").removeClass("is-invalid");
-
-	var errorObj = {};
-
-	if (isEmpty(dataObj.courseTypeName)) {
-		errorObj.courseTypeName = "Mandatory Field!";
-	} else if (hasRestrictedChar3(dataObj.courseTypeName)) {
-		errorObj.courseTypeName = "Course Type Name can only have alphanumeric characters, spaces and special characters like '_ @ .'";
-	}
-	if (!isEmpty(dataObj.noOfDays) && isNotNumber(dataObj.noOfDays)) {
-		errorObj.noOfDays = "Must be a number!";
-	}
-
-	return showErrors(errorObj);
-}
-
-function submitFun(dataObj) {
-	var url = "courseType/validateSave";
-	var doneCallbackFun = function(responseObj) {
-		if (responseObj.status == "success") {
-			bootbox.alert({
-				message : responseObj.msg,
-				backdrop : true,
-				callback : function() {
-					showLoaderRight(true);
-					goToListCourseTypes();
+				if (courseType != null) {
+					base.elements.courseTypeCode.val(courseType.courseTypeCode);
+					base.elements.courseTypeName.val(courseType.courseTypeName);
+					base.elements.noOfDays.val(courseType.noOfDays);
 				}
-			});
+				Loader.showLoaderRight(false);
+
+				return courseType;
+			};
+
+			return AjaxFn.callPostFun(url, data, doneCallbackFun, ErrorFn.errorFun1);
+		} else {
+			Loader.showLoaderRight(false);
+			return $.when(null);
 		}
-		showLoaderRight(false);
+	},
+	validateFun: function (dataObj) {
+		this.elements.errMsgs.html("");
+		this.elements.errMsgs.addClass("d-none");
 
-		return responseObj;
-	};
+		this.elements.validationFields.removeClass("is-invalid");
 
-	return callAjaxPostFun(url, dataObj, doneCallbackFun, errorFun2);
-}
+		var errorObj = {};
 
-function validateSubmitFun() {
-	showLoaderRight(true);
+		if (Validation.isEmpty(dataObj.courseTypeName)) {
+			errorObj.courseTypeName = "Mandatory Field!";
+		} else if (Validation.hasRestrictedChar3(dataObj.courseTypeName)) {
+			errorObj.courseTypeName = "Course Type Name can only have alphanumeric characters, spaces and special characters like '_ @ .'";
+		}
+		if (!Validation.isEmpty(dataObj.noOfDays) && Validation.isNotNumber(dataObj.noOfDays)) {
+			errorObj.noOfDays = "Must be a number!";
+		}
 
-	var courseTypeFormData = $("#courseTypeForm").serializeToJSON({});
+		return ErrorFn.showErrors(errorObj);
+	},
+	submitFun: function (dataObj) {
+		var base = this;
 
-	var isValid = validateFun(courseTypeFormData);
+		var url = "courseType/validateSave";
+		var doneCallbackFun = function (responseObj) {
+			if (responseObj.status == "success") {
+				bootbox.alert({
+					message: responseObj.msg,
+					backdrop: true,
+					callback: function () {
+						Loader.showLoaderRight(true);
+						base.goToListCourseTypes();
+					}
+				});
+			} else if (responseObj.status == "fail" && !Validation.isEmpty(responseObj.invalidData)) {
+				ErrorFn.showErrors(responseObj.invalidData);
+			}
+			Loader.showLoaderRight(false);
 
-	if (isValid) {
-		submitFun(courseTypeFormData);
-	} else {
-		showLoaderRight(false);
+			return responseObj;
+		};
+
+		return AjaxFn.callPostFun(url, dataObj, doneCallbackFun, ErrorFn.errorFun2);
+	},
+	validateSubmitFun: function () {
+		Loader.showLoaderRight(true);
+
+		var courseTypeFormData = this.elements.courseTypeForm.serializeToJSON({});
+		var isValid = this.validateFun(courseTypeFormData);
+
+		if (isValid) {
+			this.submitFun(courseTypeFormData);
+		} else {
+			Loader.showLoaderRight(false);
+		}
+	},
+	initialize: function () {
+		this.findElements().addClickEvents().loadDataFun();
 	}
-}
+};
+
+$(function () {
+	CrudController.initialize();
+});

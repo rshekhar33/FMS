@@ -6,6 +6,10 @@ CREATE TABLE IF NOT EXISTS `common_setting` (
   `type` VARCHAR(100) NOT NULL,
   `value` VARCHAR(100) NULL,
   `order_number` INT NULL,
+  `created_by` INT NOT NULL,
+  `created_date` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `modified_by` INT NOT NULL,
+  `modified_date` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`common_setting_id`));
 
 
@@ -75,9 +79,9 @@ CREATE TABLE IF NOT EXISTS `user_role_relation` (
     ON DELETE NO ACTION
     ON UPDATE NO ACTION);
 
-CREATE INDEX `idx_user_role_relation_1` ON `user_role_relation` (`role_id` ASC);
-
 CREATE INDEX `idx_user_role_relation_0` ON `user_role_relation` (`user_id` ASC);
+
+CREATE INDEX `idx_user_role_relation_1` ON `user_role_relation` (`role_id` ASC);
 
 CREATE INDEX `idx_user_role_relation_2` ON `user_role_relation` (`user_id` ASC, `role_id` ASC);
 
@@ -91,6 +95,8 @@ CREATE TABLE IF NOT EXISTS `privilege` (
   `description` VARCHAR(500) NULL,
   `created_by` INT NOT NULL,
   `created_date` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `modified_by` INT NOT NULL,
+  `modified_date` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `is_active` INT NOT NULL DEFAULT 0 COMMENT '0 - Inactive\n1 - Active',
   PRIMARY KEY (`privilege_id`));
 
@@ -120,9 +126,9 @@ CREATE TABLE IF NOT EXISTS `role_privilege_relation` (
     ON DELETE NO ACTION
     ON UPDATE NO ACTION);
 
-CREATE INDEX `idx_role_privilege_relation_1` ON `role_privilege_relation` (`privilege_id` ASC);
-
 CREATE INDEX `idx_role_privilege_relation_0` ON `role_privilege_relation` (`role_id` ASC);
+
+CREATE INDEX `idx_role_privilege_relation_1` ON `role_privilege_relation` (`privilege_id` ASC);
 
 CREATE INDEX `idx_role_privilege_relation_2` ON `role_privilege_relation` (`role_id` ASC, `privilege_id` ASC);
 
@@ -134,8 +140,12 @@ CREATE TABLE IF NOT EXISTS `action` (
   `action_id` INT NOT NULL AUTO_INCREMENT,
   `privilege_id` INT NULL,
   `action_path` VARCHAR(100) NOT NULL,
-  `is_skip` INT NOT NULL DEFAULT 0 COMMENT '0 - Inactive\n1 - Active',
-  `is_active` INT NOT NULL DEFAULT 0,
+  `created_by` INT NOT NULL,
+  `created_date` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `modified_by` INT NOT NULL,
+  `modified_date` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `is_active` INT NOT NULL DEFAULT 0 COMMENT '0 - Inactive\n1 - Active',
+  `is_skip` INT NOT NULL DEFAULT 0 COMMENT '0 - Authentication required\n1 - Authentication to be skipped',
   PRIMARY KEY (`action_id`),
   CONSTRAINT `fk_action_0`
     FOREIGN KEY (`privilege_id`)
@@ -185,9 +195,11 @@ CREATE TABLE IF NOT EXISTS `faculty_skillset` (
     ON DELETE NO ACTION
     ON UPDATE NO ACTION);
 
+CREATE INDEX `idx_faculty_skillset_0` ON `faculty_skillset` (`user_id` ASC);
+
 CREATE INDEX `idx_faculty_skillset_1` ON `faculty_skillset` (`module_id` ASC);
 
-CREATE INDEX `idx_faculty_skillset_0` ON `faculty_skillset` (`user_id` ASC);
+CREATE INDEX `idx_faculty_skillset_2` ON `faculty_skillset` (`user_id` ASC, `module_id` ASC);
 
 
 -- -----------------------------------------------------

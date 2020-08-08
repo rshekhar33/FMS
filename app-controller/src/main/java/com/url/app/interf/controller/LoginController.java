@@ -6,7 +6,6 @@ import java.util.Locale;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 import com.url.app.utility.AppUrlView;
@@ -41,7 +40,7 @@ public interface LoginController {
 	 * 
 	 * @return name of the view which is to be rendered when access is denied.
 	 */
-	@RequestMapping(value = AppUrlView.PATH_ACCESS_DENIED, method = { RequestMethod.GET, RequestMethod.POST })
+	@RequestMapping(value = AppUrlView.PATH_ACCESS_DENIED)
 	@ResponseStatus(code = HttpStatus.FORBIDDEN)
 	String accessDeniedPage();
 
@@ -50,7 +49,7 @@ public interface LoginController {
 	 * 
 	 * @return name of the view which is to be rendered when session is invalid.
 	 */
-	@RequestMapping(value = AppUrlView.PATH_INVALID_SESSION, method = { RequestMethod.GET, RequestMethod.POST })
+	@RequestMapping(value = AppUrlView.PATH_INVALID_SESSION)
 	@ResponseStatus(code = HttpStatus.UNAUTHORIZED)
 	String invalidSessionPage();
 
@@ -59,7 +58,7 @@ public interface LoginController {
 	 * 
 	 * @return name of the view which is to be rendered when session has expired.
 	 */
-	@RequestMapping(value = AppUrlView.PATH_SESSION_EXPIRED, method = { RequestMethod.GET, RequestMethod.POST })
+	@RequestMapping(value = AppUrlView.PATH_SESSION_EXPIRED)
 	@ResponseStatus(code = HttpStatus.UNAUTHORIZED)
 	String sessionExpiredPage();
 }
