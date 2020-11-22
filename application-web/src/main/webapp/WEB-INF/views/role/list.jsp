@@ -76,16 +76,7 @@
 							</div>
 							<!-- /.card-header -->
 							<div class="card-body">
-								<table id="rolesTable" class="table table-bordered table-striped" aria-describedby="rolesTable">
-									<thead>
-										<tr>
-											<th scope="col">Role Name</th>
-											<th scope="col">Active</th>
-											<th scope="col">Action</th>
-										</tr>
-									</thead>
-									<tbody>
-									</tbody>
+								<table id="rolesTable" class="table table-bordered table-striped">
 								</table>
 							</div>
 							<!-- /.card-body -->

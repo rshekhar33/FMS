@@ -76,16 +76,7 @@
 							</div>
 							<!-- /.card-header -->
 							<div class="card-body">
-								<table id="modulesTable" class="table table-bordered table-striped" aria-describedby="modulesTable">
-									<thead>
-										<tr>
-											<th scope="col">Module Name</th>
-											<th scope="col">Active</th>
-											<th scope="col">Action</th>
-										</tr>
-									</thead>
-									<tbody>
-									</tbody>
+								<table id="modulesTable" class="table table-bordered table-striped">
 								</table>
 							</div>
 							<!-- /.card-body -->

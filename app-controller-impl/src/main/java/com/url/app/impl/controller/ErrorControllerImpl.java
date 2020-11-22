@@ -5,39 +5,54 @@ import javax.servlet.http.HttpServletRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.web.servlet.error.ErrorController;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.url.app.interf.controller.AppErrorController;
-import com.url.app.interf.service.AppService;
+import com.url.app.config.AppMessage;
 import com.url.app.interf.service.AppUserService;
+import com.url.app.pojo.AppExceptionInfo;
 import com.url.app.utility.AppCommon;
+import com.url.app.utility.AppConstant;
 import com.url.app.utility.AppLogMessage;
 import com.url.app.utility.AppResponseKey;
 import com.url.app.utility.AppUrlView;
 
 /**
- * Error Controller Implementation.
+ * Error Controller
  * 
  * @author Shekhar Shinde
  */
 @Controller
-public class ErrorControllerImpl implements AppErrorController {
+public class ErrorControllerImpl implements ErrorController {
 	private static final Logger logger = LoggerFactory.getLogger(ErrorControllerImpl.class);
 
 	@Autowired
 	private AppUserService appUserService;
 
 	@Autowired
-	private AppService appService;
+	private AppMessage appMessage;
 
-	@Override
+	@RequestMapping(value = AppUrlView.PATH_ERROR)
 	public ModelAndView incorrectPath(final HttpServletRequest request) {
 		final Object appExceptionInfoObj = request.getAttribute(AppResponseKey.APP_EXCEPTION_INFO);
 		logger.error(AppLogMessage.GLOBAL_ERROR_MSG, appExceptionInfoObj);
 
+		AppExceptionInfo appExceptionInfo = null;
+		if (appExceptionInfoObj instanceof AppExceptionInfo) {
+			appExceptionInfo = (AppExceptionInfo) appExceptionInfoObj;
+		} else {
+			appExceptionInfo = new AppExceptionInfo();
+			appExceptionInfo.setStatus(AppConstant.FAIL);
+			appExceptionInfo.setStatusCode(HttpStatus.INTERNAL_SERVER_ERROR.value());
+			appExceptionInfo.setExceptionHeader(appMessage.exceptionHeader2);
+			appExceptionInfo.setExceptionDesc(appMessage.exceptionDesc3);
+		}
+
 		final ModelAndView mav = new ModelAndView(errorPage());
-		mav.addObject(AppResponseKey.APP_EXCEPTION_INFO, appService.getAppExceptionInfo(appExceptionInfoObj));
+		mav.addObject(AppResponseKey.APP_EXCEPTION_INFO, appExceptionInfo);
 
 		return mav;
 	}

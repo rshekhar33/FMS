@@ -25,7 +25,7 @@ import com.url.app.utility.AppSQL;
 @Table(name = "feedback_answer")
 @JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 @NamedQuery(name = "FeedbackAnswer.findAll", query = AppSQL.QRY_FIND_ALL_FEEDBACK_ANSWER)
-public class FeedbackAnswer extends ActiveBaseEntity implements Serializable {
+public class FeedbackAnswer extends BaseEntity implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -35,6 +35,9 @@ public class FeedbackAnswer extends ActiveBaseEntity implements Serializable {
 
 	@Column(nullable = false, length = 500)
 	private String answer;
+
+	@Column(name = "is_active", nullable = false)
+	private Integer isActive;
 
 	//bi-directional many-to-one association to FeedbackQuestion
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
@@ -59,6 +62,14 @@ public class FeedbackAnswer extends ActiveBaseEntity implements Serializable {
 
 	public void setAnswer(String answer) {
 		this.answer = answer;
+	}
+
+	public Integer getIsActive() {
+		return this.isActive;
+	}
+
+	public void setIsActive(Integer isActive) {
+		this.isActive = isActive;
 	}
 
 	public FeedbackQuestion getFeedbackQuestion() {

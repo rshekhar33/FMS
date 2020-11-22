@@ -29,13 +29,16 @@ import com.url.app.utility.AppSQL;
 @Table(name = "feedback_question")
 @JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 @NamedQuery(name = "FeedbackQuestion.findAll", query = AppSQL.QRY_FIND_ALL_FEEDBACK_QUESTION)
-public class FeedbackQuestion extends ActiveBaseEntity implements Serializable {
+public class FeedbackQuestion extends BaseEntity implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "feedback_question_id", unique = true, nullable = false)
 	private Integer feedbackQuestionId;
+
+	@Column(name = "is_active", nullable = false)
+	private Integer isActive;
 
 	@Column(nullable = false, length = 500)
 	private String question;
@@ -60,6 +63,14 @@ public class FeedbackQuestion extends ActiveBaseEntity implements Serializable {
 
 	public void setFeedbackQuestionId(Integer feedbackQuestionId) {
 		this.feedbackQuestionId = feedbackQuestionId;
+	}
+
+	public Integer getIsActive() {
+		return this.isActive;
+	}
+
+	public void setIsActive(Integer isActive) {
+		this.isActive = isActive;
 	}
 
 	public String getQuestion() {

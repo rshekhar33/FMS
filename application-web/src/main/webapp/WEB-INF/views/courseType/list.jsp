@@ -76,18 +76,7 @@
 							</div>
 							<!-- /.card-header -->
 							<div class="card-body">
-								<table id="courseTypesTable" class="table table-bordered table-striped" aria-describedby="courseTypesTable">
-									<thead>
-										<tr>
-											<th scope="col">Course Type Code</th>
-											<th scope="col">Course Type Name</th>
-											<th scope="col">No. Of Days</th>
-											<th scope="col">Active</th>
-											<th scope="col">Action</th>
-										</tr>
-									</thead>
-									<tbody>
-									</tbody>
+								<table id="courseTypesTable" class="table table-bordered table-striped">
 								</table>
 							</div>
 							<!-- /.card-body -->

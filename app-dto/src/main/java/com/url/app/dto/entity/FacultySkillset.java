@@ -6,7 +6,9 @@ import java.util.Objects;
 import java.util.Set;
 
 import javax.persistence.AssociationOverride;
+import javax.persistence.AssociationOverrides;
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
@@ -24,15 +26,18 @@ import com.url.app.utility.AppSQL;
  */
 @Entity
 @Table(name = "faculty_skillset")
-@AssociationOverride(name = "id.module", joinColumns = @JoinColumn(name = "module_id"))
-@AssociationOverride(name = "id.user", joinColumns = @JoinColumn(name = "user_id"))
+@AssociationOverrides({ @AssociationOverride(name = "id.module", joinColumns = @JoinColumn(name = "module_id")),
+		@AssociationOverride(name = "id.user", joinColumns = @JoinColumn(name = "user_id")) })
 @JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 @NamedQuery(name = "FacultySkillset.findAll", query = AppSQL.QRY_FIND_ALL_FACULTY_SKILLSET)
-public class FacultySkillset extends ActiveBaseEntity implements Serializable {
+public class FacultySkillset extends BaseEntity implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@EmbeddedId
 	private FacultySkillsetPK id = new FacultySkillsetPK();
+
+	@Column(name = "is_active", nullable = false)
+	private Integer isActive;
 
 	//bi-directional many-to-one association to Course
 	@OneToMany(mappedBy = "facultySkillset", cascade = CascadeType.ALL, orphanRemoval = true)
@@ -67,6 +72,14 @@ public class FacultySkillset extends ActiveBaseEntity implements Serializable {
 
 	public void setUser(User user) {
 		getId().setUser(user);
+	}
+
+	public Integer getIsActive() {
+		return this.isActive;
+	}
+
+	public void setIsActive(Integer isActive) {
+		this.isActive = isActive;
 	}
 
 	public Set<Course> getCourses() {

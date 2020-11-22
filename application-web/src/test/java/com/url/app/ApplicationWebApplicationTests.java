@@ -37,7 +37,7 @@ class ApplicationWebApplicationTests {
 
 	@Test
 	void jasyptEncDecr() {
-		final String plainText = AppConstant.USER_DEFAULT_PASS;
+		final String plainText = AppConstant.USER_DEFAULT_PASSWORD;
 		logger.info("plainText : {}", plainText);
 
 		final String encryptText = stringEncryptor.encrypt(plainText);

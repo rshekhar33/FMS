@@ -16,7 +16,7 @@ import org.springframework.stereotype.Component;
 import com.url.app.dto.entity.Action;
 import com.url.app.pojo.AppConcurrentHashMap;
 import com.url.app.pojo.RolesCollection;
-import com.url.app.dto.entity.UrlRolesBean;
+import com.url.app.pojo.UrlRolesBean;
 import com.url.app.utility.AppLogMessage;
 
 /**

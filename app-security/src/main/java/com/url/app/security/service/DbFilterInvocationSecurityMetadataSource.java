@@ -1,7 +1,6 @@
 package com.url.app.security.service;
 
 import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -39,7 +38,7 @@ public class DbFilterInvocationSecurityMetadataSource implements FilterInvocatio
 	private static final Collection<ConfigAttribute> CONFIG_ATTRIBUTES_DENIED = SecurityConfig.createList("DENIED");
 
 	@Override
-	public Collection<ConfigAttribute> getAttributes(final Object object) {
+	public Collection<ConfigAttribute> getAttributes(final Object object) throws IllegalArgumentException {
 		final FilterInvocation fi = (FilterInvocation) object;
 		String url = fi.getRequestUrl();
 		logger.debug(AppLogMessage.FILTER_INVOCATION_URL_MSG, url);
@@ -69,7 +68,7 @@ public class DbFilterInvocationSecurityMetadataSource implements FilterInvocatio
 
 	@Override
 	public Collection<ConfigAttribute> getAllConfigAttributes() {
-		return Collections.emptySet();
+		return null;
 	}
 
 	@Override

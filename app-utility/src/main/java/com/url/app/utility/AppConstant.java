@@ -21,7 +21,7 @@ public class AppConstant {
 	public static final String FAIL = "fail";
 
 	/* StringEncryptor details */
-	public static final String STRING_ENCRYPTOR_KEY = "fmsEncryptKey";
+	public static final String STRING_ENCRYPTOR_PASSWORD = "fmsEncryptKey";
 	public static final String STRING_ENCRYPTOR_PROVIDER_NAME = "SunJCE";
 
 	/* Regex for validation */
@@ -58,9 +58,9 @@ public class AppConstant {
 	public static final String CIPHER_FACTORY_ALGORITHM = "PBKDF2WithHmacSHA1";
 	public static final String CIPHER_KEY_ALGORITHM = "AES";
 
-	public static final String USER_DEFAULT_PASS = "fms";
+	public static final String USER_DEFAULT_PASSWORD = "fms";
 
 	/* Spring Security ignore patterns */
-	public static final String STATIC_RESOURCE_PATTERN = "/static/**";
+	public static final String STATIC_PATH_PATTERN = "/static/**";
 	public static final String STATIC_RESOURCE_LOCATION = "classpath:/static/";
 }

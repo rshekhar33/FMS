@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.util.Objects;
 
 import javax.persistence.AssociationOverride;
+import javax.persistence.AssociationOverrides;
+import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
@@ -19,15 +21,18 @@ import com.url.app.utility.AppSQL;
  */
 @Entity
 @Table(name = "user_role_relation")
-@AssociationOverride(name = "id.role", joinColumns = @JoinColumn(name = "role_id"))
-@AssociationOverride(name = "id.user", joinColumns = @JoinColumn(name = "user_id"))
+@AssociationOverrides({ @AssociationOverride(name = "id.role", joinColumns = @JoinColumn(name = "role_id")),
+		@AssociationOverride(name = "id.user", joinColumns = @JoinColumn(name = "user_id")) })
 @JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 @NamedQuery(name = "UserRoleRelation.findAll", query = AppSQL.QRY_FIND_ALL_USER_ROLE_RELATION)
-public class UserRoleRelation extends ActiveBaseEntity implements Serializable {
+public class UserRoleRelation extends BaseEntity implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@EmbeddedId
 	private UserRoleRelationPK id = new UserRoleRelationPK();
+
+	@Column(name = "is_active", nullable = false)
+	private Integer isActive;
 
 	public UserRoleRelation() {
 		super();
@@ -57,6 +62,14 @@ public class UserRoleRelation extends ActiveBaseEntity implements Serializable {
 
 	public void setUser(User user) {
 		getId().setUser(user);
+	}
+
+	public Integer getIsActive() {
+		return this.isActive;
+	}
+
+	public void setIsActive(Integer isActive) {
+		this.isActive = isActive;
 	}
 
 	@Override

@@ -14,6 +14,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinColumns;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -34,7 +35,7 @@ import com.url.app.utility.AppSQL;
 @Table(name = "course")
 @JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 @NamedQuery(name = "Course.findAll", query = AppSQL.QRY_FIND_ALL_COURSE)
-public class Course extends ActiveBaseEntity implements Serializable {
+public class Course extends BaseEntity implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -49,6 +50,9 @@ public class Course extends ActiveBaseEntity implements Serializable {
 	@Column(name = "end_date")
 	private Date endDate;
 
+	@Column(name = "is_active", nullable = false)
+	private Integer isActive;
+
 	@Temporal(TemporalType.DATE)
 	@DateTimeFormat(pattern = "MM/dd/yyyy")
 	@Column(name = "start_date")
@@ -61,8 +65,8 @@ public class Course extends ActiveBaseEntity implements Serializable {
 
 	//bi-directional many-to-one association to FacultySkillset
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	@JoinColumn(name = "module_id", referencedColumnName = "module_id", nullable = false)
-	@JoinColumn(name = "user_id", referencedColumnName = "user_id", nullable = false)
+	@JoinColumns({ @JoinColumn(name = "module_id", referencedColumnName = "module_id", nullable = false),
+			@JoinColumn(name = "user_id", referencedColumnName = "user_id", nullable = false) })
 	private FacultySkillset facultySkillset;
 
 	//bi-directional many-to-one association to FeedbackQuestion
@@ -96,6 +100,14 @@ public class Course extends ActiveBaseEntity implements Serializable {
 
 	public void setEndDate(Date endDate) {
 		this.endDate = endDate;
+	}
+
+	public Integer getIsActive() {
+		return this.isActive;
+	}
+
+	public void setIsActive(Integer isActive) {
+		this.isActive = isActive;
 	}
 
 	public Date getStartDate() {

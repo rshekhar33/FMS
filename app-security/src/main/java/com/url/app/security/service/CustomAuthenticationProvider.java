@@ -7,6 +7,7 @@ import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.stereotype.Component;
 
 import com.url.app.security.util.SecurityUtil;
@@ -20,7 +21,7 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
 	private DaoAuthenticationProvider daoAuthenticationProvider;
 
 	@Override
-	public Authentication authenticate(Authentication authentication) {
+	public Authentication authenticate(Authentication authentication) throws AuthenticationException {
 		final String userName = authentication.getName();
 		final String passwordEnc = authentication.getCredentials().toString();
 		final String password = SecurityUtil.decrypt(passwordEnc);

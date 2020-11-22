@@ -15,7 +15,7 @@ import com.url.app.dto.entity.FacultySkillsetMng;
 import com.url.app.dto.entity.User;
 import com.url.app.dto.entity.UserMng;
 import com.url.app.interf.dao.AppDao;
-import com.url.app.dto.entity.UrlRolesBean;
+import com.url.app.pojo.UrlRolesBean;
 import com.url.app.utility.AppCommon;
 import com.url.app.utility.AppSQL;
 
@@ -64,7 +64,7 @@ public class AppDaoImpl implements AppDao {
 		final Query query = entityManager.createQuery(AppSQL.QRY_UPDATE_USER_LAST_SUCCESS_LOGIN_DATE);
 		query.setParameter("failedAttemptCnt", 0);
 		query.setParameter("lastSuccessfulLoginDate", AppCommon.currentDateTime());
-		query.setParameter(AppSQL.PARAMETER_USER_ID, userId);
+		query.setParameter("userId", userId);
 
 		return query.executeUpdate();
 	}
@@ -89,7 +89,7 @@ public class AppDaoImpl implements AppDao {
 	@Override
 	public User fetchUserWithRoles(final Integer userId) {
 		final TypedQuery<User> typedQuery = entityManager.createQuery(AppSQL.QRY_SELECT_USER_ROLES_BY_USERID, User.class);
-		typedQuery.setParameter(AppSQL.PARAMETER_USER_ID, userId);
+		typedQuery.setParameter("userId", userId);
 
 		User user = null;
 		final List<User> queryResult = typedQuery.getResultList();
@@ -103,7 +103,7 @@ public class AppDaoImpl implements AppDao {
 	@Override
 	public User fetchUserWithModules(final Integer userId) {
 		final TypedQuery<User> typedQuery = entityManager.createQuery(AppSQL.QRY_SELECT_USER_SKILLSETS, User.class);
-		typedQuery.setParameter(AppSQL.PARAMETER_USER_ID, userId);
+		typedQuery.setParameter("userId", userId);
 
 		User user = null;
 		final List<User> queryResult = typedQuery.getResultList();
