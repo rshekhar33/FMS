@@ -25,7 +25,7 @@ import com.url.app.utility.AppUrlView;
  * @author Shekhar Shinde
  */
 public class LoginFailureHandler extends SimpleUrlAuthenticationFailureHandler {
-	private static final Logger logger = LoggerFactory.getLogger(LoginFailureHandler.class);
+	private static final Logger appLogger = LoggerFactory.getLogger(LoginFailureHandler.class);
 
 	@Autowired
 	private AppUserService appUserService;
@@ -45,7 +45,7 @@ public class LoginFailureHandler extends SimpleUrlAuthenticationFailureHandler {
 			loginErrorMessage = exception.getMessage();
 		}
 
-		logger.debug(AppLogMessage.AUTHENTICATION_FAILED_DUE_TO_MSG, userName, loginErrorMessage);
+		appLogger.debug(AppLogMessage.AUTHENTICATION_FAILED_DUE_TO_MSG, userName, loginErrorMessage);
 
 		request.getSession().setAttribute(AppHttpSessionKey.LOGIN_ERROR, loginErrorMessage);
 

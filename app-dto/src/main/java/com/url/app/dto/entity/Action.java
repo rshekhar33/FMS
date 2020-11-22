@@ -25,7 +25,7 @@ import com.url.app.utility.AppSQL;
 @Table(name = "action")
 @JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 @NamedQuery(name = "Action.findAll", query = AppSQL.QRY_FIND_ALL_ACTION)
-public class Action extends BaseEntity implements Serializable {
+public class Action extends ActiveBaseEntity implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -35,9 +35,6 @@ public class Action extends BaseEntity implements Serializable {
 
 	@Column(name = "action_path", nullable = false, length = 100)
 	private String actionPath;
-
-	@Column(name = "is_active", nullable = false)
-	private Integer isActive;
 
 	@Column(name = "is_skip", nullable = false)
 	private Integer isSkip;
@@ -65,14 +62,6 @@ public class Action extends BaseEntity implements Serializable {
 
 	public void setActionPath(String actionPath) {
 		this.actionPath = actionPath;
-	}
-
-	public Integer getIsActive() {
-		return this.isActive;
-	}
-
-	public void setIsActive(Integer isActive) {
-		this.isActive = isActive;
 	}
 
 	public Integer getIsSkip() {

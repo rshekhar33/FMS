@@ -68,7 +68,7 @@ public class AppBean {
 	@Bean
 	public StringEncryptor stringEncryptor() {
 		final SimpleStringPBEConfig config = new SimpleStringPBEConfig();
-		config.setPassword(AppConstant.STRING_ENCRYPTOR_PASSWORD);
+		config.setPassword(AppConstant.STRING_ENCRYPTOR_KEY);
 		config.setKeyObtentionIterations(1000);
 		config.setPoolSize(1);
 		config.setProviderName(AppConstant.STRING_ENCRYPTOR_PROVIDER_NAME);

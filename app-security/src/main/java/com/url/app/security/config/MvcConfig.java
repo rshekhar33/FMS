@@ -31,6 +31,6 @@ public class MvcConfig implements WebMvcConfigurer {
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
 		WebMvcConfigurer.super.addResourceHandlers(registry);
 
-		registry.addResourceHandler(AppConstant.STATIC_PATH_PATTERN).addResourceLocations(AppConstant.STATIC_RESOURCE_LOCATION);
+		registry.addResourceHandler(AppConstant.STATIC_RESOURCE_PATTERN).addResourceLocations(AppConstant.STATIC_RESOURCE_LOCATION);
 	}
 }

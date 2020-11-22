@@ -44,7 +44,7 @@ public class FacultySkillsetPK implements Serializable {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(module, user);
+		return Objects.hash(user, module);
 	}
 
 	@Override
@@ -60,6 +60,6 @@ public class FacultySkillsetPK implements Serializable {
 		}
 		FacultySkillsetPK other = (FacultySkillsetPK) obj;
 
-		return Objects.equals(module, other.module) && Objects.equals(user, other.user);
+		return Objects.equals(user, other.user) && Objects.equals(module, other.module);
 	}
 }

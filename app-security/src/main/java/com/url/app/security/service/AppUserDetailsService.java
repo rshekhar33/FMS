@@ -30,7 +30,7 @@ public class AppUserDetailsService implements UserDetailsService {
 	private AppMessage appMessage;
 
 	@Override
-	public UserDetails loadUserByUsername(final String username) throws UsernameNotFoundException {
+	public UserDetails loadUserByUsername(final String username) {
 		final User user = appUserService.fetchValidUser(username);
 		if (user == null) {
 			throw new UsernameNotFoundException(appMessage.userDoesNotExist);

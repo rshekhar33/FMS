@@ -21,7 +21,7 @@ import com.url.app.utility.AppLogMessage;
  * @author Shekhar Shinde
  */
 public class LoginSuccessHandler extends SavedRequestAwareAuthenticationSuccessHandler {
-	private static final Logger logger = LoggerFactory.getLogger(LoginSuccessHandler.class);
+	private static final Logger appLogger = LoggerFactory.getLogger(LoginSuccessHandler.class);
 
 	@Autowired
 	private AppUserService appUserService;
@@ -29,7 +29,7 @@ public class LoginSuccessHandler extends SavedRequestAwareAuthenticationSuccessH
 	@Override
 	public void onAuthenticationSuccess(final HttpServletRequest request, final HttpServletResponse response, final Authentication authentication)
 			throws IOException, ServletException {
-		logger.debug(AppLogMessage.LOGIN_SUCCESS_WITH_ROLES_MSG, appUserService.getPrincipal().getAuthorities());
+		appLogger.debug(AppLogMessage.LOGIN_SUCCESS_WITH_ROLES_MSG, appUserService.getPrincipal().getAuthorities());
 
 		appUserService.userUpdateLastLoginSuccess();
 
