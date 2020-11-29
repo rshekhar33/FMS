@@ -76,7 +76,20 @@
 							</div>
 							<!-- /.card-header -->
 							<div class="card-body">
-								<table id="usersTable" class="table table-bordered table-striped">
+								<table id="usersTable" class="table table-bordered table-striped" aria-describedby="usersTable">
+									<thead>
+										<tr>
+											<th scope="col">UserName</th>
+											<th scope="col">Name</th>
+											<th scope="col">Email ID</th>
+											<th scope="col">Mobile No</th>
+											<th scope="col">Role</th>
+											<th scope="col">Active</th>
+											<th scope="col">Action</th>
+										</tr>
+									</thead>
+									<tbody>
+									</tbody>
 								</table>
 							</div>
 							<!-- /.card-body -->

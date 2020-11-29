@@ -26,7 +26,7 @@ import com.url.app.utility.AppSQL;
 @Table(name = "privilege")
 @JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 @NamedQuery(name = "Privilege.findAll", query = AppSQL.QRY_FIND_ALL_PRIVILEGE)
-public class Privilege extends BaseEntity implements Serializable {
+public class Privilege extends ActiveBaseEntity implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -36,9 +36,6 @@ public class Privilege extends BaseEntity implements Serializable {
 
 	@Column(length = 500)
 	private String description;
-
-	@Column(name = "is_active", nullable = false)
-	private Integer isActive;
 
 	@Column(name = "privilege_name", unique = true, nullable = false, length = 100)
 	private String privilegeName;
@@ -71,14 +68,6 @@ public class Privilege extends BaseEntity implements Serializable {
 
 	public void setDescription(String description) {
 		this.description = description;
-	}
-
-	public Integer getIsActive() {
-		return this.isActive;
-	}
-
-	public void setIsActive(Integer isActive) {
-		this.isActive = isActive;
 	}
 
 	public String getPrivilegeName() {

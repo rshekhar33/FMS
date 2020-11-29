@@ -95,7 +95,7 @@ public class MultipleEntryPointsSecurityConfig {
 
 		@Override
 		public void configure(WebSecurity web) throws Exception {
-			web.ignoring().antMatchers(AppConstant.STATIC_PATH_PATTERN);
+			web.ignoring().antMatchers(AppConstant.STATIC_RESOURCE_PATTERN);
 		}
 
 		public FilterSecurityInterceptor filterSecurityInterceptor() {
@@ -118,5 +118,10 @@ public class MultipleEntryPointsSecurityConfig {
 
 			return affirmativeBased;
 		}
+	}
+
+	@Override
+	public String toString() {
+		return super.toString();
 	}
 }

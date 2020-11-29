@@ -107,13 +107,13 @@
 									</div>
 								</div>
 								<div class="card-body table-responsive p-0">
-									<table class="table table-striped table-valign-middle">
+									<table class="table table-striped table-valign-middle" aria-describedby="tbl">
 										<thead>
 											<tr>
-												<th>Product</th>
-												<th>Price</th>
-												<th>Sales</th>
-												<th>More</th>
+												<th scope="col">Product</th>
+												<th scope="col">Price</th>
+												<th scope="col">Sales</th>
+												<th scope="col">More</th>
 											</tr>
 										</thead>
 										<tbody>
