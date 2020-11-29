@@ -30,7 +30,7 @@ import com.url.app.utility.AppResponseKey;
 public class AppValidationServiceImpl implements AppValidationService {
 
 	@Autowired
-	private AppDBValidationMessage appDBValidationKey;
+	private AppDBValidationMessage appDBValidationMessage;
 
 	@Autowired
 	private AppModuleValidationService appModuleValidationService;
@@ -60,14 +60,14 @@ public class AppValidationServiceImpl implements AppValidationService {
 
 			final Long moduleNameCount = moduleRepository.countByModuleNameAndModuleIdNot(module.getModuleName(), module.getModuleId());
 			if (moduleNameCount > 0) {
-				moduleNameError = appDBValidationKey.moduleModulenameExistsError;
+				moduleNameError = appDBValidationMessage.moduleModulenameExistsError;
 			}
 		} else {
 			appModuleValidationService.validateForCreate(module);
 
 			final Long moduleNameCount = moduleRepository.countByModuleName(module.getModuleName());
 			if (moduleNameCount > 0) {
-				moduleNameError = appDBValidationKey.moduleModulenameExistsError;
+				moduleNameError = appDBValidationMessage.moduleModulenameExistsError;
 			}
 		}
 		invalidData.put(AppResponseKey.MODULE_NAME, moduleNameError);
@@ -85,14 +85,14 @@ public class AppValidationServiceImpl implements AppValidationService {
 
 			final Long roleNameCount = roleRepository.countByRoleNameAndRoleIdNot(role.getRoleName(), role.getRoleId());
 			if (roleNameCount > 0) {
-				roleNameError = appDBValidationKey.roleRolenameExistsError;
+				roleNameError = appDBValidationMessage.roleRolenameExistsError;
 			}
 		} else {
 			appRoleValidationService.validateForCreate(role);
 
 			final Long roleNameCount = roleRepository.countByRoleName(role.getRoleName());
 			if (roleNameCount > 0) {
-				roleNameError = appDBValidationKey.roleRolenameExistsError;
+				roleNameError = appDBValidationMessage.roleRolenameExistsError;
 			}
 		}
 		invalidData.put(AppResponseKey.ROLE_NAME, roleNameError);
@@ -111,18 +111,18 @@ public class AppValidationServiceImpl implements AppValidationService {
 
 			final Long emailIdCount = userRepository.countByEmailIdAndUserIdNot(user.getEmailId(), user.getUserId());
 			if (emailIdCount > 0) {
-				emailIdError = appDBValidationKey.userEmailExistsError;
+				emailIdError = appDBValidationMessage.userEmailExistsError;
 			}
 		} else {
 			appUserValidationService.validateForCreate(user);
 
 			final Long userNameCount = userRepository.countByUserName(user.getUserName());
 			if (userNameCount > 0) {
-				userNameError = appDBValidationKey.userUsernameExistsError;
+				userNameError = appDBValidationMessage.userUsernameExistsError;
 			}
 			final Long emailIdCount = userRepository.countByEmailId(user.getEmailId());
 			if (emailIdCount > 0) {
-				emailIdError = appDBValidationKey.userEmailExistsError;
+				emailIdError = appDBValidationMessage.userEmailExistsError;
 			}
 		}
 		invalidData.put(AppResponseKey.USER_NAME, userNameError);

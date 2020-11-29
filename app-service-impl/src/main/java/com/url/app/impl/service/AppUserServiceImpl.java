@@ -156,7 +156,7 @@ public class AppUserServiceImpl implements AppUserService {
 				user = userRepository.getOne(formUser.getUserId());
 			} else {
 				user.setUserName(formUser.getUserName());
-				user.setPassword(passwordEncoder.encode(AppConstant.USER_DEFAULT_PASSWORD));
+				user.setPassword(passwordEncoder.encode(AppConstant.USER_DEFAULT_PASS));
 				user.setIsActive(AppConstant.ACTIVE);
 				user.setCreatedBy(loggedInUserId);
 			}

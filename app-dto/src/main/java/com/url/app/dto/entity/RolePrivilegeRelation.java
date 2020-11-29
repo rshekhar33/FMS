@@ -4,8 +4,6 @@ import java.io.Serializable;
 import java.util.Objects;
 
 import javax.persistence.AssociationOverride;
-import javax.persistence.AssociationOverrides;
-import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
@@ -21,18 +19,15 @@ import com.url.app.utility.AppSQL;
  */
 @Entity
 @Table(name = "role_privilege_relation")
-@AssociationOverrides({ @AssociationOverride(name = "id.privilege", joinColumns = @JoinColumn(name = "privilege_id")),
-		@AssociationOverride(name = "id.role", joinColumns = @JoinColumn(name = "role_id")) })
+@AssociationOverride(name = "id.privilege", joinColumns = @JoinColumn(name = "privilege_id"))
+@AssociationOverride(name = "id.role", joinColumns = @JoinColumn(name = "role_id"))
 @JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 @NamedQuery(name = "RolePrivilegeRelation.findAll", query = AppSQL.QRY_FIND_ALL_ROLE_PRIVILEGE_RELATION)
-public class RolePrivilegeRelation extends BaseEntity implements Serializable {
+public class RolePrivilegeRelation extends ActiveBaseEntity implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@EmbeddedId
 	private RolePrivilegeRelationPK id = new RolePrivilegeRelationPK();
-
-	@Column(name = "is_active", nullable = false)
-	private Integer isActive;
 
 	public RolePrivilegeRelation() {
 		super();
@@ -62,14 +57,6 @@ public class RolePrivilegeRelation extends BaseEntity implements Serializable {
 
 	public void setRole(Role role) {
 		getId().setRole(role);
-	}
-
-	public Integer getIsActive() {
-		return this.isActive;
-	}
-
-	public void setIsActive(Integer isActive) {
-		this.isActive = isActive;
 	}
 
 	@Override
