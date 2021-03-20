@@ -5,7 +5,6 @@ import java.util.Map;
 
 import com.url.app.dto.entity.User;
 import com.url.app.dto.entity.UserMng;
-import com.url.app.pojo.LoggedUser;
 
 /**
  * Service Layer of application for User.
@@ -14,27 +13,6 @@ import com.url.app.pojo.LoggedUser;
  * @author Shekhar Shinde
  */
 public interface AppUserService {
-
-	/**
-	 * Get loggedUser from spring security principal.
-	 * 
-	 * @return loggedUser from spring security principal.
-	 */
-	LoggedUser getPrincipal();
-
-	/**
-	 * Get User of LoggedUser from spring security principal.
-	 * 
-	 * @return User of LoggedUser from spring security principal.
-	 */
-	User getPrincipalUser();
-
-	/**
-	 * Get userId of LoggedUser from spring security principal.
-	 * 
-	 * @return userId of User of LoggedUser from spring security principal.
-	 */
-	Integer getPrincipalUserUserId();
 
 	/**
 	 * Fetch user data from userName.

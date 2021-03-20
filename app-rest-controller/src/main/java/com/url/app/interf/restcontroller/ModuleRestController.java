@@ -26,6 +26,12 @@ public interface ModuleRestController {
 	List<Module> fetchDetails();
 
 	/**
+	 * Fetch data of Active Modules Listing.
+	 */
+	@PostMapping(value = AppUrlView.PATH_FETCH_ACTIVE_DETAILS, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+	List<Module> fetchActiveDetails();
+
+	/**
 	 * Fetch data of on add/update module screen.
 	 */
 	@PostMapping(value = AppUrlView.PATH_FETCH_DATA, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)

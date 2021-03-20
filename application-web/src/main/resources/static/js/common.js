@@ -7,7 +7,7 @@ var CommonFn = {
 		/* Code to include token in all Ajax headers */
 		var token = $("meta[name='_csrf']").attr("content");
 		var header = $("meta[name='_csrf_header']").attr("content");
-		$(document).ajaxSend(function (e, xhr) {
+		$(document).ajaxSend(function (_e, xhr) {
 			xhr.setRequestHeader(header, token);
 		});
 

@@ -22,7 +22,6 @@ public class AppLogMessage {
 	public static final String COMMA_TXT_MSG = ", ";
 
 	public static final String COURSE_TYPE_ID_MSG = "courseTypeId = {}";
-	public static final String USER_ID_MODULE_ID_MSG = "userId = {}, moduleId = {}";
 
 	public static final String INCORRECT_PATH_MSG = "Incorrect Path at Location : {} with Exception : {}";
 	public static final String NO_HANDLER_FOUND_EXCEPTION_MSG = "Global NoHandlerFoundException at Location : {} with Exception : {}";

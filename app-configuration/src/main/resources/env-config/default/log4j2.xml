@@ -2,7 +2,7 @@
 <!DOCTYPE xml>
 <Configuration>
 	<Properties>
-		<Property name="rootFilePath" value="/DevTools/Development/FMS_FILES/logs" />
+		<Property name="rootFilePath" value="/FMS_FILES/logs" />
 		<Property name="infoFileName" value="${rootFilePath}/infolog.log" />
 		<Property name="warnFileName" value="${rootFilePath}/warnlog.log" />
 		<Property name="infoFilePattern" value="${rootFilePath}/$${date:yyyy-MM-dd}/infolog-%d{yyyy-MM-dd}-%i.log.zip" />

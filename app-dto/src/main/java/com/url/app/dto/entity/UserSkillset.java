@@ -20,34 +20,34 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.url.app.utility.AppSQL;
 
 /**
- * The persistent class for the faculty_skillset database table.
+ * The persistent class for the user_skillset database table.
  */
 @Entity
-@Table(name = "faculty_skillset")
+@Table(name = "user_skillset")
 @AssociationOverride(name = "id.module", joinColumns = @JoinColumn(name = "module_id"))
 @AssociationOverride(name = "id.user", joinColumns = @JoinColumn(name = "user_id"))
 @JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
-@NamedQuery(name = "FacultySkillset.findAll", query = AppSQL.QRY_FIND_ALL_FACULTY_SKILLSET)
-public class FacultySkillset extends ActiveBaseEntity implements Serializable {
+@NamedQuery(name = "UserSkillset.findAll", query = AppSQL.QRY_FIND_ALL_USER_SKILLSET)
+public class UserSkillset extends ActiveBaseEntity implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@EmbeddedId
-	private FacultySkillsetPK id = new FacultySkillsetPK();
+	private UserSkillsetPK id = new UserSkillsetPK();
 
 	//bi-directional many-to-one association to Course
-	@OneToMany(mappedBy = "facultySkillset", cascade = CascadeType.ALL, orphanRemoval = true)
-	@JsonBackReference(value = "facultySkillset_course")
+	@OneToMany(mappedBy = "userSkillset", cascade = CascadeType.ALL, orphanRemoval = true)
+	@JsonBackReference(value = "userSkillset_course")
 	private Set<Course> courses = new HashSet<>(0);
 
-	public FacultySkillset() {
+	public UserSkillset() {
 		super();
 	}
 
-	public FacultySkillsetPK getId() {
+	public UserSkillsetPK getId() {
 		return this.id;
 	}
 
-	public void setId(FacultySkillsetPK id) {
+	public void setId(UserSkillsetPK id) {
 		this.id = id;
 	}
 
@@ -78,7 +78,7 @@ public class FacultySkillset extends ActiveBaseEntity implements Serializable {
 	}
 
 	public boolean addCourse(Course course) {
-		course.setFacultySkillset(this);
+		course.setUserSkillset(this);
 
 		return getCourses().add(course);
 	}
@@ -100,10 +100,10 @@ public class FacultySkillset extends ActiveBaseEntity implements Serializable {
 		if (obj == null) {
 			return false;
 		}
-		if (!(obj instanceof FacultySkillset)) {
+		if (!(obj instanceof UserSkillset)) {
 			return false;
 		}
-		FacultySkillset other = (FacultySkillset) obj;
+		UserSkillset other = (UserSkillset) obj;
 
 		return Objects.equals(id, other.id);
 	}

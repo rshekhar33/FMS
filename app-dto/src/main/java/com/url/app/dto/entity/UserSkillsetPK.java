@@ -9,10 +9,10 @@ import javax.persistence.FetchType;
 import javax.persistence.ManyToOne;
 
 /**
- * The primary key class for the faculty_skillset database table.
+ * The primary key class for the user_skillset database table.
  */
 @Embeddable
-public class FacultySkillsetPK implements Serializable {
+public class UserSkillsetPK implements Serializable {
 	//default serial version id, required for serializable classes.
 	private static final long serialVersionUID = 1L;
 
@@ -22,7 +22,7 @@ public class FacultySkillsetPK implements Serializable {
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private Module module;
 
-	public FacultySkillsetPK() {
+	public UserSkillsetPK() {
 		super();
 	}
 
@@ -55,10 +55,10 @@ public class FacultySkillsetPK implements Serializable {
 		if (obj == null) {
 			return false;
 		}
-		if (!(obj instanceof FacultySkillsetPK)) {
+		if (!(obj instanceof UserSkillsetPK)) {
 			return false;
 		}
-		FacultySkillsetPK other = (FacultySkillsetPK) obj;
+		UserSkillsetPK other = (UserSkillsetPK) obj;
 
 		return Objects.equals(user, other.user) && Objects.equals(module, other.module);
 	}

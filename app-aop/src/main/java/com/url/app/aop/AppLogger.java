@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.util.StopWatch;
 
 import com.url.app.dto.entity.User;
-import com.url.app.interf.service.AppUserService;
+import com.url.app.security.service.AppPrincipalUser;
 import com.url.app.utility.AppLogMessage;
 
 /**
@@ -30,7 +30,7 @@ public class AppLogger {
 	private HttpServletRequest request;
 
 	@Autowired
-	private AppUserService appUserService;
+	private AppPrincipalUser appPrincipalUser;
 
 	@Around("(within(@org.springframework.stereotype.Controller *) || within(@org.springframework.web.bind.annotation.RestController *)) "
 			+ "&& (execution(* com.url.app.interf.controller.*.*(..)) || execution(* com.url.app.interf.restcontroller.*.*(..)))")
@@ -53,7 +53,7 @@ public class AppLogger {
 	}
 
 	public User principalUser() {
-		User user = appUserService.getPrincipalUser();
+		User user = appPrincipalUser.getPrincipalUser();
 		if (user == null) {
 			user = new User();
 		}

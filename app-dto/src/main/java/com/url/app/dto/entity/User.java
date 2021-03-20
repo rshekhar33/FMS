@@ -112,10 +112,10 @@ public class User extends BaseEntity implements Serializable {
 	@Size(groups = BasicCreateGroup.class, max = 50, message = AppBasicValidationKey.LENGTH_ERROR)
 	private String userName;
 
-	//bi-directional many-to-one association to FacultySkillset
+	//bi-directional many-to-one association to UserSkillset
 	@OneToMany(mappedBy = "id.user", cascade = CascadeType.ALL, orphanRemoval = true)
-	@JsonBackReference(value = "user_facultySkillset")
-	private Set<FacultySkillset> facultySkillsets = new HashSet<>(0);
+	@JsonBackReference(value = "user_userSkillset")
+	private Set<UserSkillset> userSkillsets = new HashSet<>(0);
 
 	//bi-directional many-to-one association to UserRoleRelation
 	@OneToMany(mappedBy = "id.user", cascade = CascadeType.ALL, orphanRemoval = true)
@@ -125,6 +125,9 @@ public class User extends BaseEntity implements Serializable {
 	@Transient
 	@NotEmpty(groups = { BasicCreateGroup.class, BasicUpdateGroup.class }, message = AppBasicValidationKey.MANDATORY_FIELD_ERROR)
 	private List<@Positive Integer> roles;
+
+	@Transient
+	private List<Integer> modules;
 
 	public User() {
 		super();
@@ -226,22 +229,22 @@ public class User extends BaseEntity implements Serializable {
 		this.userName = userName;
 	}
 
-	public Set<FacultySkillset> getFacultySkillsets() {
-		return this.facultySkillsets;
+	public Set<UserSkillset> getUserSkillsets() {
+		return this.userSkillsets;
 	}
 
-	public void setFacultySkillsets(Set<FacultySkillset> facultySkillsets) {
-		this.facultySkillsets = facultySkillsets;
+	public void setUserSkillsets(Set<UserSkillset> userSkillsets) {
+		this.userSkillsets = userSkillsets;
 	}
 
-	public boolean addFacultySkillset(FacultySkillset facultySkillset) {
-		facultySkillset.setUser(this);
+	public boolean addUserSkillset(UserSkillset userSkillset) {
+		userSkillset.setUser(this);
 
-		return getFacultySkillsets().add(facultySkillset);
+		return getUserSkillsets().add(userSkillset);
 	}
 
-	public boolean removeFacultySkillset(FacultySkillset facultySkillset) {
-		return getFacultySkillsets().remove(facultySkillset);
+	public boolean removeUserSkillset(UserSkillset userSkillset) {
+		return getUserSkillsets().remove(userSkillset);
 	}
 
 	public Set<UserRoleRelation> getUserRoleRelations() {
@@ -268,6 +271,14 @@ public class User extends BaseEntity implements Serializable {
 
 	public void setRoles(List<Integer> roles) {
 		this.roles = roles;
+	}
+
+	public List<Integer> getModules() {
+		return modules;
+	}
+
+	public void setModules(List<Integer> modules) {
+		this.modules = modules;
 	}
 
 	@Override

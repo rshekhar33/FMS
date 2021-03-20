@@ -1,14 +1,14 @@
 package com.url.app.pojo;
 
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import com.url.app.dto.entity.Role;
 import com.url.app.dto.entity.User;
 import com.url.app.dto.entity.UserRoleRelation;
 import com.url.app.utility.AppConstant;
@@ -40,12 +40,8 @@ public class LoggedUser implements UserDetails {
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
-		final List<SimpleGrantedAuthority> authorities = new ArrayList<>();
-		for (UserRoleRelation userRoleRelation : getUser().getUserRoleRelations()) {
-			authorities.add(new SimpleGrantedAuthority(String.valueOf(userRoleRelation.getRole().getRoleId())));
-		}
-
-		return authorities;
+		return getUser().getUserRoleRelations().stream().map(UserRoleRelation::getRole).map(Role::getRoleId).map(String::valueOf).map(SimpleGrantedAuthority::new)
+				.collect(Collectors.toList());
 	}
 
 	@Override

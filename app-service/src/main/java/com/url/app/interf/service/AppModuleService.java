@@ -21,6 +21,13 @@ public interface AppModuleService {
 	List<Module> fetchDetailsModules();
 
 	/**
+	 * Fetch all active module details.
+	 * 
+	 * @return modules details in json format.
+	 */
+	List<Module> fetchActiveDetailsModules();
+
+	/**
 	 * Fetch module data on add module screen.
 	 * 
 	 * @param module contains the moduleId of module.

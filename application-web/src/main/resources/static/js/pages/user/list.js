@@ -43,8 +43,8 @@ var ListController = {
 				title: "Mobile No",
 				data: "mobileNo"
 			}, {
-				title: "Role",
-				data: "roleName"
+				title: "Roles",
+				data: "roleNames"
 			}, {
 				title: "Active",
 				data: "isActive",
@@ -85,7 +85,7 @@ var ListController = {
 					fullName: user.fullName,
 					emailId: user.emailId,
 					mobileNo: user.mobileNo,
-					roleName: user.roleName,
+					roleNames: user.roleNames,
 					isActive: isActiveStr,
 					action: isActionStr
 				});

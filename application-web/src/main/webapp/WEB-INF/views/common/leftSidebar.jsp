@@ -11,7 +11,7 @@
 	<!-- Sidebar -->
 	<div class="sidebar">
 		<!-- SidebarSearch Form -->
-		<div class="form-inline">
+		<div class="form-inline mt-2">
 			<div class="input-group" data-widget="sidebar-search">
 				<input class="form-control form-control-sidebar" type="search" placeholder="Search" aria-label="Search">
 				<div class="input-group-append">
@@ -145,8 +145,8 @@
 					</ul>
 				</li>
 				</c:if>
-				<c:if test="${appAuthorization.isAccessAllowed('facultySkillset/list') || appAuthorization.isAccessAllowed('facultySkillset/add')}">
-				<li class="nav-item ${facultySkillsetMenuOpenCls}">
+				<c:if test="${appAuthorization.isAccessAllowed('userSkillset/list')}">
+				<li class="nav-item ${userSkillsetMenuOpenCls}">
 					<a href="#" class="nav-link">
 						<i class="nav-icon fas fa-wrench"></i>
 						<p>
@@ -154,19 +154,11 @@
 						</p>
 					</a>
 					<ul class="nav nav-treeview">
-						<c:if test="${appAuthorization.isAccessAllowed('facultySkillset/list')}">
+						<c:if test="${appAuthorization.isAccessAllowed('userSkillset/list')}">
 						<li class="nav-item">
-							<a href="${contextPath}facultySkillset/list" class="nav-link ${facultySkillsetsActiveCls}">
+							<a href="${contextPath}userSkillset/list" class="nav-link ${userSkillsetsActiveCls}">
 								<i class="fas fa-list nav-icon"></i>
 								<p>List Faculty Skillsets</p>
-							</a>
-						</li>
-						</c:if>
-						<c:if test="${appAuthorization.isAccessAllowed('facultySkillset/add')}">
-						<li class="nav-item">
-							<a href="${contextPath}facultySkillset/add" class="nav-link ${facultySkillsetCrudActiveCls}">
-								<i class="fas fa-plus nav-icon"></i>
-								<p>Add Faculty Skillset</p>
 							</a>
 						</li>
 						</c:if>

@@ -14,7 +14,6 @@ import com.url.app.dto.entity.Role;
 import com.url.app.dto.validation.AppRoleValidationService;
 import com.url.app.interf.dao.RoleRepository;
 import com.url.app.interf.service.AppRoleService;
-import com.url.app.interf.service.AppUserService;
 import com.url.app.interf.service.AppValidationService;
 import com.url.app.pojo.AppConcurrentHashMap;
 import com.url.app.utility.AppCommon;
@@ -31,9 +30,6 @@ import com.url.app.utility.AppResponseKey;
 @Service(value = "appRoleServiceImpl")
 public class AppRoleServiceImpl implements AppRoleService {
 	private static final Logger logger = LoggerFactory.getLogger(AppRoleServiceImpl.class);
-
-	@Autowired
-	private AppUserService appUserService;
 
 	@Autowired
 	private RoleRepository roleRepository;
@@ -79,17 +75,13 @@ public class AppRoleServiceImpl implements AppRoleService {
 		}
 
 		if (AppCommon.isEmpty(status)) {
-			final Integer loggedInUserId = appUserService.getPrincipalUserUserId();
-
 			Role role = new Role();
 			if (AppCommon.isPositiveInteger(formRole.getRoleId())) {
 				role = roleRepository.getOne(formRole.getRoleId());
 			} else {
 				role.setIsActive(AppConstant.ACTIVE);
-				role.setCreatedBy(loggedInUserId);
 			}
 			role.setRoleName(formRole.getRoleName());
-			role.setModifiedBy(loggedInUserId);
 
 			roleRepository.save(role);
 			final Integer roleId = role.getRoleId();

@@ -15,7 +15,6 @@ import com.url.app.dto.validation.AppCourseTypeValidationService;
 import com.url.app.interf.dao.AppDao;
 import com.url.app.interf.dao.CourseTypeRepository;
 import com.url.app.interf.service.AppCourseTypeService;
-import com.url.app.interf.service.AppUserService;
 import com.url.app.pojo.AppConcurrentHashMap;
 import com.url.app.utility.AppCommon;
 import com.url.app.utility.AppConstant;
@@ -34,9 +33,6 @@ public class AppCourseTypeServiceImpl implements AppCourseTypeService {
 
 	@Autowired
 	private AppDao appDao;
-
-	@Autowired
-	private AppUserService appUserService;
 
 	@Autowired
 	private CourseTypeRepository courseTypeRepository;
@@ -73,8 +69,6 @@ public class AppCourseTypeServiceImpl implements AppCourseTypeService {
 		String status = AppConstant.BLANK_STRING;
 		String msg = AppConstant.BLANK_STRING;
 
-		final Integer loggedInUserId = appUserService.getPrincipalUserUserId();
-
 		CourseType courseType = new CourseType();
 		if (AppCommon.isPositiveInteger(formCourseType.getCourseTypeId())) {
 			courseType = courseTypeRepository.getOne(formCourseType.getCourseTypeId());
@@ -82,11 +76,9 @@ public class AppCourseTypeServiceImpl implements AppCourseTypeService {
 			final String courseTypeCode = AppConstant.COURSE_TYPE_CODE_PREFIX + appDao.generateNewCode(AppConstant.CS_TYPE_COURSE_TYPE_CODE_COUNTER);
 			courseType.setCourseTypeCode(courseTypeCode);
 			courseType.setIsActive(AppConstant.ACTIVE);
-			courseType.setCreatedBy(loggedInUserId);
 		}
 		courseType.setCourseTypeName(formCourseType.getCourseTypeName());
 		courseType.setNoOfDays(formCourseType.getNoOfDays());
-		courseType.setModifiedBy(loggedInUserId);
 
 		courseTypeRepository.save(courseType);
 		final Integer courseTypeId = courseType.getCourseTypeId();

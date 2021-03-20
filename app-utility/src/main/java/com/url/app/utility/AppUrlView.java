@@ -21,7 +21,7 @@ public class AppUrlView {
 	public static final String MODULE = "module";
 	public static final String COURSE_TYPE = "courseType";
 	public static final String ROLE = "role";
-	public static final String FACULTY_SKILLSET = "facultySkillset";
+	public static final String USER_SKILLSET = "userSkillset";
 	public static final String SEPARATOR = "/";
 
 	public static final String ALL_URL_ANT_PATTERN = "/**";
@@ -34,7 +34,7 @@ public class AppUrlView {
 	public static final String PATH_ROOT_MODULE = MODULE;
 	public static final String PATH_ROOT_COURSE_TYPE = COURSE_TYPE;
 	public static final String PATH_ROOT_ROLE = ROLE;
-	public static final String PATH_ROOT_FACULTY_SKILLSET = FACULTY_SKILLSET;
+	public static final String PATH_ROOT_USER_SKILLSET = USER_SKILLSET;
 
 	/* URL paths */
 	public static final String PATH_ROOT = SEPARATOR;
@@ -84,8 +84,8 @@ public class AppUrlView {
 	public static final String REDIRECT_URL_COURSE_TYPE_LIST = REDIRECT + PATH_ROOT_COURSE_TYPE + SEPARATOR + PATH_LIST;
 	public static final String REDIRECT_URL_COURSE_TYPE_UPDATE = REDIRECT + PATH_ROOT_COURSE_TYPE + SEPARATOR + PATH_UPDATE;
 
-	public static final String REDIRECT_URL_FACULTY_SKILLSET_LIST = REDIRECT + PATH_ROOT_FACULTY_SKILLSET + SEPARATOR + PATH_LIST;
-	public static final String REDIRECT_URL_FACULTY_SKILLSET_UPDATE = REDIRECT + PATH_ROOT_FACULTY_SKILLSET + SEPARATOR + PATH_UPDATE;
+	public static final String REDIRECT_URL_USER_SKILLSET_LIST = REDIRECT + PATH_ROOT_USER_SKILLSET + SEPARATOR + PATH_LIST;
+	public static final String REDIRECT_URL_USER_SKILLSET_UPDATE = REDIRECT + PATH_ROOT_USER_SKILLSET + SEPARATOR + PATH_UPDATE;
 
 	/* View root paths */
 	public static final String VIEW_ROOT_LOGIN_SIGN_UP = "loginSignUp/";
@@ -95,7 +95,7 @@ public class AppUrlView {
 	public static final String VIEW_ROOT_MODULE = MODULE + SEPARATOR;
 	public static final String VIEW_ROOT_COURSE_TYPE = COURSE_TYPE + SEPARATOR;
 	public static final String VIEW_ROOT_ROLE = ROLE + SEPARATOR;
-	public static final String VIEW_ROOT_FACULTY_SKILLSET = FACULTY_SKILLSET + SEPARATOR;
+	public static final String VIEW_ROOT_USER_SKILLSET = USER_SKILLSET + SEPARATOR;
 
 	/* View paths */
 	public static final String VIEW_LIST = "list";
@@ -124,8 +124,8 @@ public class AppUrlView {
 	public static final String VIEW_ROLE_LIST = VIEW_ROOT_ROLE + VIEW_LIST;
 	public static final String VIEW_ROLE_CRUD = VIEW_ROOT_ROLE + VIEW_CRUD;
 
-	public static final String VIEW_FACULTY_SKILLSET_LIST = VIEW_ROOT_FACULTY_SKILLSET + VIEW_LIST;
-	public static final String VIEW_FACULTY_SKILLSET_CRUD = VIEW_ROOT_FACULTY_SKILLSET + VIEW_CRUD;
+	public static final String VIEW_USER_SKILLSET_LIST = VIEW_ROOT_USER_SKILLSET + VIEW_LIST;
+	public static final String VIEW_USER_SKILLSET_CRUD = VIEW_ROOT_USER_SKILLSET + VIEW_CRUD;
 
 	/* Parameters */
 	public static final String PARAMETER_NAME_USERNAME = "userName";
