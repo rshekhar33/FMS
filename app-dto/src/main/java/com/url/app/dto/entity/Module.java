@@ -61,10 +61,10 @@ public class Module extends BaseEntity implements Serializable {
 	@Size(groups = { BasicCreateGroup.class, BasicUpdateGroup.class }, max = 100, message = AppBasicValidationKey.LENGTH_ERROR)
 	private String moduleName;
 
-	//bi-directional many-to-one association to FacultySkillset
+	//bi-directional many-to-one association to UserSkillset
 	@OneToMany(mappedBy = "id.module", cascade = CascadeType.ALL, orphanRemoval = true)
-	@JsonBackReference(value = "module_facultySkillset")
-	private Set<FacultySkillset> facultySkillsets = new HashSet<>(0);
+	@JsonBackReference(value = "module_userSkillset")
+	private Set<UserSkillset> userSkillsets = new HashSet<>(0);
 
 	public Module() {
 		super();
@@ -94,22 +94,22 @@ public class Module extends BaseEntity implements Serializable {
 		this.moduleName = moduleName;
 	}
 
-	public Set<FacultySkillset> getFacultySkillsets() {
-		return this.facultySkillsets;
+	public Set<UserSkillset> getUserSkillsets() {
+		return this.userSkillsets;
 	}
 
-	public void setFacultySkillsets(Set<FacultySkillset> facultySkillsets) {
-		this.facultySkillsets = facultySkillsets;
+	public void setUserSkillsets(Set<UserSkillset> userSkillsets) {
+		this.userSkillsets = userSkillsets;
 	}
 
-	public boolean addFacultySkillset(FacultySkillset facultySkillset) {
-		facultySkillset.setModule(this);
+	public boolean addUserSkillset(UserSkillset userSkillset) {
+		userSkillset.setModule(this);
 
-		return getFacultySkillsets().add(facultySkillset);
+		return getUserSkillsets().add(userSkillset);
 	}
 
-	public boolean removeFacultySkillset(FacultySkillset facultySkillset) {
-		return getFacultySkillsets().remove(facultySkillset);
+	public boolean removeUserSkillset(UserSkillset userSkillset) {
+		return getUserSkillsets().remove(userSkillset);
 	}
 
 	@Override

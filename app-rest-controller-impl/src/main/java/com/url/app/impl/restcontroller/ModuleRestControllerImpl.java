@@ -27,6 +27,11 @@ public class ModuleRestControllerImpl implements ModuleRestController {
 	}
 
 	@Override
+	public List<Module> fetchActiveDetails() {
+		return appModuleService.fetchActiveDetailsModules();
+	}
+
+	@Override
 	public Module fetchData(final Module module) {
 		return appModuleService.fetchDataModule(module);
 	}

@@ -8,7 +8,9 @@ import javax.persistence.MappedSuperclass;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedBy;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
@@ -21,6 +23,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 @EntityListeners(AuditingEntityListener.class)
 public class BaseEntity {
 	@Column(name = "created_by", updatable = false, nullable = false)
+	@CreatedBy
 	private Integer createdBy;
 
 	@Temporal(TemporalType.TIMESTAMP)
@@ -29,6 +32,7 @@ public class BaseEntity {
 	private Date createdDate;
 
 	@Column(name = "modified_by", nullable = false)
+	@LastModifiedBy
 	private Integer modifiedBy;
 
 	@Temporal(TemporalType.TIMESTAMP)

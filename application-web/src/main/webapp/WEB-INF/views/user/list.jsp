@@ -83,7 +83,7 @@
 											<th scope="col">Name</th>
 											<th scope="col">Email ID</th>
 											<th scope="col">Mobile No</th>
-											<th scope="col">Role</th>
+											<th scope="col">Roles</th>
 											<th scope="col">Active</th>
 											<th scope="col">Action</th>
 										</tr>

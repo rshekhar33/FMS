@@ -12,6 +12,10 @@ public class AppSQL {
 
 	public static final String PARAMETER_USER_ID = "userId";
 
+	public static final String PARAMETER_USER_NAME = "userName";
+
+	public static final String PARAMETER_TYPE = "type";
+
 	//@formatter:off
 	/* sql queries */
 	public static final String QRY_FIND_ALL_ACTION = "SELECT a FROM Action a";
@@ -22,7 +26,7 @@ public class AppSQL {
 
 	public static final String QRY_FIND_ALL_COURSE_TYPE = "SELECT c FROM CourseType c";
 
-	public static final String QRY_FIND_ALL_FACULTY_SKILLSET = "SELECT f FROM FacultySkillset f";
+	public static final String QRY_FIND_ALL_USER_SKILLSET = "SELECT u FROM UserSkillset u";
 
 	public static final String QRY_FIND_ALL_FEEDBACK_ANSWER = "SELECT f FROM FeedbackAnswer f";
 
@@ -68,13 +72,21 @@ public class AppSQL {
 
 	public static final String QRY_SELECT_USER_ROLES_BY_USERID = FROM_USER
 			+ "left join fetch u.userRoleRelations urr "
+			+ "left join fetch urr.id.role r "
 			+ "where u.userId=:userId "
 			+ ORDER_BY_USER_ID_ASC;
 
-	public static final String QRY_SELECT_USER_SKILLSETS = FROM_USER
-			+ "left join fetch u.facultySkillsets fs "
+	public static final String QRY_SELECT_USER_SKILLSETS_BY_USERID = FROM_USER
+			+ "left join fetch u.userSkillsets us "
+			+ "left join fetch us.id.module m "
 			+ "where u.userId=:userId "
 			+ ORDER_BY_USER_ID_ASC;
+
+	public static final String QRY_UPDATE_USER_SKILLSETS_IS_ACTIVE = "update UserSkillset us "
+			+ "set us.isActive=:isActive, "
+			+ "us.modifiedBy=:modifiedBy, "
+			+ "us.modifiedDate=:modifiedDate "
+			+ "where us.id.user.userId=:userId";
 
 	public static final String QRY_SELECT_COMMON_SETTING_VALUE = "select cs.value "
 			+ "from CommonSetting cs "
@@ -88,6 +100,6 @@ public class AppSQL {
 	/* pl/sql Procedures */
 	public static final String PROC_ALL_USERS = "get_all_users";
 
-	public static final String PROC_FACULTY_SKILLSETS = "get_faculty_skillsets";
+	public static final String PROC_USER_SKILLSETS = "get_user_skillsets";
 	//@formatter:on
 }

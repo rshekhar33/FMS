@@ -13,6 +13,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler;
 
 import com.url.app.interf.service.AppUserService;
+import com.url.app.security.service.AppPrincipalUser;
 import com.url.app.utility.AppLogMessage;
 
 /**
@@ -24,12 +25,15 @@ public class LoginSuccessHandler extends SavedRequestAwareAuthenticationSuccessH
 	private static final Logger appLogger = LoggerFactory.getLogger(LoginSuccessHandler.class);
 
 	@Autowired
+	private AppPrincipalUser appPrincipalUser;
+
+	@Autowired
 	private AppUserService appUserService;
 
 	@Override
 	public void onAuthenticationSuccess(final HttpServletRequest request, final HttpServletResponse response, final Authentication authentication)
 			throws IOException, ServletException {
-		appLogger.debug(AppLogMessage.LOGIN_SUCCESS_WITH_ROLES_MSG, appUserService.getPrincipal().getAuthorities());
+		appLogger.debug(AppLogMessage.LOGIN_SUCCESS_WITH_ROLES_MSG, appPrincipalUser.getPrincipal().getAuthorities());
 
 		appUserService.userUpdateLastLoginSuccess();
 

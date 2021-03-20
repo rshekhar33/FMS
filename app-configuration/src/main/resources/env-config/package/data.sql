@@ -43,7 +43,7 @@ INSERT INTO `user_role_relation` (`user_id`, `role_id`, `created_by`, `created_d
 INSERT INTO `user_role_relation` (`user_id`, `role_id`, `created_by`, `created_date`, `modified_by`, `modified_date`, `is_active`) VALUES (9, 3, 1, now(), 1, now(), 1);
 INSERT INTO `user_role_relation` (`user_id`, `role_id`, `created_by`, `created_date`, `modified_by`, `modified_date`, `is_active`) VALUES (10, 3, 1, now(), 1, now(), 1);
 INSERT INTO `user_role_relation` (`user_id`, `role_id`, `created_by`, `created_date`, `modified_by`, `modified_date`, `is_active`) VALUES (11, 3, 1, now(), 1, now(), 1);
-INSERT INTO `user_role_relation` (`user_id`, `role_id`, `created_by`, `created_date`, `modified_by`, `modified_date`, `is_active`) VALUES (12, 3, 1, now(), 1, now(), 1);
+INSERT INTO `user_role_relation` (`user_id`, `role_id`, `created_by`, `created_date`, `modified_by`, `modified_date`, `is_active`) VALUES (12, 2, 1, now(), 1, now(), 1);
 INSERT INTO `user_role_relation` (`user_id`, `role_id`, `created_by`, `created_date`, `modified_by`, `modified_date`, `is_active`) VALUES (12, 1, 1, now(), 1, now(), 1);
 
 -- -----------------------------------------------------
@@ -67,9 +67,8 @@ INSERT INTO `privilege` (`privilege_id`, `privilege_name`, `description`, `creat
 INSERT INTO `privilege` (`privilege_id`, `privilege_name`, `description`, `created_by`, `created_date`, `modified_by`, `modified_date`, `is_active`) VALUES (16, 'Edit Role', NULL, 1, now(), 1, now(), 1);
 INSERT INTO `privilege` (`privilege_id`, `privilege_name`, `description`, `created_by`, `created_date`, `modified_by`, `modified_date`, `is_active`) VALUES (17, 'Activate/Inactivate Role', NULL, 1, now(), 1, now(), 1);
 INSERT INTO `privilege` (`privilege_id`, `privilege_name`, `description`, `created_by`, `created_date`, `modified_by`, `modified_date`, `is_active`) VALUES (18, 'Faculty Skillset Listing', NULL, 1, now(), 1, now(), 1);
-INSERT INTO `privilege` (`privilege_id`, `privilege_name`, `description`, `created_by`, `created_date`, `modified_by`, `modified_date`, `is_active`) VALUES (19, 'Add Faculty Skillset', NULL, 1, now(), 1, now(), 1);
-INSERT INTO `privilege` (`privilege_id`, `privilege_name`, `description`, `created_by`, `created_date`, `modified_by`, `modified_date`, `is_active`) VALUES (20, 'Edit Faculty Skillset', NULL, 1, now(), 1, now(), 1);
-INSERT INTO `privilege` (`privilege_id`, `privilege_name`, `description`, `created_by`, `created_date`, `modified_by`, `modified_date`, `is_active`) VALUES (21, 'Activate/Inactivate Faculty Skillset', NULL, 1, now(), 1, now(), 1);
+INSERT INTO `privilege` (`privilege_id`, `privilege_name`, `description`, `created_by`, `created_date`, `modified_by`, `modified_date`, `is_active`) VALUES (19, 'Edit Faculty Skillset', NULL, 1, now(), 1, now(), 1);
+INSERT INTO `privilege` (`privilege_id`, `privilege_name`, `description`, `created_by`, `created_date`, `modified_by`, `modified_date`, `is_active`) VALUES (20, 'Activate/Inactivate Faculty Skillset', NULL, 1, now(), 1, now(), 1);
 
 -- -----------------------------------------------------
 -- Data for table `role_privilege_relation`
@@ -93,6 +92,9 @@ INSERT INTO `role_privilege_relation` (`role_id`, `privilege_id`, `created_by`, 
 INSERT INTO `role_privilege_relation` (`role_id`, `privilege_id`, `created_by`, `created_date`, `modified_by`, `modified_date`, `is_active`) VALUES (1, 15, 1, now(), 1, now(), 1);
 INSERT INTO `role_privilege_relation` (`role_id`, `privilege_id`, `created_by`, `created_date`, `modified_by`, `modified_date`, `is_active`) VALUES (1, 16, 1, now(), 1, now(), 1);
 INSERT INTO `role_privilege_relation` (`role_id`, `privilege_id`, `created_by`, `created_date`, `modified_by`, `modified_date`, `is_active`) VALUES (1, 17, 1, now(), 1, now(), 1);
+INSERT INTO `role_privilege_relation` (`role_id`, `privilege_id`, `created_by`, `created_date`, `modified_by`, `modified_date`, `is_active`) VALUES (1, 18, 1, now(), 1, now(), 1);
+INSERT INTO `role_privilege_relation` (`role_id`, `privilege_id`, `created_by`, `created_date`, `modified_by`, `modified_date`, `is_active`) VALUES (1, 19, 1, now(), 1, now(), 1);
+INSERT INTO `role_privilege_relation` (`role_id`, `privilege_id`, `created_by`, `created_date`, `modified_by`, `modified_date`, `is_active`) VALUES (1, 20, 1, now(), 1, now(), 1);
 
 -- -----------------------------------------------------
 -- Data for table `action`
@@ -143,6 +145,13 @@ INSERT INTO `action` (`action_id`, `privilege_id`, `action_path`, `created_by`, 
 INSERT INTO `action` (`action_id`, `privilege_id`, `action_path`, `created_by`, `created_date`, `modified_by`, `modified_date`, `is_active`, `is_skip`) VALUES (DEFAULT, 16, 'role/fetchData', 1, now(), 1, now(), 1, 0);
 INSERT INTO `action` (`action_id`, `privilege_id`, `action_path`, `created_by`, `created_date`, `modified_by`, `modified_date`, `is_active`, `is_skip`) VALUES (DEFAULT, 16, 'role/validateSave', 1, now(), 1, now(), 1, 0);
 INSERT INTO `action` (`action_id`, `privilege_id`, `action_path`, `created_by`, `created_date`, `modified_by`, `modified_date`, `is_active`, `is_skip`) VALUES (DEFAULT, 17, 'role/activation', 1, now(), 1, now(), 1, 0);
+INSERT INTO `action` (`action_id`, `privilege_id`, `action_path`, `created_by`, `created_date`, `modified_by`, `modified_date`, `is_active`, `is_skip`) VALUES (DEFAULT, 18, 'userSkillset/list', 1, now(), 1, now(), 1, 0);
+INSERT INTO `action` (`action_id`, `privilege_id`, `action_path`, `created_by`, `created_date`, `modified_by`, `modified_date`, `is_active`, `is_skip`) VALUES (DEFAULT, 18, 'userSkillset/fetchDetails', 1, now(), 1, now(), 1, 0);
+INSERT INTO `action` (`action_id`, `privilege_id`, `action_path`, `created_by`, `created_date`, `modified_by`, `modified_date`, `is_active`, `is_skip`) VALUES (DEFAULT, 19, 'userSkillset/update', 1, now(), 1, now(), 1, 0);
+INSERT INTO `action` (`action_id`, `privilege_id`, `action_path`, `created_by`, `created_date`, `modified_by`, `modified_date`, `is_active`, `is_skip`) VALUES (DEFAULT, 19, 'userSkillset/fetchData', 1, now(), 1, now(), 1, 0);
+INSERT INTO `action` (`action_id`, `privilege_id`, `action_path`, `created_by`, `created_date`, `modified_by`, `modified_date`, `is_active`, `is_skip`) VALUES (DEFAULT, 19, 'module/fetchActiveDetails', 1, now(), 1, now(), 1, 0);
+INSERT INTO `action` (`action_id`, `privilege_id`, `action_path`, `created_by`, `created_date`, `modified_by`, `modified_date`, `is_active`, `is_skip`) VALUES (DEFAULT, 19, 'userSkillset/validateSave', 1, now(), 1, now(), 1, 0);
+INSERT INTO `action` (`action_id`, `privilege_id`, `action_path`, `created_by`, `created_date`, `modified_by`, `modified_date`, `is_active`, `is_skip`) VALUES (DEFAULT, 20, 'userSkillset/activation', 1, now(), 1, now(), 1, 0);
 
 -- -----------------------------------------------------
 -- Data for table `module`
@@ -152,11 +161,11 @@ INSERT INTO `module` (`module_id`, `module_name`, `created_by`, `created_date`, 
 INSERT INTO `module` (`module_id`, `module_name`, `created_by`, `created_date`, `modified_by`, `modified_date`, `is_active`) VALUES (3, 'Struts', 1, now(), 1, now(), 1);
 
 -- -----------------------------------------------------
--- Data for table `faculty_skillset`
+-- Data for table `user_skillset`
 -- -----------------------------------------------------
-INSERT INTO `faculty_skillset` (`user_id`, `module_id`, `created_by`, `created_date`, `modified_by`, `modified_date`, `is_active`) VALUES (4, 1, 1, now(), 1, now(), 1);
-INSERT INTO `faculty_skillset` (`user_id`, `module_id`, `created_by`, `created_date`, `modified_by`, `modified_date`, `is_active`) VALUES (4, 2, 1, now(), 1, now(), 1);
-INSERT INTO `faculty_skillset` (`user_id`, `module_id`, `created_by`, `created_date`, `modified_by`, `modified_date`, `is_active`) VALUES (5, 3, 1, now(), 1, now(), 1);
+INSERT INTO `user_skillset` (`user_id`, `module_id`, `created_by`, `created_date`, `modified_by`, `modified_date`, `is_active`) VALUES (4, 1, 1, now(), 1, now(), 1);
+INSERT INTO `user_skillset` (`user_id`, `module_id`, `created_by`, `created_date`, `modified_by`, `modified_date`, `is_active`) VALUES (4, 2, 1, now(), 1, now(), 1);
+INSERT INTO `user_skillset` (`user_id`, `module_id`, `created_by`, `created_date`, `modified_by`, `modified_date`, `is_active`) VALUES (5, 3, 1, now(), 1, now(), 1);
 
 -- -----------------------------------------------------
 -- Data for table `course_type`

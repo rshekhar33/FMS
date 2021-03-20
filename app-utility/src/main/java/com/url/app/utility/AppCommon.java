@@ -1,5 +1,6 @@
 package com.url.app.utility;
 
+import java.util.Collection;
 import java.util.Date;
 
 /**
@@ -30,6 +31,16 @@ public class AppCommon {
 	 */
 	public static final boolean isEmpty(final String str) {
 		return str == null || str.trim().isEmpty();
+	}
+
+	/**
+	 * Check whether collection is null or empty.
+	 * 
+	 * @param collection the collection which is to be checked.
+	 * @return true/false.
+	 */
+	public static final boolean isEmpty(final Collection<?> collection) {
+		return collection == null || collection.isEmpty();
 	}
 
 	/**

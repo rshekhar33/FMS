@@ -3,10 +3,10 @@ package com.url.app.interf.dao;
 import java.util.List;
 
 import com.url.app.dto.entity.Action;
-import com.url.app.dto.entity.FacultySkillsetMng;
+import com.url.app.dto.entity.UrlRolesBean;
 import com.url.app.dto.entity.User;
 import com.url.app.dto.entity.UserMng;
-import com.url.app.dto.entity.UrlRolesBean;
+import com.url.app.dto.entity.UserSkillsetMng;
 
 /**
  * Dao Layer of application.
@@ -86,9 +86,17 @@ public interface AppDao {
 	String generateNewCode(String commonSettingsType);
 
 	/**
-	 * Get all faculty skillset details.
+	 * Get all user skillset details.
 	 * 
-	 * @return list of faculty skillsets with its details.
+	 * @return list of user skillsets with its details.
 	 */
-	List<FacultySkillsetMng> fetchFacultySkillsetsListing();
+	List<UserSkillsetMng> fetchUserSkillsetsListing();
+
+	/**
+	 * Update user skillsets isActive flag.
+	 * 
+	 * @param user the fields which are to be updated.
+	 * @return the number of entities updated.
+	 */
+	int userSkillsetsUpdateIsActive(User user);
 }

@@ -37,17 +37,17 @@ public class LoginControllerImpl implements LoginController {
 	}
 
 	@Override
-	public String accessDeniedPage() {
+	public String accessDenied() {
 		return AppUrlView.VIEW_ACCESS_DENIED;
 	}
 
 	@Override
-	public String invalidSessionPage() {
+	public String invalidSession() {
 		return AppUrlView.VIEW_INVALID_SESSION;
 	}
 
 	@Override
-	public String sessionExpiredPage() {
+	public String sessionExpired() {
 		return AppUrlView.VIEW_SESSION_EXPIRED;
 	}
 }

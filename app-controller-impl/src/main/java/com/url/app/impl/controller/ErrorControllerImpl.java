@@ -10,7 +10,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.url.app.interf.controller.AppErrorController;
 import com.url.app.interf.service.AppService;
-import com.url.app.interf.service.AppUserService;
+import com.url.app.security.service.AppPrincipalUser;
 import com.url.app.utility.AppCommon;
 import com.url.app.utility.AppLogMessage;
 import com.url.app.utility.AppResponseKey;
@@ -26,7 +26,7 @@ public class ErrorControllerImpl implements AppErrorController {
 	private static final Logger logger = LoggerFactory.getLogger(ErrorControllerImpl.class);
 
 	@Autowired
-	private AppUserService appUserService;
+	private AppPrincipalUser appPrincipalUser;
 
 	@Autowired
 	private AppService appService;
@@ -50,7 +50,7 @@ public class ErrorControllerImpl implements AppErrorController {
 	public String errorPage() {
 		String view = AppUrlView.VIEW_GLOBAL_ERROR_PAGE;
 		try {
-			final Integer userId = appUserService.getPrincipalUserUserId();
+			final Integer userId = appPrincipalUser.getPrincipalUserUserId();
 			if (AppCommon.isPositiveInteger(userId)) {
 				view = AppUrlView.VIEW_APP_ERROR_PAGE;
 			}

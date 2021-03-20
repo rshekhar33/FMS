@@ -90,13 +90,12 @@ var CrudController = {
 
 			var dropdownData = [];
 			if (roles != null) {
-				for (var i = 0; i < roles.length; i++) {
-					var role = roles[i];
-					dropdownData.push({
+				dropdownData = $.map(roles, function (role) {
+					return {
 						id: role.roleId,
 						text: role.roleName
-					});
-				}
+					};
+				});
 			}
 			base.elements.roles.select2({
 				placeholder: "Select an option",

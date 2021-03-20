@@ -3,7 +3,7 @@ var DL = "__bcdef567kop48__";
 var secretKey = new Date().getTime();
 
 function getArr6() {
-	return [ 0, 1, 2, 3, 4, 5 ];
+	return [0, 1, 2, 3, 4, 5];
 }
 
 function shuffle(arr) {
@@ -14,18 +14,18 @@ function shuffle(arr) {
 
 function getChar(n) {
 	switch (n) {
-	case 0:
-		return 'a';
-	case 1:
-		return 'b';
-	case 2:
-		return 'c';
-	case 3:
-		return 'd';
-	case 4:
-		return 'e';
-	case 5:
-		return 'f';
+		case 0:
+			return 'a';
+		case 1:
+			return 'b';
+		case 2:
+			return 'c';
+		case 3:
+			return 'd';
+		case 4:
+			return 'e';
+		case 5:
+			return 'f';
 	}
 }
 
@@ -109,7 +109,7 @@ function encryptString(plainTextStr) {
 	var aesUtil = new AesUtil(ks, ic);
 	var ciphertext = aesUtil.encrypt(salt, iv, pp, plainTextStr);
 
-	var finalStr = getCipherText([ ciphertext, iv, salt, pp, ic, ks ]);
+	var finalStr = getCipherText([ciphertext, iv, salt, pp, ic, ks]);
 
 	return finalStr;
 }

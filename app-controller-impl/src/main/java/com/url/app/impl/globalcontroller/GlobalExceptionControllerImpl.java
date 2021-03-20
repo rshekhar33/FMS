@@ -17,8 +17,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.url.app.config.AppMessage;
 import com.url.app.interf.globalcontroller.GlobalExceptionController;
-import com.url.app.interf.service.AppUserService;
 import com.url.app.pojo.AppExceptionInfo;
+import com.url.app.security.service.AppPrincipalUser;
 import com.url.app.utility.AppCommon;
 import com.url.app.utility.AppConstant;
 import com.url.app.utility.AppLogMessage;
@@ -36,10 +36,10 @@ public class GlobalExceptionControllerImpl implements GlobalExceptionController 
 	private static final Logger logger = LoggerFactory.getLogger(GlobalExceptionControllerImpl.class);
 
 	@Autowired
-	private AppUserService appUserService;
+	private AppMessage appMessage;
 
 	@Autowired
-	private AppMessage appMessage;
+	private AppPrincipalUser appPrincipalUser;
 
 	@Override
 	public ModelAndView handleAllException(final HttpServletRequest request, final Exception e) {
@@ -67,7 +67,7 @@ public class GlobalExceptionControllerImpl implements GlobalExceptionController 
 	public String errorPage() {
 		String view = AppUrlView.VIEW_GLOBAL_ERROR_PAGE;
 		try {
-			final Integer userId = appUserService.getPrincipalUserUserId();
+			final Integer userId = appPrincipalUser.getPrincipalUserUserId();
 			if (AppCommon.isPositiveInteger(userId)) {
 				view = AppUrlView.VIEW_APP_ERROR_PAGE;
 			}

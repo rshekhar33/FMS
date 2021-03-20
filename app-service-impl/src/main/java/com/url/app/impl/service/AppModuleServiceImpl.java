@@ -14,7 +14,6 @@ import com.url.app.dto.entity.Module;
 import com.url.app.dto.validation.AppModuleValidationService;
 import com.url.app.interf.dao.ModuleRepository;
 import com.url.app.interf.service.AppModuleService;
-import com.url.app.interf.service.AppUserService;
 import com.url.app.interf.service.AppValidationService;
 import com.url.app.pojo.AppConcurrentHashMap;
 import com.url.app.utility.AppCommon;
@@ -33,9 +32,6 @@ public class AppModuleServiceImpl implements AppModuleService {
 	private static final Logger logger = LoggerFactory.getLogger(AppModuleServiceImpl.class);
 
 	@Autowired
-	private AppUserService appUserService;
-
-	@Autowired
 	private ModuleRepository moduleRepository;
 
 	@Autowired
@@ -51,6 +47,12 @@ public class AppModuleServiceImpl implements AppModuleService {
 	@Transactional(readOnly = true)
 	public List<Module> fetchDetailsModules() {
 		return moduleRepository.findAllByOrderByModuleId();
+	}
+
+	@Override
+	@Transactional(readOnly = true)
+	public List<Module> fetchActiveDetailsModules() {
+		return moduleRepository.findByIsActiveOrderByModuleId(AppConstant.ACTIVE);
 	}
 
 	@Override
@@ -73,17 +75,13 @@ public class AppModuleServiceImpl implements AppModuleService {
 		}
 
 		if (AppCommon.isEmpty(status)) {
-			final Integer loggedInUserId = appUserService.getPrincipalUserUserId();
-
 			Module module = new Module();
 			if (AppCommon.isPositiveInteger(formModule.getModuleId())) {
 				module = moduleRepository.getOne(formModule.getModuleId());
 			} else {
 				module.setIsActive(AppConstant.ACTIVE);
-				module.setCreatedBy(loggedInUserId);
 			}
 			module.setModuleName(formModule.getModuleName());
-			module.setModifiedBy(loggedInUserId);
 
 			moduleRepository.save(module);
 			final Integer moduleId = module.getModuleId();

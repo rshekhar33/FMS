@@ -59,11 +59,11 @@ public class Course extends ActiveBaseEntity implements Serializable {
 	@JoinColumn(name = "course_type_id", nullable = false)
 	private CourseType courseType;
 
-	//bi-directional many-to-one association to FacultySkillset
+	//bi-directional many-to-one association to UserSkillset
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinColumn(name = "module_id", referencedColumnName = "module_id", nullable = false)
 	@JoinColumn(name = "user_id", referencedColumnName = "user_id", nullable = false)
-	private FacultySkillset facultySkillset;
+	private UserSkillset userSkillset;
 
 	//bi-directional many-to-one association to FeedbackQuestion
 	@OneToMany(mappedBy = "course", cascade = CascadeType.ALL, orphanRemoval = true)
@@ -114,12 +114,12 @@ public class Course extends ActiveBaseEntity implements Serializable {
 		this.courseType = courseType;
 	}
 
-	public FacultySkillset getFacultySkillset() {
-		return this.facultySkillset;
+	public UserSkillset getUserSkillset() {
+		return this.userSkillset;
 	}
 
-	public void setFacultySkillset(FacultySkillset facultySkillset) {
-		this.facultySkillset = facultySkillset;
+	public void setUserSkillset(UserSkillset userSkillset) {
+		this.userSkillset = userSkillset;
 	}
 
 	public Set<FeedbackQuestion> getFeedbackQuestions() {

@@ -173,9 +173,9 @@ CREATE UNIQUE INDEX `module_name_UNIQUE` ON `module` (`module_name` ASC);
 
 
 -- -----------------------------------------------------
--- Table `faculty_skillset`
+-- Table `user_skillset`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `faculty_skillset` (
+CREATE TABLE IF NOT EXISTS `user_skillset` (
   `user_id` INT NOT NULL,
   `module_id` INT NOT NULL,
   `created_by` INT NOT NULL,
@@ -184,22 +184,22 @@ CREATE TABLE IF NOT EXISTS `faculty_skillset` (
   `modified_date` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `is_active` INT NOT NULL DEFAULT 0 COMMENT '0 - Inactive\n1 - Active',
   PRIMARY KEY (`user_id`, `module_id`),
-  CONSTRAINT `fk_faculty_skillset_0`
+  CONSTRAINT `fk_user_skillset_0`
     FOREIGN KEY (`user_id`)
     REFERENCES `user` (`user_id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT `fk_faculty_skillset_1`
+  CONSTRAINT `fk_user_skillset_1`
     FOREIGN KEY (`module_id`)
     REFERENCES `module` (`module_id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION);
 
-CREATE INDEX `idx_faculty_skillset_0` ON `faculty_skillset` (`user_id` ASC);
+CREATE INDEX `idx_user_skillset_0` ON `user_skillset` (`user_id` ASC);
 
-CREATE INDEX `idx_faculty_skillset_1` ON `faculty_skillset` (`module_id` ASC);
+CREATE INDEX `idx_user_skillset_1` ON `user_skillset` (`module_id` ASC);
 
-CREATE INDEX `idx_faculty_skillset_2` ON `faculty_skillset` (`user_id` ASC, `module_id` ASC);
+CREATE INDEX `idx_user_skillset_2` ON `user_skillset` (`user_id` ASC, `module_id` ASC);
 
 
 -- -----------------------------------------------------
@@ -239,7 +239,7 @@ CREATE TABLE IF NOT EXISTS `course` (
   PRIMARY KEY (`course_id`),
   CONSTRAINT `fk_course_0`
     FOREIGN KEY (`user_id` , `module_id`)
-    REFERENCES `faculty_skillset` (`user_id` , `module_id`)
+    REFERENCES `user_skillset` (`user_id` , `module_id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_course_1`

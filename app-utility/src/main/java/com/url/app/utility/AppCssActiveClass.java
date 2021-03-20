@@ -34,9 +34,8 @@ public class AppCssActiveClass {
 	public static final String ROLES_ACTIVE_CLS = "rolesActiveCls";
 	public static final String ROLE_CRUD_ACTIVE_CLS = "roleCrudActiveCls";
 
-	public static final String FACULTY_SKILLSET_MENU_OPEN_CLS = "facultySkillsetMenuOpenCls";
-	public static final String FACULTY_SKILLSETS_ACTIVE_CLS = "facultySkillsetsActiveCls";
-	public static final String FACULTY_SKILLSET_CRUD_ACTIVE_CLS = "facultySkillsetCrudActiveCls";
+	public static final String USER_SKILLSET_MENU_OPEN_CLS = "userSkillsetMenuOpenCls";
+	public static final String USER_SKILLSETS_ACTIVE_CLS = "userSkillsetsActiveCls";
 
 	public static final void addClass(final ModelMap modelMap, final String menuClsVar, final String submenuClsVar) {
 		modelMap.addAttribute(menuClsVar, MENU_OPEN_CLASS);

@@ -11,33 +11,27 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.url.app.utility.AppUrlView;
 
 /**
- * Controller for faculty skillset related actions.
+ * Controller for user skillset related actions.
  * 
  * @author Shekhar Shinde
  */
-@RequestMapping(value = AppUrlView.PATH_ROOT_FACULTY_SKILLSET)
-public interface FacultySkillsetController {
+@RequestMapping(value = AppUrlView.PATH_ROOT_USER_SKILLSET)
+public interface UserSkillsetController {
 
 	/**
-	 * Faculty Skillsets Listing Screen.
+	 * User Skillsets Listing Screen.
 	 */
 	@GetMapping(value = AppUrlView.PATH_LIST)
 	String list(HttpSession httpSess, ModelMap modelMap);
 
 	/**
-	 * Add faculty skillset screen.
-	 */
-	@GetMapping(value = AppUrlView.PATH_ADD)
-	String add(HttpSession httpSess, ModelMap modelMap);
-
-	/**
-	 * Action to get facultySkillsetId on update faculty skillset screen.
+	 * Action to get userId on update user skillset screen.
 	 */
 	@PostMapping(value = AppUrlView.PATH_UPDATE)
-	String update(HttpSession httpSess, @RequestParam("linkId") String linkId, @RequestParam("linkId2") String linkId2);
+	String update(HttpSession httpSess, @RequestParam("linkId") String linkId);
 
 	/**
-	 * Update faculty skillset screen.
+	 * Update user skillset screen.
 	 */
 	@GetMapping(value = AppUrlView.PATH_UPDATE)
 	String updateScreen(HttpSession httpSess, ModelMap modelMap);

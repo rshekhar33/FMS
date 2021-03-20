@@ -11,11 +11,11 @@ import javax.persistence.TypedQuery;
 import org.springframework.stereotype.Repository;
 
 import com.url.app.dto.entity.Action;
-import com.url.app.dto.entity.FacultySkillsetMng;
+import com.url.app.dto.entity.UrlRolesBean;
 import com.url.app.dto.entity.User;
 import com.url.app.dto.entity.UserMng;
+import com.url.app.dto.entity.UserSkillsetMng;
 import com.url.app.interf.dao.AppDao;
-import com.url.app.dto.entity.UrlRolesBean;
 import com.url.app.utility.AppCommon;
 import com.url.app.utility.AppSQL;
 
@@ -48,7 +48,7 @@ public class AppDaoImpl implements AppDao {
 	@Override
 	public User fetchUser(final String userName) {
 		final TypedQuery<User> typedQuery = entityManager.createQuery(AppSQL.QRY_SELECT_USER_ROLES_BY_USERNAME, User.class);
-		typedQuery.setParameter("userName", userName);
+		typedQuery.setParameter(AppSQL.PARAMETER_USER_NAME, userName);
 
 		User user = null;
 		final List<User> queryResult = typedQuery.getResultList();
@@ -73,7 +73,7 @@ public class AppDaoImpl implements AppDao {
 	public int userUpdateLastLoginFailure(final String userName) {
 		final Query query = entityManager.createQuery(AppSQL.QRY_UPDATE_USER_LAST_FAILED_LOGIN_DATE);
 		query.setParameter("lastFailedLoginDate", AppCommon.currentDateTime());
-		query.setParameter("userName", userName);
+		query.setParameter(AppSQL.PARAMETER_USER_NAME, userName);
 
 		return query.executeUpdate();
 	}
@@ -102,7 +102,7 @@ public class AppDaoImpl implements AppDao {
 
 	@Override
 	public User fetchUserWithModules(final Integer userId) {
-		final TypedQuery<User> typedQuery = entityManager.createQuery(AppSQL.QRY_SELECT_USER_SKILLSETS, User.class);
+		final TypedQuery<User> typedQuery = entityManager.createQuery(AppSQL.QRY_SELECT_USER_SKILLSETS_BY_USERID, User.class);
 		typedQuery.setParameter(AppSQL.PARAMETER_USER_ID, userId);
 
 		User user = null;
@@ -117,12 +117,12 @@ public class AppDaoImpl implements AppDao {
 	@Override
 	public String generateNewCode(final String commonSettingsType) {
 		final TypedQuery<String> typedQuery = entityManager.createQuery(AppSQL.QRY_SELECT_COMMON_SETTING_VALUE, String.class);
-		typedQuery.setParameter("type", commonSettingsType);
+		typedQuery.setParameter(AppSQL.PARAMETER_TYPE, commonSettingsType);
 
 		final String value = typedQuery.getSingleResult();
 
 		final Query query = entityManager.createQuery(AppSQL.QRY_UPDATE_COMMON_SETTING_VALUE);
-		query.setParameter("type", commonSettingsType);
+		query.setParameter(AppSQL.PARAMETER_TYPE, commonSettingsType);
 
 		query.executeUpdate();
 
@@ -131,9 +131,20 @@ public class AppDaoImpl implements AppDao {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<FacultySkillsetMng> fetchFacultySkillsetsListing() {
-		final StoredProcedureQuery query = entityManager.createStoredProcedureQuery(AppSQL.PROC_FACULTY_SKILLSETS, FacultySkillsetMng.class);
+	public List<UserSkillsetMng> fetchUserSkillsetsListing() {
+		final StoredProcedureQuery query = entityManager.createStoredProcedureQuery(AppSQL.PROC_USER_SKILLSETS, UserSkillsetMng.class);
 
 		return query.getResultList();
+	}
+
+	@Override
+	public int userSkillsetsUpdateIsActive(final User user) {
+		final Query query = entityManager.createQuery(AppSQL.QRY_UPDATE_USER_SKILLSETS_IS_ACTIVE);
+		query.setParameter("isActive", user.getIsActive());
+		query.setParameter("modifiedBy", user.getModifiedBy());
+		query.setParameter("modifiedDate", AppCommon.currentDateTime());
+		query.setParameter(AppSQL.PARAMETER_USER_ID, user.getUserId());
+
+		return query.executeUpdate();
 	}
 }

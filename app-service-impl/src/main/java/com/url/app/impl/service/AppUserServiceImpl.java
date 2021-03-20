@@ -9,7 +9,6 @@ import java.util.stream.Collectors;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -25,7 +24,7 @@ import com.url.app.interf.dao.UserRepository;
 import com.url.app.interf.service.AppUserService;
 import com.url.app.interf.service.AppValidationService;
 import com.url.app.pojo.AppConcurrentHashMap;
-import com.url.app.pojo.LoggedUser;
+import com.url.app.security.service.AppPrincipalUser;
 import com.url.app.utility.AppCommon;
 import com.url.app.utility.AppConstant;
 import com.url.app.utility.AppLogMessage;
@@ -54,48 +53,13 @@ public class AppUserServiceImpl implements AppUserService {
 	private AppMessage appMessage;
 
 	@Autowired
+	private AppPrincipalUser appPrincipalUser;
+
+	@Autowired
 	private AppUserValidationService appUserValidationService;
 
 	@Autowired
 	private AppValidationService appValidationService;
-
-	@Override
-	public LoggedUser getPrincipal() {
-		LoggedUser loggedUser = null;
-		try {
-			final Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-
-			if (principal instanceof LoggedUser) {
-				loggedUser = (LoggedUser) principal;
-			}
-		} catch (Exception e) {
-			logger.error(e.getMessage(), e);
-		}
-
-		return loggedUser;
-	}
-
-	@Override
-	public User getPrincipalUser() {
-		User user = null;
-		final LoggedUser loggedUser = getPrincipal();
-		if (loggedUser != null) {
-			user = loggedUser.getUser();
-		}
-
-		return user;
-	}
-
-	@Override
-	public Integer getPrincipalUserUserId() {
-		Integer userId = null;
-		final User user = getPrincipalUser();
-		if (user != null) {
-			userId = user.getUserId();
-		}
-
-		return userId;
-	}
 
 	@Override
 	@Transactional(readOnly = true)
@@ -106,7 +70,7 @@ public class AppUserServiceImpl implements AppUserService {
 	@Override
 	@Transactional
 	public void userUpdateLastLoginSuccess() {
-		appDao.userUpdateLastLoginSuccess(getPrincipalUserUserId());
+		appDao.userUpdateLastLoginSuccess(appPrincipalUser.getPrincipalUserUserId());
 	}
 
 	@Override
@@ -149,39 +113,33 @@ public class AppUserServiceImpl implements AppUserService {
 		}
 
 		if (AppCommon.isEmpty(status)) {
-			final Integer loggedInUserId = getPrincipalUserUserId();
-
 			User user = new User();
 			if (AppCommon.isPositiveInteger(formUser.getUserId())) {
-				user = userRepository.getOne(formUser.getUserId());
+				user = appDao.fetchUserWithRoles(formUser.getUserId());
 			} else {
 				user.setUserName(formUser.getUserName());
 				user.setPassword(passwordEncoder.encode(AppConstant.USER_DEFAULT_PASS));
 				user.setIsActive(AppConstant.ACTIVE);
-				user.setCreatedBy(loggedInUserId);
 			}
 			user.setFirstName(formUser.getFirstName());
 			user.setMiddleName(formUser.getMiddleName());
 			user.setLastName(formUser.getLastName());
 			user.setEmailId(formUser.getEmailId());
 			user.setMobileNo(formUser.getMobileNo());
-			user.setModifiedBy(loggedInUserId);
 
 			final Set<UserRoleRelation> removedUserRoleRelations = new HashSet<>(user.getUserRoleRelations());
-			for (Integer roleId : formUser.getRoles()) {
+			for (final Integer roleId : formUser.getRoles()) {
 				final Role role = new Role();
 				role.setRoleId(roleId);
 
 				final UserRoleRelation userRoleRelation = new UserRoleRelation();
 				userRoleRelation.setRole(role);
 				userRoleRelation.setIsActive(AppConstant.ACTIVE);
-				userRoleRelation.setCreatedBy(loggedInUserId);
-				userRoleRelation.setModifiedBy(loggedInUserId);
 
 				user.addUserRoleRelation(userRoleRelation);
 				removedUserRoleRelations.remove(userRoleRelation);
 			}
-			for (UserRoleRelation userRoleRelation : removedUserRoleRelations) {
+			for (final UserRoleRelation userRoleRelation : removedUserRoleRelations) {
 				user.removeUserRoleRelation(userRoleRelation);
 			}
 

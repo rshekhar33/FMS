@@ -42,7 +42,7 @@ public interface LoginController {
 	 */
 	@RequestMapping(value = AppUrlView.PATH_ACCESS_DENIED)
 	@ResponseStatus(code = HttpStatus.FORBIDDEN)
-	String accessDeniedPage();
+	String accessDenied();
 
 	/**
 	 * View when application is accessed using invalid session id.
@@ -51,7 +51,7 @@ public interface LoginController {
 	 */
 	@RequestMapping(value = AppUrlView.PATH_INVALID_SESSION)
 	@ResponseStatus(code = HttpStatus.UNAUTHORIZED)
-	String invalidSessionPage();
+	String invalidSession();
 
 	/**
 	 * View when session has expired.
@@ -60,5 +60,5 @@ public interface LoginController {
 	 */
 	@RequestMapping(value = AppUrlView.PATH_SESSION_EXPIRED)
 	@ResponseStatus(code = HttpStatus.UNAUTHORIZED)
-	String sessionExpiredPage();
+	String sessionExpired();
 }

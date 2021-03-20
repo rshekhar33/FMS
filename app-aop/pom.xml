@@ -22,7 +22,7 @@
 		</dependency>
 		<dependency>
 			<groupId>com.url.app</groupId>
-			<artifactId>app-service</artifactId>
+			<artifactId>app-security</artifactId>
 			<version>${project.version}</version>
 		</dependency>
 		<dependency>

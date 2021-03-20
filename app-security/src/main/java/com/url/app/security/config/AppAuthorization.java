@@ -1,7 +1,7 @@
 package com.url.app.security.config;
 
 import java.util.ArrayList;
-import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -14,9 +14,10 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 
 import com.url.app.dto.entity.Action;
+import com.url.app.dto.entity.UrlRolesBean;
 import com.url.app.pojo.AppConcurrentHashMap;
 import com.url.app.pojo.RolesCollection;
-import com.url.app.dto.entity.UrlRolesBean;
+import com.url.app.utility.AppCommon;
 import com.url.app.utility.AppLogMessage;
 
 /**
@@ -88,19 +89,9 @@ public class AppAuthorization {
 		final List<String> roles = getListOfRolesHavingAccessToAction(action);
 
 		final Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		final Collection<? extends GrantedAuthority> userRoles = auth.getAuthorities();
+		final List<String> userRoles = auth.getAuthorities().stream().map(GrantedAuthority::getAuthority).collect(Collectors.toList());
 
-		boolean isAccessAllowed = false;
-		if (roles != null && !roles.isEmpty()) {
-			for (final GrantedAuthority grantedAuthority : userRoles) {
-				if (roles.contains(grantedAuthority.getAuthority())) {
-					isAccessAllowed = true;
-					break;
-				}
-			}
-		}
-
-		return isAccessAllowed;
+		return !AppCommon.isEmpty(roles) && !AppCommon.isEmpty(userRoles) && !Collections.disjoint(roles, userRoles);
 	}
 
 	/**
@@ -120,10 +111,8 @@ public class AppAuthorization {
 		applicationAuthSkipUrls = actionsSkipMap.getOrDefault(1, new ArrayList<>());
 		applicationUrls = actionsSkipMap.getOrDefault(0, new ArrayList<>()).stream().distinct().collect(Collectors.toList());
 
-		for (final UrlRolesBean urlRolesBean : actionRoleList) {
-			final String dbUrl = urlRolesBean.getUrl();
-			actionRoles.computeIfAbsent(dbUrl, k -> new RolesCollection()).add(String.valueOf(urlRolesBean.getRoleId()));
-		}
+		actionRoleList
+				.forEach(urlRolesBean -> actionRoles.computeIfAbsent(urlRolesBean.getUrl(), k -> new RolesCollection()).add(String.valueOf(urlRolesBean.getRoleId())));
 
 		actionRoles.forEach((k, v) -> v.setRoleArr(v.getRoleList().stream().toArray(String[]::new)));
 

@@ -129,8 +129,14 @@ public class AppMessage {
 	public String courseDeleteSuccess;
 
 	/**
-	 * facultySkillsets
+	 * userSkillsets
 	 */
-	@Value("${facultyskillsets.update.success}")
-	public String facultyskillsetsUpdateSuccess;
+	@Value("${userskillsets.update.success}")
+	public String userskillsetsUpdateSuccess;
+
+	@Value("${userskillsets.active.success}")
+	public String userskillsetsActiveSuccess;
+
+	@Value("${userskillsets.inactive.success}")
+	public String userskillsetsInactiveSuccess;
 }

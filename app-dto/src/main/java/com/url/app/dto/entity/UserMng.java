@@ -33,8 +33,8 @@ public class UserMng implements Serializable {
 	@Column(name = "user_name", nullable = false, length = 50)
 	private String userName;
 
-	@Column(name = "role_name")
-	private String roleName;
+	@Column(name = "role_names")
+	private String roleNames;
 
 	public UserMng() {
 		super();
@@ -88,12 +88,12 @@ public class UserMng implements Serializable {
 		this.userName = userName;
 	}
 
-	public String getRoleName() {
-		return roleName;
+	public String getRoleNames() {
+		return roleNames;
 	}
 
-	public void setRoleName(String roleName) {
-		this.roleName = roleName;
+	public void setRoleNames(String roleNames) {
+		this.roleNames = roleNames;
 	}
 
 	@Override
