@@ -77,13 +77,10 @@ public class AppUserSkillsetServiceImpl implements AppUserSkillsetService {
 		String status = AppConstant.BLANK_STRING;
 		String msg = AppConstant.BLANK_STRING;
 
-		User user = new User();
-		if (AppCommon.isPositiveInteger(formUser.getUserId())) {
-			user = appDao.fetchUserWithModules(formUser.getUserId());
-		}
+		final User user = AppCommon.isPositiveInteger(formUser.getUserId()) ? appDao.fetchUserWithModules(formUser.getUserId()) : new User();
 
 		final Set<UserSkillset> removedUserSkillsets = new HashSet<>(user.getUserSkillsets());
-		if (!AppCommon.isEmpty(formUser.getModules())) {
+		if (AppCommon.isNotEmpty(formUser.getModules())) {
 			for (final Integer moduleId : formUser.getModules()) {
 				final Module module = new Module();
 				module.setModuleId(moduleId);

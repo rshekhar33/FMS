@@ -46,6 +46,7 @@ public class Course extends ActiveBaseEntity implements Serializable {
 	private String courseCode;
 
 	@Temporal(TemporalType.DATE)
+	@DateTimeFormat(pattern = "MM/dd/yyyy")
 	@Column(name = "end_date")
 	private Date endDate;
 

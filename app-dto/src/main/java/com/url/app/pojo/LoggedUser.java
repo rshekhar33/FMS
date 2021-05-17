@@ -1,6 +1,7 @@
 package com.url.app.pojo;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
@@ -20,14 +21,22 @@ public class LoggedUser implements UserDetails {
 	private static final long serialVersionUID = 1L;
 
 	private User user;
+	private List<String> userRoles;
 
-	public LoggedUser() {
+	private LoggedUser() {
 		super();
 	}
 
-	public LoggedUser(User user) {
+	private LoggedUser(User user) {
 		super();
 		this.user = user;
+	}
+
+	public static LoggedUser getInstance(final User user) {
+		final LoggedUser loggedUser = new LoggedUser(user);
+		loggedUser.setUserRoles(loggedUser.getUser().getUserRoleRelations().stream().map(UserRoleRelation::getRole).map(Role::getRoleId).map(String::valueOf)
+				.collect(Collectors.toList()));
+		return loggedUser;
 	}
 
 	public User getUser() {
@@ -38,10 +47,17 @@ public class LoggedUser implements UserDetails {
 		this.user = user;
 	}
 
+	public List<String> getUserRoles() {
+		return userRoles;
+	}
+
+	public void setUserRoles(List<String> userRoles) {
+		this.userRoles = userRoles;
+	}
+
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
-		return getUser().getUserRoleRelations().stream().map(UserRoleRelation::getRole).map(Role::getRoleId).map(String::valueOf).map(SimpleGrantedAuthority::new)
-				.collect(Collectors.toList());
+		return getUserRoles().stream().map(SimpleGrantedAuthority::new).collect(Collectors.toList());
 	}
 
 	@Override

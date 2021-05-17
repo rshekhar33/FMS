@@ -1,5 +1,7 @@
 package com.url.app.security.service;
 
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -43,13 +45,9 @@ public class AppPrincipalUser {
 	 * @return User of LoggedUser from spring security principal.
 	 */
 	public User getPrincipalUser() {
-		User user = null;
 		final LoggedUser loggedUser = getPrincipal();
-		if (loggedUser != null) {
-			user = loggedUser.getUser();
-		}
 
-		return user;
+		return (loggedUser != null) ? loggedUser.getUser() : null;
 	}
 
 	/**
@@ -58,12 +56,19 @@ public class AppPrincipalUser {
 	 * @return userId of User of LoggedUser from spring security principal.
 	 */
 	public Integer getPrincipalUserUserId() {
-		Integer userId = null;
 		final User user = getPrincipalUser();
-		if (user != null) {
-			userId = user.getUserId();
-		}
 
-		return userId;
+		return (user != null) ? user.getUserId() : null;
+	}
+
+	/**
+	 * Get roles of LoggedUser from spring security principal.
+	 * 
+	 * @return roles of LoggedUser from spring security principal.
+	 */
+	public List<String> getPrincipalUserRoles() {
+		final LoggedUser loggedUser = getPrincipal();
+
+		return (loggedUser != null) ? loggedUser.getUserRoles() : null;
 	}
 }

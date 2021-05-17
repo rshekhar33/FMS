@@ -38,6 +38,6 @@ public class AppUserDetailsService implements UserDetailsService {
 
 		logger.debug(AppLogMessage.USER_USERNAME_MSG, username);
 
-		return new LoggedUser(user);
+		return LoggedUser.getInstance(user);
 	}
 }

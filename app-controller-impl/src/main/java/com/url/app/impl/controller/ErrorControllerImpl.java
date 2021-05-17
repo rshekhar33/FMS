@@ -48,16 +48,6 @@ public class ErrorControllerImpl implements AppErrorController {
 	}
 
 	public String errorPage() {
-		String view = AppUrlView.VIEW_GLOBAL_ERROR_PAGE;
-		try {
-			final Integer userId = appPrincipalUser.getPrincipalUserUserId();
-			if (AppCommon.isPositiveInteger(userId)) {
-				view = AppUrlView.VIEW_APP_ERROR_PAGE;
-			}
-		} catch (Exception e) {
-			logger.error(e.getMessage(), e);
-		}
-
-		return view;
+		return AppCommon.isPositiveInteger(appPrincipalUser.getPrincipalUserUserId()) ? AppUrlView.VIEW_APP_ERROR_PAGE : AppUrlView.VIEW_GLOBAL_ERROR_PAGE;
 	}
 }

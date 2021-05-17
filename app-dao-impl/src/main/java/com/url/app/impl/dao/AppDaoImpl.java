@@ -50,13 +50,9 @@ public class AppDaoImpl implements AppDao {
 		final TypedQuery<User> typedQuery = entityManager.createQuery(AppSQL.QRY_SELECT_USER_ROLES_BY_USERNAME, User.class);
 		typedQuery.setParameter(AppSQL.PARAMETER_USER_NAME, userName);
 
-		User user = null;
 		final List<User> queryResult = typedQuery.getResultList();
-		if (!queryResult.isEmpty()) {
-			user = queryResult.get(0);
-		}
 
-		return user;
+		return !queryResult.isEmpty() ? queryResult.get(0) : null;
 	}
 
 	@Override
@@ -91,13 +87,9 @@ public class AppDaoImpl implements AppDao {
 		final TypedQuery<User> typedQuery = entityManager.createQuery(AppSQL.QRY_SELECT_USER_ROLES_BY_USERID, User.class);
 		typedQuery.setParameter(AppSQL.PARAMETER_USER_ID, userId);
 
-		User user = null;
 		final List<User> queryResult = typedQuery.getResultList();
-		if (!queryResult.isEmpty()) {
-			user = queryResult.get(0);
-		}
 
-		return user;
+		return !queryResult.isEmpty() ? queryResult.get(0) : null;
 	}
 
 	@Override
@@ -105,13 +97,9 @@ public class AppDaoImpl implements AppDao {
 		final TypedQuery<User> typedQuery = entityManager.createQuery(AppSQL.QRY_SELECT_USER_SKILLSETS_BY_USERID, User.class);
 		typedQuery.setParameter(AppSQL.PARAMETER_USER_ID, userId);
 
-		User user = null;
 		final List<User> queryResult = typedQuery.getResultList();
-		if (!queryResult.isEmpty()) {
-			user = queryResult.get(0);
-		}
 
-		return user;
+		return !queryResult.isEmpty() ? queryResult.get(0) : null;
 	}
 
 	@Override

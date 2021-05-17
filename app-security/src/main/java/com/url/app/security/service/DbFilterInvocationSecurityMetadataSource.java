@@ -36,35 +36,28 @@ public class DbFilterInvocationSecurityMetadataSource implements FilterInvocatio
 	@Autowired
 	private AppAuthorization appAuthorization;
 
-	private static final Collection<ConfigAttribute> CONFIG_ATTRIBUTES_DENIED = SecurityConfig.createList("DENIED");
+	private static final List<ConfigAttribute> CONFIG_ATTRIBUTES_DENIED = SecurityConfig.createList("DENIED");
 
 	@Override
 	public Collection<ConfigAttribute> getAttributes(final Object object) {
 		final FilterInvocation fi = (FilterInvocation) object;
-		String url = fi.getRequestUrl();
-		logger.debug(AppLogMessage.FILTER_INVOCATION_URL_MSG, url);
-
 		final HttpServletRequest request = fi.getHttpRequest();
 
-		if (request instanceof SecurityContextHolderAwareRequestWrapper) {
-			url = request.getRequestURI().substring(request.getContextPath().length() + 1);
-		}
+		final String url = (request instanceof SecurityContextHolderAwareRequestWrapper) ? request.getRequestURI().substring(request.getContextPath().length() + 1)
+				: fi.getRequestUrl();
 
-		final String[] roles = appAuthorization.getArrayOfRolesHavingAccessToAction(url);
-		logger.debug(AppLogMessage.REQUEST_URL_AND_ROLES_MSG, url, roles);
+		List<ConfigAttribute> configAttributes = appAuthorization.getConfigAttributesOfRolesHavingAccessToAction(url);
+		logger.debug(AppLogMessage.REQUEST_URL_AND_ROLES_MSG, url, configAttributes);
 
-		Collection<ConfigAttribute> attributes = null;
-		if (roles == null) {
+		if (configAttributes == null) {
 			final List<String> applicationAuthSkipUrls = appAuthorization.getApplicationAuthSkipUrls();
 			final List<String> applicationUrls = appAuthorization.getApplicationUrls();
 			if (url != null && !applicationAuthSkipUrls.contains(url) && applicationUrls.contains(url)) {
-				attributes = CONFIG_ATTRIBUTES_DENIED;
+				configAttributes = CONFIG_ATTRIBUTES_DENIED;
 			}
-		} else {
-			attributes = SecurityConfig.createList(roles);
 		}
 
-		return attributes;
+		return configAttributes;
 	}
 
 	@Override
