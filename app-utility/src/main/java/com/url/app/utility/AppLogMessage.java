@@ -21,17 +21,16 @@ public class AppLogMessage {
 	public static final String FROM_METHOD_TXT_MSG = " : from method : ";
 	public static final String COMMA_TXT_MSG = ", ";
 
-	public static final String COURSE_TYPE_ID_MSG = "courseTypeId = {}";
-
 	public static final String INCORRECT_PATH_MSG = "Incorrect Path at Location : {} with Exception : {}";
 	public static final String NO_HANDLER_FOUND_EXCEPTION_MSG = "Global NoHandlerFoundException at Location : {} with Exception : {}";
 	public static final String METHOD_NOT_SUPPORTED_EXCEPTION_MSG = "Global HttpRequestMethodNotSupportedException at Location : {} with Exception : {}";
 	public static final String GLOBAL_EXCEPTION_MSG = "Global Exception at Location : ";
 	public static final String GLOBAL_ERROR_MSG = "Global Error Data : {}";
 
-	public static final String MODULE_ID_MSG = "moduleId = {}";
-	public static final String ROLE_ID_MSG = "roleId = {}";
-	public static final String USER_ID_MSG = "userId = {}";
+	public static final String COURSE_TYPE_ID_MSG = "courseTypeId : {}";
+	public static final String MODULE_ID_MSG = "moduleId : {}";
+	public static final String ROLE_ID_MSG = "roleId : {}";
+	public static final String USER_ID_MSG = "userId : {}";
 
 	public static final String COURSE_TYPE_MSG = "courseType : {}";
 	public static final String MODULE_MSG = "module : {}";
@@ -43,16 +42,13 @@ public class AppLogMessage {
 	public static final String APPLICATION_ACTIONS_MSG = "Application actions : {}";
 	public static final String ACTION_ROLES_MSG = "Action and its associcated roles : {}";
 
-	public static final String ALL_REQUEST_PARAMS_MSG = "allRequestParams : {}";
-
 	public static final String USER_USERNAME_MSG = "User found with username : {}";
 
 	public static final String PASSWORD_ENCRYPTED_MSG = "Password encrypted text : {}";
 
-	public static final String FILTER_INVOCATION_URL_MSG = "FilterInvocation Url : {}";
 	public static final String REQUEST_URL_AND_ROLES_MSG = "Request Url : '{}' and its Associated Roles : {}";
 
-	public static final String AUTHENTICATION_FAILED_DUE_TO_MSG = "Authentication for userName = '{}' failed due to = {}";
+	public static final String AUTHENTICATION_FAILED_DUE_TO_MSG = "Authentication for userName : '{}' failed due to : {}";
 
-	public static final String LOGIN_SUCCESS_WITH_ROLES_MSG = "Login Success. LoggedUser with roles = {}";
+	public static final String LOGIN_SUCCESS_WITH_ROLES_MSG = "Login Success. LoggedUser with roles : {}";
 }

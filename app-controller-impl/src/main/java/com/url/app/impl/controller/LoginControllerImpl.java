@@ -18,12 +18,7 @@ public class LoginControllerImpl implements LoginController {
 
 	@Override
 	public String index(final Locale locale, final Principal principal) {
-		String url = AppUrlView.REDIRECT_URL_HOME;
-		if (principal == null) {
-			url = AppUrlView.VIEW_LOGIN;
-		}
-
-		return url;
+		return (principal == null) ? AppUrlView.VIEW_LOGIN : AppUrlView.REDIRECT_URL_HOME;
 	}
 
 	@Override

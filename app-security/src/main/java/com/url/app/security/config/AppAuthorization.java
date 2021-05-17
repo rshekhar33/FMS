@@ -8,15 +8,16 @@ import java.util.stream.Collectors;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.ConfigAttribute;
+import org.springframework.security.access.SecurityConfig;
 import org.springframework.stereotype.Component;
 
 import com.url.app.dto.entity.Action;
 import com.url.app.dto.entity.UrlRolesBean;
 import com.url.app.pojo.AppConcurrentHashMap;
 import com.url.app.pojo.RolesCollection;
+import com.url.app.security.service.AppPrincipalUser;
 import com.url.app.utility.AppCommon;
 import com.url.app.utility.AppLogMessage;
 
@@ -28,6 +29,9 @@ import com.url.app.utility.AppLogMessage;
 @Component
 public class AppAuthorization {
 	private static final Logger logger = LoggerFactory.getLogger(AppAuthorization.class);
+
+	@Autowired
+	private AppPrincipalUser appPrincipalUser;
 
 	private Map<String, RolesCollection> actionRoles = new AppConcurrentHashMap<>();
 	private List<String> applicationAuthSkipUrls = new ArrayList<>();
@@ -74,9 +78,9 @@ public class AppAuthorization {
 	 * @param action the url action whose roles are to be fetched.
 	 * @return array of all roles which has access to the provided action.
 	 */
-	public String[] getArrayOfRolesHavingAccessToAction(final String action) {
+	public List<ConfigAttribute> getConfigAttributesOfRolesHavingAccessToAction(final String action) {
 		final RolesCollection rolesCollection = actionRoles.get(action);
-		return rolesCollection != null ? rolesCollection.getRoleArr() : null;
+		return rolesCollection != null ? rolesCollection.getConfigAttributes() : null;
 	}
 
 	/**
@@ -87,17 +91,16 @@ public class AppAuthorization {
 	 */
 	public boolean isAccessAllowed(final String action) {
 		final List<String> roles = getListOfRolesHavingAccessToAction(action);
+		final List<String> userRoles = appPrincipalUser.getPrincipalUserRoles();
 
-		final Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		final List<String> userRoles = auth.getAuthorities().stream().map(GrantedAuthority::getAuthority).collect(Collectors.toList());
-
-		return !AppCommon.isEmpty(roles) && !AppCommon.isEmpty(userRoles) && !Collections.disjoint(roles, userRoles);
+		return AppCommon.isNotEmpty(roles) && AppCommon.isNotEmpty(userRoles) && !Collections.disjoint(roles, userRoles);
 	}
 
 	/**
 	 * Converts flat mapping into key value map with action as key and all its associated roles in a list as values.
 	 * 
 	 * @param actionRoleList flat mapping of action and roles from database.
+	 * @param actions list of all the application actions.
 	 */
 	public void mapUrlToRole(final List<UrlRolesBean> actionRoleList, final List<Action> actions) {
 		logger.debug(AppLogMessage.ACTION_ROLE_MAPPING_MSG, actionRoleList);
@@ -114,7 +117,7 @@ public class AppAuthorization {
 		actionRoleList
 				.forEach(urlRolesBean -> actionRoles.computeIfAbsent(urlRolesBean.getUrl(), k -> new RolesCollection()).add(String.valueOf(urlRolesBean.getRoleId())));
 
-		actionRoles.forEach((k, v) -> v.setRoleArr(v.getRoleList().stream().toArray(String[]::new)));
+		actionRoles.forEach((k, v) -> v.setConfigAttributes(SecurityConfig.createList(v.getRoleList().toArray(String[]::new))));
 
 		logger.debug(AppLogMessage.SKIPPED_ACTIONS_MSG, applicationAuthSkipUrls);
 		logger.debug(AppLogMessage.APPLICATION_ACTIONS_MSG, applicationUrls);

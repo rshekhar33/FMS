@@ -1,15 +1,16 @@
 package com.url.app.pojo;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
+
+import org.springframework.security.access.ConfigAttribute;
 
 /**
  * @author Shekhar Shinde
  */
 public class RolesCollection {
 	private List<String> roleList = new ArrayList<>();
-	private String[] roleArr = new String[0];
+	private List<ConfigAttribute> configAttributes;
 
 	public RolesCollection() {
 		super();
@@ -23,28 +24,23 @@ public class RolesCollection {
 		this.roleList = roleList;
 	}
 
-	public String[] getRoleArr() {
-		return roleArr;
+	public List<ConfigAttribute> getConfigAttributes() {
+		return configAttributes;
 	}
 
-	public void setRoleArr(String[] roleArr) {
-		this.roleArr = roleArr;
+	public void setConfigAttributes(List<ConfigAttribute> configAttributes) {
+		this.configAttributes = configAttributes;
 	}
 
-	public <T> T[] toArray(T[] a) {
-		return roleList.toArray(a);
-	}
-
-	public boolean add(String e) {
-		return roleList.add(e);
+	public boolean add(String roleId) {
+		return roleList.add(roleId);
 	}
 
 	@Override
 	public String toString() {
 		final int maxLen = 10;
 		StringBuilder builder = new StringBuilder();
-		builder.append("RolesCollection [roleList=").append(roleList != null ? roleList.subList(0, Math.min(roleList.size(), maxLen)) : null).append(", roleArr=")
-				.append(roleArr != null ? Arrays.asList(roleArr).subList(0, Math.min(roleArr.length, maxLen)) : null).append("]");
+		builder.append("RolesCollection [roleList=").append(roleList != null ? roleList.subList(0, Math.min(roleList.size(), maxLen)) : null).append("]");
 		return builder.toString();
 	}
 }

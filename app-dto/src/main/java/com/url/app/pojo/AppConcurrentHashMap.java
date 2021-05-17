@@ -7,10 +7,6 @@ public class AppConcurrentHashMap<K, V> extends ConcurrentHashMap<K, V> {
 
 	@Override
 	public V put(K key, V value) {
-		if (key == null || value == null) {
-			return null;
-		}
-
-		return super.put(key, value);
+		return (key == null || value == null) ? null : super.put(key, value);
 	}
 }

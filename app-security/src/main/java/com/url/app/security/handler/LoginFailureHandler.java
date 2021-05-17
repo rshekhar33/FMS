@@ -40,10 +40,7 @@ public class LoginFailureHandler extends SimpleUrlAuthenticationFailureHandler {
 
 		appUserService.userUpdateLastLoginFailure(userName);
 
-		String loginErrorMessage = appMessage.loginError;
-		if (!(exception instanceof InternalAuthenticationServiceException)) {
-			loginErrorMessage = exception.getMessage();
-		}
+		final String loginErrorMessage = (exception instanceof InternalAuthenticationServiceException) ? appMessage.loginError : exception.getMessage();
 
 		appLogger.debug(AppLogMessage.AUTHENTICATION_FAILED_DUE_TO_MSG, userName, loginErrorMessage);
 

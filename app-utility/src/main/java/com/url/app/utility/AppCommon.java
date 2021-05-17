@@ -44,6 +44,16 @@ public class AppCommon {
 	}
 
 	/**
+	 * Check whether collection is not null and not empty.
+	 * 
+	 * @param collection the collection which is to be checked.
+	 * @return true/false.
+	 */
+	public static final boolean isNotEmpty(final Collection<?> collection) {
+		return collection != null && !collection.isEmpty();
+	}
+
+	/**
 	 * Check whether integer is a positive number.
 	 * 
 	 * @param str the string which is to be checked.

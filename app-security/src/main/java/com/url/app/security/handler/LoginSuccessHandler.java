@@ -33,7 +33,7 @@ public class LoginSuccessHandler extends SavedRequestAwareAuthenticationSuccessH
 	@Override
 	public void onAuthenticationSuccess(final HttpServletRequest request, final HttpServletResponse response, final Authentication authentication)
 			throws IOException, ServletException {
-		appLogger.debug(AppLogMessage.LOGIN_SUCCESS_WITH_ROLES_MSG, appPrincipalUser.getPrincipal().getAuthorities());
+		appLogger.debug(AppLogMessage.LOGIN_SUCCESS_WITH_ROLES_MSG, appPrincipalUser.getPrincipalUserRoles());
 
 		appUserService.userUpdateLastLoginSuccess();
 
