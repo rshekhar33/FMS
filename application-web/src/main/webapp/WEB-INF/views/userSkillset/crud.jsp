@@ -83,7 +83,7 @@
 											<label for="userName" class="col-sm-2 col-form-label">UserName*</label>
 
 											<div class="col-sm-8">
-												<input type="text" id="userName" name="userName" maxlength="50" disabled="disabled" class="form-control" placeholder="UserName">
+												<input type="text" id="userName" name="userName" maxlength="50" disabled="disabled" class="form-control validationField" autocomplete="off" placeholder="UserName">
 												<label id="userNameError" for="userName" class="col-form-label errMsgCls d-none"></label>
 											</div>
 										</div>
@@ -91,7 +91,7 @@
 											<label for="modules" class="col-sm-2 col-form-label">Module Names</label>
 
 											<div class="col-sm-4">
-												<select id="modules" name="modules" multiple="multiple" size="7" class="form-control">
+												<select id="modules" name="modules" multiple="multiple" size="7" class="form-control validationField">
 												</select>
 												<label id="modulesError" for="modules" class="col-form-label errMsgCls d-none"></label>
 											</div>

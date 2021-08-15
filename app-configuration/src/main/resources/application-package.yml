@@ -6,11 +6,13 @@ spring:
     password: ENC(ftEDigclRA+AvqPdTumuXw==)
     url: jdbc:h2:mem:fmsdb
     username: ENC(ftEDigclRA+AvqPdTumuXw==)
-    data:
-    - classpath:env-config/package/data.sql
-    schema:
-    - classpath:env-config/package/schema.sql
   jpa:
     properties:
       hibernate:
         dialect: org.hibernate.dialect.H2Dialect
+  sql:
+    init:
+      data-locations:
+      - classpath:env-config/package/data.sql
+      schema-locations:
+      - classpath:env-config/package/schema.sql

@@ -32,9 +32,4 @@ public class ErrorRestControllerImpl implements AppErrorRestController {
 
 		return appService.getAppExceptionInfo(appExceptionInfoObj);
 	}
-
-	@Override
-	public String getErrorPath() {
-		return null;
-	}
 }

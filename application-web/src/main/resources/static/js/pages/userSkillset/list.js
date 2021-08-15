@@ -67,7 +67,7 @@ var ListController = {
 				var isActiveStr = '';
 				if (activationIsAllowed) {
 					isActiveStr = '<div class="ui fitted toggle checkbox"><input type="checkbox" class="actionActivate" ';
-					isActiveStr += (userSkillset.usIsActive == 1) ? 'checked="checked" ' : '';
+					isActiveStr += (userSkillset.usIsActive == 1) ? 'checked="checked" ' : (userSkillset.usIsActive == 0) ? '' : 'disabled="disabled" ';
 					isActiveStr += 'data-user-id="' + userSkillset.userId + '" /><label></label></div>';
 				}
 				var isActionStr = '';
