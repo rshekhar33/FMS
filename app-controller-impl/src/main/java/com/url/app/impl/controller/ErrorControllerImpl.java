@@ -42,11 +42,6 @@ public class ErrorControllerImpl implements AppErrorController {
 		return mav;
 	}
 
-	@Override
-	public String getErrorPath() {
-		return null;
-	}
-
 	public String errorPage() {
 		return AppCommon.isPositiveInteger(appPrincipalUser.getPrincipalUserUserId()) ? AppUrlView.VIEW_APP_ERROR_PAGE : AppUrlView.VIEW_GLOBAL_ERROR_PAGE;
 	}

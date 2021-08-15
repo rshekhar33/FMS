@@ -58,7 +58,7 @@ public class AppRoleServiceImpl implements AppRoleService {
 	@Override
 	@Transactional(readOnly = true)
 	public Role fetchDataRole(final Role formRole) {
-		return AppCommon.isPositiveInteger(formRole.getRoleId()) ? roleRepository.getOne(formRole.getRoleId()) : null;
+		return AppCommon.isPositiveInteger(formRole.getRoleId()) ? roleRepository.getById(formRole.getRoleId()) : null;
 	}
 
 	@Override
@@ -77,7 +77,7 @@ public class AppRoleServiceImpl implements AppRoleService {
 		if (AppCommon.isEmpty(status)) {
 			Role role = new Role();
 			if (AppCommon.isPositiveInteger(formRole.getRoleId())) {
-				role = roleRepository.getOne(formRole.getRoleId());
+				role = roleRepository.getById(formRole.getRoleId());
 			} else {
 				role.setIsActive(AppConstant.ACTIVE);
 			}
@@ -108,7 +108,7 @@ public class AppRoleServiceImpl implements AppRoleService {
 		String status = AppConstant.BLANK_STRING;
 		String msg = AppConstant.BLANK_STRING;
 
-		final Role role = roleRepository.getOne(formRole.getRoleId());
+		final Role role = roleRepository.getById(formRole.getRoleId());
 		role.setIsActive(formRole.getIsActive());
 
 		roleRepository.save(role);

@@ -168,7 +168,7 @@ public class AppUserServiceImpl implements AppUserService {
 		String status = AppConstant.BLANK_STRING;
 		String msg = AppConstant.BLANK_STRING;
 
-		final User user = userRepository.getOne(formUser.getUserId());
+		final User user = userRepository.getById(formUser.getUserId());
 		user.setIsActive(formUser.getIsActive());
 
 		userRepository.save(user);

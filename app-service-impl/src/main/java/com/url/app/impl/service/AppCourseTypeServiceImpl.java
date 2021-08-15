@@ -52,7 +52,7 @@ public class AppCourseTypeServiceImpl implements AppCourseTypeService {
 	@Override
 	@Transactional(readOnly = true)
 	public CourseType fetchDataCourseType(final CourseType formCourseType) {
-		return AppCommon.isPositiveInteger(formCourseType.getCourseTypeId()) ? courseTypeRepository.getOne(formCourseType.getCourseTypeId()) : null;
+		return AppCommon.isPositiveInteger(formCourseType.getCourseTypeId()) ? courseTypeRepository.getById(formCourseType.getCourseTypeId()) : null;
 	}
 
 	@Override
@@ -71,7 +71,7 @@ public class AppCourseTypeServiceImpl implements AppCourseTypeService {
 
 		CourseType courseType = new CourseType();
 		if (AppCommon.isPositiveInteger(formCourseType.getCourseTypeId())) {
-			courseType = courseTypeRepository.getOne(formCourseType.getCourseTypeId());
+			courseType = courseTypeRepository.getById(formCourseType.getCourseTypeId());
 		} else {
 			final String courseTypeCode = AppConstant.COURSE_TYPE_CODE_PREFIX + appDao.generateNewCode(AppConstant.CS_TYPE_COURSE_TYPE_CODE_COUNTER);
 			courseType.setCourseTypeCode(courseTypeCode);
@@ -103,7 +103,7 @@ public class AppCourseTypeServiceImpl implements AppCourseTypeService {
 		String status = AppConstant.BLANK_STRING;
 		String msg = AppConstant.BLANK_STRING;
 
-		final CourseType courseType = courseTypeRepository.getOne(formCourseType.getCourseTypeId());
+		final CourseType courseType = courseTypeRepository.getById(formCourseType.getCourseTypeId());
 		courseType.setIsActive(formCourseType.getIsActive());
 
 		courseTypeRepository.save(courseType);

@@ -58,7 +58,7 @@ public class AppModuleServiceImpl implements AppModuleService {
 	@Override
 	@Transactional(readOnly = true)
 	public Module fetchDataModule(final Module formModule) {
-		return AppCommon.isPositiveInteger(formModule.getModuleId()) ? moduleRepository.getOne(formModule.getModuleId()) : null;
+		return AppCommon.isPositiveInteger(formModule.getModuleId()) ? moduleRepository.getById(formModule.getModuleId()) : null;
 	}
 
 	@Override
@@ -77,7 +77,7 @@ public class AppModuleServiceImpl implements AppModuleService {
 		if (AppCommon.isEmpty(status)) {
 			Module module = new Module();
 			if (AppCommon.isPositiveInteger(formModule.getModuleId())) {
-				module = moduleRepository.getOne(formModule.getModuleId());
+				module = moduleRepository.getById(formModule.getModuleId());
 			} else {
 				module.setIsActive(AppConstant.ACTIVE);
 			}
@@ -108,7 +108,7 @@ public class AppModuleServiceImpl implements AppModuleService {
 		String status = AppConstant.BLANK_STRING;
 		String msg = AppConstant.BLANK_STRING;
 
-		final Module module = moduleRepository.getOne(formModule.getModuleId());
+		final Module module = moduleRepository.getById(formModule.getModuleId());
 		module.setIsActive(formModule.getIsActive());
 
 		moduleRepository.save(module);

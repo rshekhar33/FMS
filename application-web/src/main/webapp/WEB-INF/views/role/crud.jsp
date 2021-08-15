@@ -81,7 +81,7 @@
 											<label for="roleName" class="col-sm-2 col-form-label">Role Name*</label>
 
 											<div class="col-sm-8">
-												<input type="text" id="roleName" name="roleName" maxlength="100" class="form-control" placeholder="Role Name">
+												<input type="text" id="roleName" name="roleName" maxlength="100" class="form-control validationField" autocomplete="off" placeholder="Role Name">
 												<label id="roleNameError" for="roleName" class="col-form-label errMsgCls d-none"></label>
 											</div>
 										</div>
